@@ -1,0 +1,274 @@
+/** Login form styles **/
+.login-page {
+    background: url(../images/login_bg.jpg);
+    height: 600px;
+    -webkit-background-size: cover !important;
+    -moz-background-size: cover !important;
+    -o-background-size: cover !important;
+    background-size: cover !important;
+    padding: 0;
+    margin: 0;
+}
+
+#login-form-container {
+    margin-top: 300px;
+}
+
+#activation-form-container {
+    margin-top: 100px;
+}
+
+.login-form-header {
+    background: #B0262E;
+    border: 1px solid #B0262E;
+    color: #FFFFFF;
+    height: 60px;
+}
+
+.login-form-header h3 {
+    font-weight: bold;
+    text-align: center;
+}
+
+.login-form-body {
+    border: 1px solid #B0262E;
+    background: #FFFFFF;
+    padding: 10px;
+}
+
+/** Style for buttons */
+.btn-custom {
+    background: #B0262E;
+    color: #FFFFFF;
+}
+
+.btn-custom:hover {
+    background: #9B2A34;
+    color: #FFFFFF;
+}
+
+.btn, input[type=text], input[type=password] {
+    border-radius: 0px !important;
+    height: 40px;
+    font-size: 1.2em;
+}
+
+.site-logo {
+    color: #FFFFFF !important;
+    font-size: 1.7em;
+    font-weight: bold;
+}
+
+.sidebar {
+   background: #6610f2;
+   height: 100%;
+   min-height: 250vh;
+}
+
+/** Menu **/
+.site-logo-container {
+    background-color: #B22222;
+    height: 70px;
+}
+
+.menu {
+    margin-top: 50px;
+}
+
+.menu {
+    font-size: 1.2em;
+    list-style-type: none;
+    margin-bottom: 20px;
+    padding: 0px;
+    list-style-type: none;
+}
+
+.menu li {
+    color: #FFFAF0;
+    margin-bottom: 10px;
+    cursor: pointer;
+    padding: 18px;
+    background-color: darkblue;
+    border-left: 5px solid white;
+}
+
+.menu li .fa {
+    float: left;
+    margin-right: 10px;
+    width: 20px;
+}
+
+.menu li:hover, .menu li.active {
+    color: #FFFFFF;
+    background-color: #4682B4;
+    font-weight: bold;
+    border-left: 5px solid orange;
+}
+
+.menu li.active{
+    border-left: 5px solid orange;
+}
+
+.menu li a{
+    text-decoration: none;
+    color: #FFFAF0;
+}
+
+.page-title {
+    background: rgba(226, 105, 6, 0.866);
+    color: #FFFFFF;
+    height: 70px;
+}
+
+.menubar {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/** Pages */
+.no-data {
+    color: rgb(192, 192, 192);
+    font-weight: bold;
+    font-size: 3em;
+    margin-top: 100px;
+}
+
+.modal.custom-modal .modal-content {
+    border-radius: 0px;
+}
+
+/** Table */
+.table-head {
+    text-transform:uppercase;
+    text-align: left;
+    padding-top: 5px;
+    padding-bottom: 4px;
+    background: linear-gradient(rgb(229, 76, 16), rgb(172, 78, 41));
+    color: #FFFFFF;
+}
+
+tbody tr:nth-of-type(even) {
+    background-color: rgba(255, 255, 255, .1);
+}
+
+tbody tr:nth-of-type(odd) {
+    background-color: rgba(229, 76, 16, .1);
+}
+
+/** Redefinition for buttons */
+.btn-primary{
+    background: #5F9EA0;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+    background: #008B8B;
+}
+
+.btn-danger {
+    background: #6610f2;
+}
+
+.btn-danger:hover {
+    background: #DC143C;
+}
+
+/** Pagination buttons **/
+.pagination>.active>a,
+.pagination>.active>a:focus,
+.pagination>.active>a:hover,
+.pagination>.active>span,
+.pagination>.active>span:focus,
+.pagination>.active>span:hover {
+    background: #DC143C;
+    border: 1px solid #DC143C;
+}
+
+.pagination>li>a,
+.pagination>li>span {
+    background: rgba(229, 76, 16, .1);
+    color: #008B8B;
+}
+
+.pagination>.disabled>a,
+.pagination>.disabled>a:focus,
+.pagination>.disabled>a:hover,
+.pagination>.disabled>span,
+.pagination>.disabled>span:focus,
+.pagination>.disabled>span:hover {
+    background: rgba(229, 76, 16, .1);
+}
+
+
+
+.select2-wrapper .select2-container {
+    width: 100% !important;
+}
+
+.select2-container--default .select2-selection--single,
+.select2-container--default .select2-selection--multiple {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 0;
+    min-height: 38px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    padding-top: 5px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 36px;
+}
+
+.side-icon {
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+/** Dashboard */
+.card-1 {
+    background: #6610f2;
+}
+
+.card-2 {
+    background: #FFA500;
+}
+
+.card-3 {
+    background: #3CB371;
+}
+
+.card-4 {
+    background: #4682B4;
+}
+
+.card-title {
+    font-size: 1.2em;
+    color: #FFFFFF;
+}
+
+.card {
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.icon {
+    font-size: 2.5em;
+    color: azure;
+}
+
+.card-body {
+    font-size: 3.5em;
+    color: #fff;
+}
+
+.timetable-btn {
+    font-size: 2em;
+    border: none;
+    padding: 10px;
+}
+
+.input-group-btn .btn {
+    font-size: 16px;
+}
+

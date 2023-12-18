@@ -1,0 +1,12 @@
+@media (min-width: 300px) {
+  .nav-title {
+    display: none;
+  }
+}
+
+@media (min-width: 992px) {
+  .nav-title {
+    display: block;
+  }
+}
+

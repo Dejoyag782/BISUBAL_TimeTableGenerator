@@ -1,0 +1,96 @@
+.fa.fa-close {
+  padding: 5px;
+  transition-timing-function: ease-out;
+  transform: rotate(0deg);
+  transition: 0.5s;
+  color: rgb(255,255,255);
+  font-size: 20px;
+  width: 30px;
+}
+
+.fa.fa-close:hover {
+  transition-timing-function: ease-in-out;
+  transition: 0.5s;
+  transform: rotate(-180deg);
+  background: var(--bs-orange);
+  border-radius: 50%;
+}
+
+#form_cont {
+  position: fixed;
+  left: -250px;
+  top: -60px;
+  z-index: 1;
+  height: 900px;
+  width: 2000px;
+  padding-top: 100px;
+  background: rgba(28,28,28,0.66);
+  display: none;
+  justify-content: center;
+}
+
+#addRoom_modal {
+  position: fixed;
+  left: -250px;
+  top: -60px;
+  z-index: 1;
+  height: 900px;
+  width: 2000px;
+  padding-top: 100px;
+  background: rgba(28,28,28,0.66);
+  display: none;
+  justify-content: center;
+}
+
+#addCourse_modal {
+  position: fixed;
+  left: -250px;
+  top: -60px;
+  z-index: 1;
+  height: 900px;
+  width: 2000px;
+  padding-top: 100px;
+  background: rgba(28,28,28,0.66);
+  display: none;
+  justify-content: center;
+}
+
+#addProfessor_modal {
+  position: fixed;
+  left: -250px;
+  top: -60px;
+  z-index: 1;
+  height: 900px;
+  width: 2000px;
+  padding-top: 100px;
+  background: rgba(28,28,28,0.66);
+  display: none;
+  justify-content: center;
+}
+
+#addClass_modal {
+  position: fixed;
+  left: -250px;
+  top: -60px;
+  z-index: 1;
+  height: 900px;
+  width: 2000px;
+  padding-top: 100px;
+  background: rgba(28,28,28,0.66);
+  display: none;
+  justify-content: center;
+}
+
+#addTimeslot_modal {
+  position: fixed;
+  left: -250px;
+  top: -60px;
+  z-index: 1;
+  height: 900px;
+  width: 2000px;
+  padding-top: 100px;
+  background: rgba(28,28,28,0.66);
+  display: none;
+  justify-content: center;
+}
+
