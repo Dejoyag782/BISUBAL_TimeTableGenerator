@@ -58,6 +58,4 @@ Route::post('/users/activate', [UsersController::class, 'activateUser']);
 Route::get('/my_account', [UsersController::class, 'showAccountPage']);
 Route::post('/my_account', [UsersController::class, 'updateAccount']);
 
-Route::get('/dashboard/index', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
-
 Auth::routes();

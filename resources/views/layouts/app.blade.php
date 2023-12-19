@@ -57,7 +57,9 @@
                                         </a>
                                     </li>
                                     @endif
+
                                 @else
+                                    @if(auth()->user()->activated)
                                     <li class="nav-item dropdown">
                                         <a id="navbarDropdown" class="nav-link dropdown-toggle" style="color: var(--bs-light);" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                             {{ Auth::user()->name }}
@@ -76,10 +78,8 @@
 
                                                 <a  class="dropdown-item" href="/my_account">Manage Account</a>
                                         </div>
-
-                                        
-                
                                     </li>
+                                    @endif
                                 @endguest
                         </ul>
                     </div>
@@ -88,9 +88,11 @@
 
         <main style="height:100%;">
             <div  style="margin-top:-20px;">
-                    @auth
-                        @include('partials.sidebar')
-                    @endauth
+            @auth
+                @if(auth()->user()->activated)
+                    @include('partials.sidebar')
+                @endif
+            @endauth
                         @yield('content')
                     @include('partials.confirm_dialog')
             </div>

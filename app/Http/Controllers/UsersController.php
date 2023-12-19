@@ -65,9 +65,9 @@ class UsersController extends Controller
     public function showActivationPage()
     {
         $user = Auth::user();
-        $questions = SecurityQuestion::all();
 
-        return view('users.activate', compact('user', 'questions'));
+        
+        return view('users.activate', compact('user'));
     }
 
     /**
@@ -86,14 +86,12 @@ class UsersController extends Controller
 
         $rules = [
             'name' => 'required',
+            'email' => 'required',
             'password' => 'required|confirmed',
-            'security_question_id' => 'required|exists:security_questions,id',
-            'security_question_answer' => 'required'
         ];
 
         $messages = [
-            'security_question_id.required' => 'A security question must be selected.',
-            'security_question_answer.required' => 'Add an answer for security question.'
+            'email.required' => 'Email is required for recovery purposes.'
         ];
 
         $this->validate($request, $rules, $messages);
@@ -102,12 +100,10 @@ class UsersController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
-            'security_question_id' => $request->security_question_id,
-            'security_question_answer' => $request->security_question_answer,
             'activated' => true
         ]);
 
-        return redirect('/');
+        return redirect('/dashboard');
     }
 
     /**

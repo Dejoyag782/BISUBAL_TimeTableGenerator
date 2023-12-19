@@ -1,6 +1,6 @@
 /** Login form styles **/
 .login-page {
-    background: url(../images/login_bg.jpg);
+    background: #eef4f7;
     height: 600px;
     -webkit-background-size: cover !important;
     -moz-background-size: cover !important;

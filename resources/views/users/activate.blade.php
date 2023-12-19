@@ -1,3 +1,11 @@
+@extends('layouts.app')
+
+@section('title')
+My Account
+@endsection
+
+@section('content')
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -10,19 +18,19 @@
 		@include('partials.styles')
 		@yield('styles')
 
-		<title>Activate Account | Timetable</title>
+		<title>Activate Account | BISUTTG</title>
     </head>
 
-    <body class="login-page">
+    <body class="login-page" style="background: ;">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-md-4 col-sm-8  col-md-offset-4 col-sm-offset-2">
                     <div id="activation-form-container">
-                        <div class="login-form-header">
-                            <h3 class="text-center">timetable</h3>
+                        <div class="login-form-header" style="background-color:Indigo; border-color:indigo;">
+                            <h3 class="text-center">Activate User</h3>
                         </div>
 
-                        <div class="login-form-body">
+                        <div class="login-form-body"  style="border-color:indigo;">
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                      <form method="POST" action="{{ URL::to('/users/activate') }}">
@@ -32,6 +40,11 @@
                                         <div class="form-group">
                                             <label>Name</label>
                                             <input type="text" class="form-control" placeholder="Name" name="name" value="{{ $user->name }}">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Email</label>
+                                            <input type="email" class="form-control" placeholder="Email" name="email" value="{{ $user->email }}">
                                         </div>
 
                                         <div class="form-group">
@@ -45,24 +58,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label>Security Question</label>
-
-                                            <div class="select2-wrapper">
-                                                <select name="security_question_id" class="form-control select2">
-                                                    @foreach ($questions as $question)
-                                                    <option value="{{ $question->id }}">{{ $question->question }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>Your Answer</label>
-                                            <input type="text" class="form-control" name="security_question_answer">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <input type="submit" name="submit" value="ACTIVATE ACCOUNT" class="btn btn-lg btn-block btn-primary">
+                                            <input type="submit" name="submit" value="ACTIVATE ACCOUNT" class="btn btn-lg btn-block btn-success">
                                         </div>
                                     </form>
                                 </div>
@@ -77,3 +73,4 @@
         @yield('scripts')
     </body>
 </html>
+@endsection
