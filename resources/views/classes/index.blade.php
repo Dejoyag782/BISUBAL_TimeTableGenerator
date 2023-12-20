@@ -13,7 +13,7 @@ Classes
     </div>
 
     <div class="menubar">
-        @include('partials.menu_bar', ['buttonTitle' => 'Add New Class'])
+        @include('partials.menu_bar', ['buttonTitle' => 'Add Class'])
     </div>
 
     <div class="page-body" id="resource-container">

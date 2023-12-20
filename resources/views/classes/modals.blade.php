@@ -1,13 +1,9 @@
-<!-- Modal for adding a new room -->
+<!-- Modal for adding a new classes -->
 <div class="modal custom-modal" id="resource-modal">
     <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">
-                    <span aria-hidden="true">x</span>
-                </button>
-
-                <h4 class="modal-heading">Add New Class</h4>
+        <div class="modal-content" style="background: rgb(217,219,221);margin-top: 150px;border-radius: 10px;">
+            <div class=" modal-header d-flex d-sm-flex d-xl-flex d-xxl-flex flex-row justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="height: 40px;color: var(--bs-indigo);background: var(--e-global-color-b068fc5);border-top-left-radius: 10px;border-top-right-radius: 10px;padding: 10px;border-bottom-style: solid;border-bottom-color: var(--bs-orange);">
+                <h5 class="modal-heading" style="color: rgb(255,255,255);width: 95%;margin-bottom: 0px;">Add New Class</h5><i class="fa fa-close d-xxl-flex justify-content-xxl-center align-items-xxl-center" id="close_resource_modal"></i>
             </div>
 
             <form class="form" method="POST" action="" id="resource-form">
@@ -44,7 +40,7 @@
                                 </div>
 
                                 <div id="courses-container">
-
+                                            
                                 </div>
                             </div>
 
@@ -69,11 +65,11 @@
                     </div>
                 </div>
 
-                <div class="modal-footer">
+                <div class="modal-footer justify-content-xxl-center">
                     <div class="form-group">
                         <div class="row">
                             <div class="col-lg-5 col-md-5 col-sm-5 col-offset-1 col-md-offset-1">
-                                <button type="button" class="btn btn-danger btn-block" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-danger btn-block" id="cancel_resource_modal" data-dismiss="modal">Cancel</button>
                             </div>
 
                             <div class="col-lg-5 col-md-5 col-sm-5">
@@ -88,7 +84,7 @@
 </div>
 
 <div id="course-template" class="hidden">
-     <div class="row course-form appended-course" id="course-{ID}-container" style="margin-bottom: 5px">
+     <div class="row course-form appended-course" id="course-{ID}-container" style="margin-bottom: 5px; align-items:center;">
         <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="select2-wrapper">
                 <select class="form-control course-select" name="course-{ID}">
@@ -116,7 +112,11 @@
         </div>
 
         <div class="col-md-1 col-sm-1 col-xs-2">
-            <span class="fa fa-close side-icon course-remove" title="Remove Course" data-id="{ID}"></span>
+            <span class="fa fa-close side-icon course-remove" 
+                  title="Remove Course" data-id="{ID}" 
+                  style="color:red; align-items:center; text-align:center;" 
+                  onmouseover="this.style.backgroundColor='red'; this.style.color='white'"
+                  onmouseout="this.style.backgroundColor='rgba(0,0,0,0)'; this.style.color='red'; this.style.borderRadius='50%';"></span>
         </div>
     </div>
 </div>

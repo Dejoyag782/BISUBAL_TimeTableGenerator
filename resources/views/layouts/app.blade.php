@@ -39,7 +39,7 @@
 		@yield('styles')
 
     <!-- Scripts -->
-    @vite(['resources/js/app.js'])
+    <!-- @vite(['resources/js/app.js']) -->
 </head>
 <body>
     <div id="app">
@@ -109,7 +109,6 @@
     <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
     <script src="{{asset('welcome_assets/js/bs-init.js')}}"></script>
-    <script src="{{asset('welcome_assets/js/mainview.js')}}"></script>
     <script src="{{asset('welcome_assets/js/modal.js')}}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>

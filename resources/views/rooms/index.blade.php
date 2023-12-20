@@ -13,7 +13,7 @@ Rooms
     </div>
 
     <div class="menubar">
-        @include('partials.menu_bar', ['buttonTitle' => 'Add New Room'])
+        @include('partials.menu_bar', ['buttonTitle' => 'Add Room'])
     </div>
 
     <div class="page-body" id="resource-container">

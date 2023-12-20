@@ -55,7 +55,10 @@ Route::get('timetables/view/{id}', [TImetablesController::class, 'view']);
 Route::get('/users/activate', [UsersController::class, 'showActivationPage']);
 Route::post('/users/activate', [UsersController::class, 'activateUser']);
 
-Route::get('/my_account', [UsersController::class, 'showAccountPage']);
-Route::post('/my_account', [UsersController::class, 'updateAccount']);
+Route::middleware(['auth'])->group(function () {
+    Route::get('/my_account', [UsersController::class, 'showAccountPage']);
+    Route::post('/my_account', [UsersController::class, 'updateAccount']);
+});
+
 
 Auth::routes();

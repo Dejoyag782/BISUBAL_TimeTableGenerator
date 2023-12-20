@@ -37,6 +37,9 @@
 }
 
 /** Style for buttons */
+.btn{
+    width: auto;
+}
 .btn-custom {
     background: #B0262E;
     color: #FFFFFF;
@@ -48,7 +51,7 @@
 }
 
 .btn, input[type=text], input[type=password] {
-    border-radius: 0px !important;
+    border-radius: 0.25rem !important;
     height: 40px;
     font-size: 1.2em;
 }
@@ -143,7 +146,7 @@
     text-align: left;
     padding-top: 5px;
     padding-bottom: 4px;
-    background: linear-gradient(rgb(229, 76, 16), rgb(172, 78, 41));
+    background: linear-gradient(rgb(226, 105, 6), rgb(245, 122, 73));
     color: #FFFFFF;
 }
 
@@ -157,19 +160,23 @@ tbody tr:nth-of-type(odd) {
 
 /** Redefinition for buttons */
 .btn-primary{
-    background: #5F9EA0;
+    background: #0d6efd;
+    border-color: #0256d4;
+    border-radius: 0.25rem;
 }
 
 .btn-primary:hover, .btn-primary:focus {
-    background: #008B8B;
+    background: #0256d4;
+    border-color: #0d6efd;
+    
 }
 
 .btn-danger {
-    background: #6610f2;
+    background: #DC143C;
 }
 
 .btn-danger:hover {
-    background: #DC143C;
+    background: #ab0627;
 }
 
 /** Pagination buttons **/
@@ -270,5 +277,10 @@ tbody tr:nth-of-type(odd) {
 
 .input-group-btn .btn {
     font-size: 16px;
+}
+
+.modal-footer{
+    align-items: center;
+    text-align: center;
 }
 

@@ -15,7 +15,7 @@ Periods
     <div class="menubar">
         <div class="row">
             <div class="col-md-2 col-sm-6 col-xs-12 col-md-offset-10 col-sm-offset-6">
-                <button class="btn btn-md btn-primary btn-block" id="resource-add-button"><span class="fa fa-plus"></span> Add New Timeslot</button>
+                <button class="btn btn-md btn-primary btn-block" id="resource-add-button"><span class="fa fa-plus"></span> Add Timeslot</button>
             </div>
         </div>
     </div>

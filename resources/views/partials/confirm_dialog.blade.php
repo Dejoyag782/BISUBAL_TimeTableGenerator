@@ -1,6 +1,6 @@
 <div class="modal" id="confirm-dialog">
     <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content" style="background: rgb(217,219,221);margin-top: 150px;border-radius: 10px;">
             <form action="" method="POST" id="resource-delete-form" class='delete-form'>
             {{ method_field('DELETE') }}
             {{ csrf_field() }}
@@ -21,7 +21,7 @@
                 </div>
             </div>
 
-            <div class="modal-footer">
+            <div class="modal-footer justify-content-xxl-center">
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6">
                         <button type="button" class="cancel btn btn-default btn-block" data-dismiss="modal" id="no-button">No</button>

@@ -175,32 +175,3 @@
   }
 }
 
-#left-nav-container:hover {
-  cursor: pointer;
-}
-
-.subsection {
-  width: 100%;
-  max-width: 100%;
-}
-
-#room-container {
-  display: none;
-}
-
-#courses-container {
-  display: none;
-}
-
-#professors-container {
-  display: none;
-}
-
-#classes-container {
-  display: none;
-}
-
-#timeslots-container {
-  display: none;
-}
-

@@ -330,7 +330,7 @@
             '<a href="#" class="close" data-dismiss="modal">×</a>'+
             '<h3>Pick a Time</h3>'+
           '</div>'+
-          '<div class="modal-content">'+
+          '<div class="modal-content" style="background: rgb(217,219,221);margin-top: 150px;border-radius: 10px;">'+
             templateContent +
           '</div>'+
           '<div class="modal-footer">'+
