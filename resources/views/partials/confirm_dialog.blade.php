@@ -5,12 +5,9 @@
             {{ method_field('DELETE') }}
             {{ csrf_field() }}
 
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">
-                    <span aria-hidden="true">x</span>
-                </button>
-
-                <h4 id="delete-dialog-header"></h4>
+            <div class="modal-header  d-flex d-sm-flex d-xl-flex d-xxl-flex flex-row justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="height: 40px;color: var(--bs-indigo);background: var(--e-global-color-b068fc5);border-top-left-radius: 10px;border-top-right-radius: 10px;padding: 10px;border-bottom-style: solid;border-bottom-color: var(--bs-orange);">
+                <h4 id="delete-dialog-header" style="color: rgb(255,255,255);width: 95%;margin-bottom: 0px;"></h4>
+                <i class="fa fa-close d-xxl-flex justify-content-xxl-center align-items-xxl-center" id="close_confirm_dialog"></i>
             </div>
 
             <div class="modal-body">

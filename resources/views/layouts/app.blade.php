@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     
 
@@ -33,6 +34,9 @@
     <link rel="stylesheet" href="{{asset('welcome_assets/css/Navigation-with-Button.css')}}">
     <link rel="stylesheet" href="{{asset('welcome_assets/css/Newsletter-Subscription-Form.css')}}">
     <link rel="stylesheet" href="{{asset('welcome_assets/css/styles.css')}}">    
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
 
     <!-- Styles -->
 		@include('partials.styles')
@@ -105,6 +109,7 @@
         @yield('scripts')
     <!-- <script src="{{asset('welcome_assets/bootstrap/js/bootstrap.min.js')}}"></script> -->
     <!-- <script src="{{asset('welcome_assets/js/bs-init.js')}}"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>

@@ -17,10 +17,10 @@ class DatabaseSeeder extends Seeder
         $this->call(AcademicPeriodsTableSeeder::class);
 
         // App data seeders
-        // $this->call(RoomsTableSeeder::class);
-        // $this->call(TimeslotsTableSeeder::class);
-        // $this->call(CoursesTableSeeder::class);
-        // $this->call(ProfessorsTableSeeder::class);
-        // $this->call(ClassesTableSeeder::class);
+        $this->call(RoomsTableSeeder::class);
+        $this->call(TimeslotsTableSeeder::class);
+        $this->call(CoursesTableSeeder::class);
+        $this->call(ProfessorsTableSeeder::class);
+        $this->call(ClassesTableSeeder::class);
     }
 }

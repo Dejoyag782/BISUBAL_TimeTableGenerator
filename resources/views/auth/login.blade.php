@@ -4,7 +4,8 @@
 
     <section class="login-clean">
         <form method="POST" action="{{ route('login') }}" style="box-shadow: 5px 5px 5px rgba(80,94,108,0.49);">
-        @csrf
+        {!! csrf_field() !!}
+        @include('errors.form_errors')
             <h2 class="visually-hidden">Login Form</h2>
             <div class="illustration"><img src="{{asset('welcome_assets/img/bisubal_ttg.png')}}" style="width: 200px;"></div>
             <div class="mb-3">

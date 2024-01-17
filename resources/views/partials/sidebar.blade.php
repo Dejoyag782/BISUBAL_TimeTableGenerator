@@ -11,7 +11,7 @@
                     <a href="/rooms"><span class="fa fa-home"></span><span class="text">Rooms</span></a>
                 </li>
                 <li class="menu-link {{ ($page == 'courses') ? 'active' : '' }}">
-                    <a href="/courses"><span class="fa fa-book"></span><span class="text">Courses</span></a>
+                    <a href="/courses"><span class="fa fa-book"></span><span class="text">Subjects</span></a>
                 </li>
                 <li class="menu-link {{ ($page == 'professors') ? 'active' : '' }}">
                     <a href="/professors"><span class="fa fa-graduation-cap"></span><span class="text">Professors</span></a>

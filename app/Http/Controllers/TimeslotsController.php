@@ -71,21 +71,25 @@ class TimeslotsController extends Controller
 
         $this->validate($request, $rules, $messages);
 
-        $exists = Timeslot::where('time', Timeslot::createTimePeriod($request->from, $request->to))->first();
+        // Find the highest rank in the existing timeslots
+        $highestRank = Timeslot::max('rank');
+
+        $data = $request->all();
+        $data['time'] = Timeslot::createTimePeriod($data['from'], $data['to']);
+        $data['rank'] = $highestRank + 1;
+
+        $exists = Timeslot::where('time', $data['time'])->first();
 
         if ($exists) {
             return response()->json(['errors' => ['This timeslot already exists']], 422);
         }
-
-        $data = $request->all();
-        $data['time'] = Timeslot::createTimePeriod($data['from'], $data['to']);
 
         $timeslots = Timeslot::all();
 
         foreach ($timeslots as $timeslot) {
             if ($timeslot->containsPeriod($data['time'])) {
                 $errors = [$data['time'] . ' falls within another timeslot (' . $timeslot->time
-                    . ').Please adjust timeslots'];
+                    . '). Please adjust timeslots'];
                 return response()->json(['errors' => $errors], 422);
             }
         }
@@ -100,25 +104,6 @@ class TimeslotsController extends Controller
         }
     }
 
-    /**
-     * Get the timeslot with the given ID
-     *
-     * @param int $id The timeslot id
-     */
-    public function show($id)
-    {
-        $timeslot = Timeslot::find($id);
-
-        if ($timeslot) {
-            $timeParts = explode("-", $timeslot->time);
-            $timeslot->from = trim($timeParts[0]);
-            $timeslot->to = trim($timeParts[1]);
-
-            return response()->json($timeslot, 200);
-        } else {
-            return response()->json(['error' => 'Timeslot not found'], 404);
-        }
-    }
 
     /**
      * Update the timeslot with the given Id

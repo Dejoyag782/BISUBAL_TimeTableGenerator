@@ -54,8 +54,15 @@ class CollegeClassesService extends AbstractService
             return null;
         }
 
-        $class->unavailable_rooms()->sync($data['unavailable_rooms']);
-        $class->courses()->sync($data['courses']);
+        // Set default value to null if 'unavailable_rooms' key is not present
+        $unavailableRooms = isset($data['unavailable_rooms']) ? $data['unavailable_rooms'] : null;
+
+        // Set default value to null if 'courses' key is not present
+        $courses = isset($data['courses']) ? $data['courses'] : null;
+
+        // Sync 'unavailable_rooms' and 'courses'
+        $class->unavailable_rooms()->sync($unavailableRooms);
+        $class->courses()->sync($courses);
 
         return $class;
     }

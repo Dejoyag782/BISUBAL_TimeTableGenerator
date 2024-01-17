@@ -238,15 +238,15 @@ tbody tr:nth-of-type(odd) {
 }
 
 .card-2 {
-    background: #FFA500;
+    background: #6610f2;
 }
 
 .card-3 {
-    background: #3CB371;
+    background: #6610f2;
 }
 
 .card-4 {
-    background: #4682B4;
+    background: #6610f2;
 }
 
 .card-title {
@@ -255,8 +255,10 @@ tbody tr:nth-of-type(odd) {
 }
 
 .card {
+    
+    border-top: orange solid 10px;
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 0 0 10px 10px;
 }
 
 .icon {

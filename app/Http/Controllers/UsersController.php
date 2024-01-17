@@ -12,7 +12,6 @@ use Illuminate\Http\Request;
 use App\Events\PasswordResetRequested;
 
 use App\Models\User;
-use App\Models\SecurityQuestion;
 
 class UsersController extends Controller
 {
@@ -126,16 +125,11 @@ class UsersController extends Controller
     {
         $rules = [
             'email' => 'required|email',
-            'security_question_answer' => 'required'
         ];
 
         $this->validate($request, $rules);
 
         $user = User::first();
-
-        if ($user->security_question_answer != $request->security_question_answer) {
-            return redirect()->back()->withErrors(['Your answer is not valid']);
-        }
 
         $token = Helpers::generateRandomString();
 
