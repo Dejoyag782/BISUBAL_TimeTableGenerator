@@ -13,32 +13,76 @@ class RoomsTableSeeder extends Seeder
     {
         DB::table('rooms')->insert([
             [
-                'name' => 'SF 19',
-                'capacity' => 180
+                'name' => 'Court Room',
+                'capacity' => 50
             ],
             [
-                'name' => 'SF 20',
-                'capacity' => 180
+                'name' => 'RM 104',
+                'capacity' => 50
             ],
             [
-                'name' => 'FF 1',
-                'capacity' => 200
+                'name' => 'RM 105',
+                'capacity' => 50
             ],
             [
-                'name' => 'SF 1',
-                'capacity' => 200
+                'name' => 'RM 106',
+                'capacity' => 50
             ],
             [
-                'name' => 'SF 8',
-                'capacity' => 150
+                'name' => 'RM 203',
+                'capacity' => 50
             ],
             [
-                'name' => 'SF 7',
-                'capacity' => 120
+                'name' => 'RM 204',
+                'capacity' => 50
             ],
             [
-                'name' => 'FF 24',
-                'capacity' => 120
+                'name' => 'RM 205',
+                'capacity' => 50
+            ],
+            [
+                'name' => 'RM 206',
+                'capacity' => 50
+            ],
+            [
+                'name' => 'RM 207',
+                'capacity' => 50
+            ],
+            [
+                'name' => 'RM 208',
+                'capacity' => 50
+            ],
+            [
+                'name' => 'Back Of Admin',
+                'capacity' => 50
+            ],
+            [
+                'name' => 'RM 301',
+                'capacity' => 50
+            ],
+            [
+                'name' => 'RM 302',
+                'capacity' => 50
+            ],
+            [
+                'name' => 'RM 303',
+                'capacity' => 50
+            ],
+            [
+                'name' => 'RM 304',
+                'capacity' => 50
+            ],
+            [
+                'name' => 'RM 306',
+                'capacity' => 50
+            ],
+            [
+                'name' => 'RM 307',
+                'capacity' => 50
+            ],
+            [
+                'name' => 'RM 308',
+                'capacity' => 50
             ]
         ]);
     }

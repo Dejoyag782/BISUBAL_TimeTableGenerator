@@ -30,6 +30,8 @@ class TimetableRenderer
      * Timeslot, Room, Professor
      *
      */
+   // ...
+
     public function render()
     {
         $chromosome = explode(",", $this->timetable->chromosome);
@@ -41,7 +43,7 @@ class TimetableRenderer
         $classes = CollegeClassModel::all();
 
         $tableTemplate = '<h3 class="text-center">{TITLE}</h3>
-                         <div style="page-break-after: always">
+                        <div style="page-break-after: always">
                             <table class="table table-bordered">
                                 <thead>
                                     {HEADING}
@@ -56,19 +58,20 @@ class TimetableRenderer
 
         foreach ($classes as $class) {
             $header = "<tr class='table-head'>";
-            $header .= "<td>Days</td>";
+            $header .= "<td>Days→<br>↓Hours</td>"; // Change this line to display hours as header
 
-            foreach ($timeslots as $timeslot) {
-                $header .= "\t<td>" . $timeslot->time . "</td>";
+            foreach ($days as $day) {
+                $header .= "\t<td>" . strtoupper($day->short_name) . "</td>";
             }
 
             $header .= "</tr>";
 
             $body = "";
 
-            foreach ($days as $day) {
-                $body .= "<tr><td>" . strtoupper($day->short_name) . "</td>";
-                foreach ($timeslots as $timeslot) {
+            foreach ($timeslots as $timeslot) {
+                $body .= "<tr><td>" . $timeslot->time . "</td>"; // Display hours in the first column
+
+                foreach ($days as $day) {
                     if (isset($data[$class->id][$day->name][$timeslot->time])) {
                         $body .= "<td class='text-center'>";
                         $slotData = $data[$class->id][$day->name][$timeslot->time];
@@ -100,6 +103,9 @@ class TimetableRenderer
             'file_url' => $path
         ]);
     }
+
+    // ...
+
 
     /**
      * Get an associative array with data for constructing timetable

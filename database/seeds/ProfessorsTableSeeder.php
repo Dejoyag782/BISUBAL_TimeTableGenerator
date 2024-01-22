@@ -13,22 +13,22 @@ class ProfessorsTableSeeder extends Seeder
     {
         DB::table('professors')->insert([
             [
-                'name' => 'Dr Theophilus Asare'
+                'name' => 'Benjamin Omamalin'
             ],
             [
-                'name' => 'Dr Richman Clifford'
+                'name' => 'Eduardo Carpio'
             ],
             [
-                'name' => 'Dr Ahmed Dawuda'
+                'name' => 'Catherine Lea Gabo'
             ],
             [
-                'name' => 'Dr Jehoshaphat Koney'
+                'name' => 'Winzeal Agoc'
             ],
             [
-                'name' => 'Dr Godfred Addai'
+                'name' => 'Julie Bitasolo'
             ],
             [
-                'name' => 'Dr Gideon Appoh'
+                'name' => 'Fermo Jay Asufra Jr.'
             ],
             [
                 'name' => 'Dr Papa Yaw Afriyie',

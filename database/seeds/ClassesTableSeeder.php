@@ -14,11 +14,11 @@ class ClassesTableSeeder extends Seeder
         DB::table('classes')->insert([
             [
                 'name' => 'CS 3',
-                'size' => 180
+                'size' => 40
             ],
             [
                 'name' => 'CS 4',
-                'size' => 200
+                'size' => 25
             ]
         ]);
 

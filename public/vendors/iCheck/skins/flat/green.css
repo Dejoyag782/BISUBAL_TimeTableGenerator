@@ -10,7 +10,8 @@
     width: 20px;
     height: 20px;
     background: url(green.png) no-repeat;
-    border: none;
+    border: solid lightseagreen  2px;
+    border-radius: 10px;
     cursor: pointer;
 }
 
@@ -18,7 +19,7 @@
     background-position: 0 0;
 }
     .icheckbox_flat-green.checked {
-        background-position: -22px 0;
+        background-position: -24px -2px;
     }
     .icheckbox_flat-green.disabled {
         background-position: -44px 0;
