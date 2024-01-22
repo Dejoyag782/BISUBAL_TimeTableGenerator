@@ -69,11 +69,11 @@ class TimetableRenderer
             $body = "";
 
             foreach ($timeslots as $timeslot) {
-                $body .= "<tr><td>" . $timeslot->time . "</td>"; // Display hours in the first column
+                $body .= "<tr><td style='width: 50px; height: 50px;'>" . $timeslot->time . "</td>"; // Display hours in the first column
 
                 foreach ($days as $day) {
                     if (isset($data[$class->id][$day->name][$timeslot->time])) {
-                        $body .= "<td class='text-center'>";
+                        $body .= "<td class='text-center' style='width: 50px; height: 50px;'>";
                         $slotData = $data[$class->id][$day->name][$timeslot->time];
                         $courseCode = $slotData['course_code'];
                         $courseName = $slotData['course_name'];
@@ -86,7 +86,7 @@ class TimetableRenderer
 
                         $body .= "</td>";
                     } else {
-                        $body .= "<td></td>";
+                        $body .= "<td style='width: 100px; height: 50px;'></td>";
                     }
                 }
                 $body .= "</tr>";
