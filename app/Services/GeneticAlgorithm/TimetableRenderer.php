@@ -32,144 +32,141 @@ class TimetableRenderer
      */
    // ...
 
-    public function render()
-    {
-        $chromosome = explode(",", $this->timetable->chromosome);
-        $scheme = explode(",", $this->timetable->scheme);
-        $data = $this->generateData($chromosome, $scheme);
+   public function render()
+   {
+       list($data, $professorSchedules) = $this->generateData(explode(",", $this->timetable->chromosome), explode(",", $this->timetable->scheme));
+   
+       $days = $this->timetable->days()->orderBy('id', 'ASC')->get();
+       $timeslots = TimeslotModel::orderBy('rank', 'ASC')->get();
+       $classes = CollegeClassModel::all();
+   
+       $tableTemplate = '<h3 class="text-center">{TITLE}</h3>
+                       <div style="page-break-after: always">
+                           <table class="table table-bordered">
+                               <thead>
+                                   {HEADING}
+                               </thead>
+                               <tbody>
+                                   {BODY}
+                               </tbody>
+                           </table>
+                       </div>';
+   
+       $content = "";
+   
+       foreach ($classes as $class) {
+           $header = "<tr class='table-head'>";
+           $header .= "<td>Days→<br>↓Hours</td>"; // Change this line to display hours as header
+   
+           foreach ($days as $day) {
+               $header .= "\t<td>" . strtoupper($day->short_name) . "</td>";
+           }
+   
+           $header .= "</tr>";
+   
+           $body = "";
+   
+           foreach ($timeslots as $timeslot) {
+               $body .= "<tr><td style='width: 50px; height: 50px;'>" . $timeslot->time . "</td>"; // Display hours in the first column
+   
+               foreach ($days as $day) {
+                   if (isset($data[$class->id][$day->name][$timeslot->time])) {
+                       $body .= "<td class='text-center' style='width: 50px; height: 50px;'>";
+                       $slotData = $data[$class->id][$day->name][$timeslot->time];
+                       $courseCode = $slotData['course_code'];
+                       $courseName = $slotData['course_name'];
+                       $professor = $slotData['professor'];
+                       $room = $slotData['room'];
+   
+                       $body .= "<span class='course_code'>{$courseCode}</span><br />";
+                       $body .= "<span class='room pull-left'>{$room}</span>";
+                       $body .= "<span class='professor pull-right'>{$professor}</span>";
+   
+                       $body .= "</td>";
+                   } else {
+                       $body .= "<td style='width: 100px; height: 50px;'></td>";
+                   }
+               }
+               $body .= "</tr>";
+           }
+   
+           $title = $class->name;
+           $content .= str_replace(['{TITLE}', '{HEADING}', '{BODY}'], [$title, $header, $body], $tableTemplate);
+       }
+   
+       $path = 'public/timetables/timetable_' . $this->timetable->id . '.html';
+       Storage::put($path, $content);
+   
+       $this->timetable->update([
+           'file_url' => $path
+       ]);
+   }
+   
+   public function renderFacultyLoad()
+   {
+       list($data, $professorSchedules) = $this->generateData(explode(",", $this->timetable->chromosome), explode(",", $this->timetable->scheme));
+   
+       $days = $this->timetable->days()->orderBy('id', 'ASC')->get();
+       $timeslots = TimeslotModel::orderBy('rank', 'ASC')->get();
+       $professors = ProfessorModel::all();
+   
+       $tableTemplate = '<h3 class="text-center">{TITLE}</h3>
+                       <div style="page-break-after: always">
+                           <table class="table table-bordered">
+                               <thead>
+                                   {HEADING}
+                               </thead>
+                               <tbody>
+                                   {BODY}
+                               </tbody>
+                           </table>
+                       </div>';
+   
+       $content = "";
+   
+       foreach ($professors as $professor) {
+           $professorHeader = "<tr class='table-head'>";
+           $professorHeader .= "<td></td>"; // Empty cell in the first column for hours
+   
+           foreach ($days as $day) {
+               $professorHeader .= "\t<td>" . strtoupper($day->short_name) . "</td>";
+           }
+   
+           $professorHeader .= "</tr>";
+   
+           $professorBody = "";
+   
+           foreach ($timeslots as $timeslot) {
+               $professorBody .= "<tr><td style='width: 50px; height: 50px;'>" . $timeslot->time . "</td>";
+   
+               foreach ($days as $day) {
+                   $professorBody .= "<td style='width: 50px; height: 50px;'>";
+                   $facultyLoadValue = $this->getFacultyLoadForTimeslot($professor->id, $data, $day->name, $timeslot->time);
+                   $professorScheduleValue = $this->getProfessorScheduleValue($professor->id, $professorSchedules, $day->name, $timeslot->time);
+   
+                   if ($facultyLoadValue > 0) {
+                       $professorBody .= "<div class='faculty-load'>{$facultyLoadValue}</div>";
+                   }
+   
+                   if ($professorScheduleValue !== null) {
+                       $professorBody .= "<div class='professor-schedule'>{$professorScheduleValue}</div>";
+                   }
+   
+                   $professorBody .= "</td>";
+               }
+               $professorBody .= "</tr>";
+           }
+   
+           $professorTitle = $professor->name;
+           $content .= str_replace(['{TITLE}', '{HEADING}', '{BODY}'], [$professorTitle, $professorHeader, $professorBody], $tableTemplate);
+       }
+   
+       $path = 'public/timetables/faculty_load_' . $this->timetable->id . '.html';
+       Storage::put($path, $content);
+   
+       return $content;
+   }
 
-        $days = $this->timetable->days()->orderBy('id', 'ASC')->get();
-        $timeslots = TimeslotModel::orderBy('rank', 'ASC')->get();
-        $classes = CollegeClassModel::all();
-
-        $tableTemplate = '<h3 class="text-center">{TITLE}</h3>
-                        <div style="page-break-after: always">
-                            <table class="table table-bordered">
-                                <thead>
-                                    {HEADING}
-                                </thead>
-                                <tbody>
-                                    {BODY}
-                                </tbody>
-                            </table>
-                        </div>';
-
-        $content = "";
-
-        foreach ($classes as $class) {
-            $header = "<tr class='table-head'>";
-            $header .= "<td>Days→<br>↓Hours</td>"; // Change this line to display hours as header
-
-            foreach ($days as $day) {
-                $header .= "\t<td>" . strtoupper($day->short_name) . "</td>";
-            }
-
-            $header .= "</tr>";
-
-            $body = "";
-
-            foreach ($timeslots as $timeslot) {
-                $body .= "<tr><td style='width: 50px; height: 50px;'>" . $timeslot->time . "</td>"; // Display hours in the first column
-
-                foreach ($days as $day) {
-                    if (isset($data[$class->id][$day->name][$timeslot->time])) {
-                        $body .= "<td class='text-center' style='width: 50px; height: 50px;'>";
-                        $slotData = $data[$class->id][$day->name][$timeslot->time];
-                        $courseCode = $slotData['course_code'];
-                        $courseName = $slotData['course_name'];
-                        $professor = $slotData['professor'];
-                        $room = $slotData['room'];
-
-                        $body .= "<span class='course_code'>{$courseCode}</span><br />";
-                        $body .= "<span class='room pull-left'>{$room}</span>";
-                        $body .= "<span class='professor pull-right'>{$professor}</span>";
-
-                        $body .= "</td>";
-                    } else {
-                        $body .= "<td style='width: 100px; height: 50px;'></td>";
-                    }
-                }
-                $body .= "</tr>";
-            }
-
-            $title = $class->name;
-            $content .= str_replace(['{TITLE}', '{HEADING}', '{BODY}'], [$title, $header, $body], $tableTemplate);
-        }
-
-        $path = 'public/timetables/timetable_' . $this->timetable->id . '.html';
-        Storage::put($path, $content);
-
-        $this->timetable->update([
-            'file_url' => $path
-        ]);
-    }
-    public function renderFacultyLoad()
-    {
-        $chromosome = explode(",", $this->timetable->chromosome);
-        $scheme = explode(",", $this->timetable->scheme);
-        $data = $this->generateData($chromosome, $scheme);
-    
-        $days = $this->timetable->days()->orderBy('id', 'ASC')->get();
-        $timeslots = TimeslotModel::orderBy('rank', 'ASC')->get();
-        $professors = ProfessorModel::all();
-        $professorSchedules = $this->generateProfessorSchedules($chromosome, $scheme);
-    
-        $tableTemplate = '<h3 class="text-center">{TITLE}</h3>
-                        <div style="page-break-after: always">
-                            <table class="table table-bordered">
-                                <thead>
-                                    {HEADING}
-                                </thead>
-                                <tbody>
-                                    {BODY}
-                                </tbody>
-                            </table>
-                        </div>';
-    
-        $content = "";
-    
-        foreach ($professors as $professor) {
-            $professorHeader = "<tr class='table-head'>";
-            $professorHeader .= "<td></td>"; // Empty cell in the first column for hours
-    
-            foreach ($days as $day) {
-                $professorHeader .= "\t<td>" . strtoupper($day->short_name) . "</td>";
-            }
-    
-            $professorHeader .= "</tr>";
-    
-            $professorBody = "";
-    
-            foreach ($timeslots as $timeslot) {
-                $professorBody .= "<tr><td style='width: 50px; height: 50px;'>" . $timeslot->time . "</td>";
-    
-                foreach ($days as $day) {
-                    $professorBody .= "<td style='width: 50px; height: 50px;'>";
-                    $facultyLoadValue = $this->getFacultyLoadForTimeslot($professor->id, $data, $day->name, $timeslot->time);
-                    $professorScheduleValue = $this->getProfessorScheduleValue($professor->id, $professorSchedules, $day->name, $timeslot->time);
-    
-                    if ($facultyLoadValue > 0) {
-                        $professorBody .= "<span class='faculty-load'>{$facultyLoadValue}</span>";
-                    }
-    
-                    if ($professorScheduleValue !== null) {
-                        $professorBody .= "<span class='professor-schedule'>{$professorScheduleValue}</span>";
-                    }
-    
-                    $professorBody .= "</td>";
-                }
-                $professorBody .= "</tr>";
-            }
-    
-            $professorTitle = $professor->name;
-            $content .= str_replace(['{TITLE}', '{HEADING}', '{BODY}'], [$professorTitle, $professorHeader, $professorBody], $tableTemplate);
-        }
-    
-        $path = 'public/timetables/faculty_load_' . $this->timetable->id . '.html';
-        Storage::put($path, $content);
-    
-        return $content;
-    }
     
     protected function getFacultyLoadForTimeslot($professorId, $data, $dayName, $timeslot)
     {
@@ -223,12 +220,25 @@ class TimetableRenderer
     protected function getProfessorScheduleValue($professorId, $professorSchedules, $dayName, $timeslot)
     {
         if (isset($professorSchedules[$professorId][$dayName][$timeslot])) {
-            return "X"; // You can customize this value as needed
+            $scheduleData = $professorSchedules[$professorId][$dayName][$timeslot];
+            $output = '';
+
+            foreach ($scheduleData as $entry) {
+                $class = CollegeClassModel::find($entry['class_id']);
+                $course = CourseModel::find($entry['course_id']);
+                $room = RoomModel::find($entry['room_id']);
+
+                $output .= "<span class='schedule-entry'>";
+                $output .= "<strong>{$course->course_code}:</strong> {$course->name} ({$class->name}), ";
+                $output .= "<strong>Room:</strong> {$room->name}<br>";
+                $output .= "</span>";
+            }
+
+            return $output;
         }
-    
+
         return null;
     }
-    
 
     public function renderAndSave()
     {
@@ -262,82 +272,84 @@ class TimetableRenderer
      * @return array Timetable data
      */
     public function generateData($chromosome, $scheme)
-    {
-        $data = [];
-        $professorSchedules = []; // New data structure to store professors' schedules
-        $schemeIndex = 0;
-        $chromosomeIndex = 0;
-        $groupId = null;
+{
+    $data = [];
+    $professorSchedules = []; // New data structure to store professors' schedules
+    $schemeIndex = 0;
+    $chromosomeIndex = 0;
+    $groupId = null;
 
-        while ($chromosomeIndex < count($chromosome)) {
-            while ($scheme[$schemeIndex][0] == 'G') {
-                $groupId = substr($scheme[$schemeIndex], 1);
-                $schemeIndex += 1;
-            }
-
-            $courseId = $scheme[$schemeIndex];
-
-            $class = CollegeClassModel::find($groupId);
-            $course = CourseModel::find($courseId);
-
-            $timeslotGene = $chromosome[$chromosomeIndex];
-            $roomGene = $chromosome[$chromosomeIndex + 1];
-            $professorGene = $chromosome[$chromosomeIndex + 2];
-
-            $matches = [];
-            preg_match('/D(\d*)T(\d*)/', $timeslotGene, $matches);
-
-            $dayId = $matches[1];
-            $timeslotId = $matches[2];
-
-            $day = DayModel::find($dayId);
-            $timeslot = TimeslotModel::find($timeslotId);
-            $professor = ProfessorModel::find($professorGene);
-            $room = RoomModel::find($roomGene);
-
-            // Populate the general timetable data structure
-            if (!isset($data[$groupId])) {
-                $data[$groupId] = [];
-            }
-
-            if (!isset($data[$groupId][$day->name])) {
-                $data[$groupId][$day->name] = [];
-            }
-
-            if (!isset($data[$groupId][$day->name][$timeslot->time])) {
-                $data[$groupId][$day->name][$timeslot->time] = [];
-            }
-
-            $data[$groupId][$day->name][$timeslot->time]['course_code'] = $course->course_code;
-            $data[$groupId][$day->name][$timeslot->time]['course_name'] = $course->name;
-            $data[$groupId][$day->name][$timeslot->time]['room'] = $room->name;
-            $data[$groupId][$day->name][$timeslot->time]['professor'] = $professor->name;
-
-            // Populate the professors' schedule data structure
-            if (!isset($professorSchedules[$professor->id])) {
-                $professorSchedules[$professor->id] = [];
-            }
-
-            if (!isset($professorSchedules[$professor->id][$day->name])) {
-                $professorSchedules[$professor->id][$day->name] = [];
-            }
-
-            if (!isset($professorSchedules[$professor->id][$day->name][$timeslot->time])) {
-                $professorSchedules[$professor->id][$day->name][$timeslot->time] = [];
-            }
-
-            $professorSchedules[$professor->id][$day->name][$timeslot->time][] = [
-                'class_id' => $class->id,
-                'course_id' => $course->id,
-                'room_id' => $room->id,
-            ];
-
-            $schemeIndex++;
-            $chromosomeIndex += 3;
+    while ($chromosomeIndex < count($chromosome)) {
+        while ($scheme[$schemeIndex][0] == 'G') {
+            $groupId = substr($scheme[$schemeIndex], 1);
+            $schemeIndex += 1;
         }
 
-        // Now, you can use $professorSchedules to get professors' schedules based on the class, time, and room.
+        $courseId = $scheme[$schemeIndex];
 
-        return $data;
+        $class = CollegeClassModel::find($groupId);
+        $course = CourseModel::find($courseId);
+
+        $timeslotGene = $chromosome[$chromosomeIndex];
+        $roomGene = $chromosome[$chromosomeIndex + 1];
+        $professorGene = $chromosome[$chromosomeIndex + 2];
+
+        $matches = [];
+        preg_match('/D(\d*)T(\d*)/', $timeslotGene, $matches);
+
+        $dayId = $matches[1];
+        $timeslotId = $matches[2];
+
+        $day = DayModel::find($dayId);
+        $timeslot = TimeslotModel::find($timeslotId);
+        $professor = ProfessorModel::find($professorGene);
+        $room = RoomModel::find($roomGene);
+
+        // Populate the general timetable data structure
+        if (!isset($data[$groupId])) {
+            $data[$groupId] = [];
+        }
+
+        if (!isset($data[$groupId][$day->name])) {
+            $data[$groupId][$day->name] = [];
+        }
+
+        if (!isset($data[$groupId][$day->name][$timeslot->time])) {
+            $data[$groupId][$day->name][$timeslot->time] = [];
+        }
+
+        $data[$groupId][$day->name][$timeslot->time]['course_code'] = $course->course_code;
+        $data[$groupId][$day->name][$timeslot->time]['course_name'] = $course->name;
+        $data[$groupId][$day->name][$timeslot->time]['room'] = $room->name;
+        $data[$groupId][$day->name][$timeslot->time]['professor'] = $professor->name;
+
+        // Populate the professors' schedule data structure
+        if (!isset($professorSchedules[$professor->id])) {
+            $professorSchedules[$professor->id] = [];
+        }
+
+        if (!isset($professorSchedules[$professor->id][$day->name])) {
+            $professorSchedules[$professor->id][$day->name] = [];
+        }
+
+        if (!isset($professorSchedules[$professor->id][$day->name][$timeslot->time])) {
+            $professorSchedules[$professor->id][$day->name][$timeslot->time] = [];
+        }
+
+        $professorSchedules[$professor->id][$day->name][$timeslot->time][] = [
+            'class_id' => $class->id,
+            'course_id' => $course->id,
+            'room_id' => $room->id,
+        ];
+
+        $schemeIndex++;
+        $chromosomeIndex += 3;
     }
+
+    // Now, you can use $professorSchedules to get professors' schedules based on the class, time, and room.
+
+    return [$data, $professorSchedules]; // Return both data structures
+}
+
+    
 }
