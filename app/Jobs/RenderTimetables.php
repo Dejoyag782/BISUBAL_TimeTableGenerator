@@ -35,6 +35,7 @@ class RenderTimetables implements ShouldQueue
         $renderer = new TimetableRenderer($this->timetable);
         $renderer->render();
         $renderer->renderFacultyLoad();
+        $renderer->renderRoomUsage();
         $renderer->renderAndSave();
     }
 }
