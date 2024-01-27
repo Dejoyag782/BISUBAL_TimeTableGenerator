@@ -118,4 +118,31 @@ class TimetablesController extends Controller
             return view('timetables.view', compact('timetableData', 'timetableName'));
         }
     }
+
+   /**
+     * Delete a timetable and its associated file
+     *
+     * @param int $id The ID of the timetable to delete
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function delete($id)
+    {
+        $timetable = Timetable::find($id);
+
+        if (!$timetable) {
+            return response()->json(['error' => 'Timetable not found'], 404);
+        }
+
+        // Delete the associated file
+        $combinedPath = 'public/timetables/combined_' . $timetable->id . '.html';
+        if (Storage::exists($combinedPath)) {
+            Storage::delete($combinedPath);
+        }
+
+        // Delete the timetable
+        $timetable->delete();
+
+        return response()->json(['deleted' => true]);
+    }
+
 }

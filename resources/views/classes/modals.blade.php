@@ -23,11 +23,11 @@
                             </div>
 
                             <div class="form-group">
-                                <label>Courses <i class="fa fa-plus side-icon" title="Add Course" id="course-add"></i></label>
+                                <label>Subjects <i class="fa fa-plus side-icon" title="Add Course" id="course-add"></i></label>
 
                                 <div class="row">
                                     <div class="col-md-4 col-sm-7 col-xs-12">
-                                        Course
+                                        Subject
                                     </div>
 
                                     <div class="col-md-4 col-sm-12 col-xs-12">
@@ -88,7 +88,7 @@
         <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="select2-wrapper">
                 <select class="form-control course-select" name="course-{ID}">
-                    <option value="" selected>Select a course</option>
+                    <option value="" selected>Select a subject</option>
                     @foreach ($courses as $course)
                     <option value="{{ $course->id }}">{{ $course->name }}</option>
                     @endforeach

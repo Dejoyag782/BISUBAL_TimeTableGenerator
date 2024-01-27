@@ -51,3 +51,29 @@ window.addEventListener('load', function () {
     timetable.init();
     console.log(timetable.baseUrl);
 });
+
+$(document).on('click', '.delete-btn', function(event) {
+    event.preventDefault(); // Prevent default link behavior
+    
+    var timetableId = $(this).data('id');
+    if (confirm('Are you sure you want to delete this timetable?')) {
+        $.ajax({
+            url: '/timetables/delete/' + timetableId,
+            type: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (response) {
+                // Handle success response
+                console.log('Timetable deleted successfully');
+                // Optionally, you can reload the page or update the UI after deletion
+                // window.location.reload();
+            },
+            error: function (xhr, status, error) {
+                // Handle error response
+                console.error('Error deleting timetable:', error);
+            }
+        });
+    }
+});
+

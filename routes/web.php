@@ -50,6 +50,7 @@ Route::resource('classes', CollegeClassesController::class);
 Route::post('timetables', [TimetablesController::class, 'store']);
 Route::get('timetables', [TImetablesController::class, 'index']);
 Route::get('timetables/view/{id}', [TImetablesController::class, 'view']);
+Route::delete('/timetables/delete/{id}', [TImetablesController::class, 'delete']);
 
 // User account activation routes
 Route::get('/users/activate', [UsersController::class, 'showActivationPage']);

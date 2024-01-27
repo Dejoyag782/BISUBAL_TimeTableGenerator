@@ -11,6 +11,8 @@ use App\Models\AcademicPeriod;
 
 class DashboardController extends Controller
 {
+    protected $service; // Declare the property
+
     /**
      * Create a new instance of this controller
      *
