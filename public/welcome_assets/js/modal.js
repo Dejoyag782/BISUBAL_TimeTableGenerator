@@ -3,13 +3,13 @@
 
 // -------------------- RESOURCES -------------------- //
 // Add Resource
-var closeAddResourceBtn = document.getElementById("close_resource_modal");
-var cancelAddResourceBtn = document.getElementById("cancel_resource_modal");
-var addResourceModal = document.getElementById("resource-modal");
+var closeAddUsersBtn = document.getElementById("close_resource_modal");
+var cancelAddUsersBtn = document.getElementById("cancel_resource_modal");
+var addUsersModal = document.getElementById("resource-modal");
 
 
-function closeAddResourceModal() {
-  addResourceModal.classList.remove('show');
+function closeAddUsersModal() {
+  addUsersModal.classList.remove('show');
   $("#resource-modal").modal('hide')
   setTimeout(function() {
     var modalBackdrop = document.querySelector('.modal-backdrop.fade.show');
@@ -19,8 +19,8 @@ function closeAddResourceModal() {
   }, 400);
 }
 
-closeAddResourceBtn.addEventListener("click", closeAddResourceModal);
-cancelAddResourceBtn.addEventListener("click", closeAddResourceModal);
+closeAddUsersBtn.addEventListener("click", closeAddUsersModal);
+cancelAddUsersBtn.addEventListener("click", closeAddUsersModal);
 
 
 // -------------------- Confirm Dialog -------------------- //

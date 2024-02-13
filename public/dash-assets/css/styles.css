@@ -1,0 +1,244 @@
+body {
+  background: #0b643a;
+  width: 100%;
+  height: auto;
+  min-height: auto;
+}
+
+#search-div {
+  width: 90%;
+  max-width: 90%;
+  height: 100%;
+  max-height: 100%;
+  padding: 5px;
+}
+
+#name-div {
+  width: auto;
+  height: auto;
+  border-style: none;
+  margin-right: 0px;
+  max-width: initial;
+  background: rgba(255,255,255,0);
+}
+
+div {
+  width: 100%;
+  max-height: 100%;
+}
+
+#left-nav {
+  height: 100%;
+  max-height: 100%;
+  min-height: 100%;
+  border-right-style: none;
+  width: 100px;
+  max-width: 15%;
+  min-width: 10%;
+}
+
+#main-container {
+  border-left: 1px solid var(--bs-yellow);
+  min-height: 700px;
+  overflow-y: scroll;
+}
+
+#col-header {
+  border-right-width: 0px;
+  padding-left: 5px;
+}
+
+#fims-heading {
+  font-size: 35px;
+  margin: 0px;
+  padding-bottom: 0px;
+}
+
+#logo {
+  border-width: 12px;
+  width: 45px;
+  height: 45px;
+}
+
+#header {
+  color: rgb(222,163,49);
+}
+
+#div {
+  width: 90%;
+  max-width: 90%;
+  height: 100%;
+  max-height: 100%;
+  padding: 5px;
+}
+
+#div1 {
+  width: auto;
+  height: auto;
+  border-style: none;
+  margin-right: 0px;
+  background: rgba(255,255,255,0);
+}
+
+#row {
+  height: 100%;
+  width: 100%;
+  max-height: 100%;
+}
+
+#left-nav {
+  height: 100%;
+  max-height: 100%;
+  min-height: 100%;
+  border-right-style: none;
+  max-width: 15%;
+}
+
+#main-container {
+  margin-left: 0px;
+  height: 100%;
+  border-left: 1px solid var(--bs-yellow);
+}
+
+#main_cont {
+  margin-top: 5px;
+  padding: 0px;
+  height: 100%;
+}
+
+#main_row {
+  height: 100%;
+  width: 100%;
+  margin: 0px;
+}
+
+#user_dropdown {
+  width: 100%;
+}
+
+#search_i {
+  font-size: 40px;
+  padding: 10px;
+  background: rgba(255,255,255,0);
+  color: rgb(255,255,255);
+  padding-top: 0px;
+  padding-right: 0px;
+}
+
+#dropdown_button {
+  background: rgba(13,110,253,0);
+}
+
+.column {
+  background: rgba(49,52,55,0);
+}
+
+#column_div {
+  padding: 10px;
+  background: rgba(255,255,255,0);
+}
+
+#column_flex_row {
+  background: #ffffff;
+  padding: 10px;
+}
+
+#column_div1 {
+  background: var(--bs-success);
+  padding: 1px;
+  box-shadow: 6px 6px 12px;
+  border-radius: 10px;
+  height: auto;
+  min-height: 100px;
+}
+
+#text_h1 {
+  color: var(--bs-body-bg);
+  font-size: 30px;
+  background: #0e7e4a;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+#farmers_number {
+  color: var(--bs-body-bg);
+  font-size: 80px;
+}
+
+#texth1 {
+  font-size: 30px;
+  color: #ffffff;
+  border-top-left-radius: 10px;
+  border-width: 10px;
+  border-color: #ffffff;
+  background: #0e7e4a;
+  border-top-right-radius: 10px;
+}
+
+#associations_number {
+  color: var(--bs-body-bg);
+  font-size: 80px;
+}
+
+#RSBSA_stab_no {
+  color: var(--bs-white);
+  font-size: 80px;
+  background-color: var(--bs-success);
+}
+
+#generated_id_no {
+  color: var(--bs-body-bg);
+  font-size: 80px;
+}
+
+#div2 {
+  width: auto;
+  height: auto;
+  border-style: none;
+  margin-right: 0px;
+  background: rgba(255,255,255,0);
+}
+
+#dropdown_button {
+  background: rgba(13,110,253,0);
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #0d6efd;
+}
+
+.btn-check:active + .btn-primary, .btn-check:checked + .btn-primary, .btn-primary.active, .btn-primary:active, .show > .btn-primary.dropdown-toggle {
+  color: #fff;
+  background-color: #0a58ca;
+  border-color: none;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #0d6efd;
+  border-color: rgba(255,255,255,0);
+}
+
+a {
+  color: var(--bs-white);
+  font-size: 20px;
+}
+
+a:hover {
+  color: var(--bs-white);
+}
+
+#div_left:hover {
+  border-left: 10px;
+  border-color: #daa520;
+  border-style: solid;
+  border-bottom: none;
+  border-top: none;
+  border-right: none;
+  background-color: #4da95b;
+}
+
+#div_left {
+  font-size: 18px;
+}

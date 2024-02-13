@@ -10,6 +10,7 @@ use App\Http\Controllers\ProfessorsController;
 use App\Http\Controllers\CollegeClassesController;
 use App\Http\Controllers\TimetablesController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\UsersManagerController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,6 +27,22 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+
+Route::group(['middleware' => ['auth', 'checkRole:superad', 'activated']], function () {
+   // user management
+    Route::get('user-management', [UsersManagerController::class, 'index'])->name('user-management.index');
+    Route::post('user-management', [UsersManagerController::class, 'store'])->name('user-management.store');
+    Route::get('user-management/{id}/edit', [UsersManagerController::class, 'edit'])->name('user-management.edit');
+    Route::put('user-management/{id}', [UsersManagerController::class, 'update'])->name('user-management.update');
+    Route::delete('user-management/{id}', [UsersManagerController::class, 'destroy'])->name('user-management.destroy');
+    Route::get('get-user-details/{id}', [UsersManagerController::class, 'getUserDetails'])->name('user.details');
+
+    // Route for registering users
+    Route::get('/register', function () {
+        return view('dashboard');
+    });
+
+});
 
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 

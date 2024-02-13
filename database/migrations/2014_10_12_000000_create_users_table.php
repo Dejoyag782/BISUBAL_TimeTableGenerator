@@ -15,6 +15,7 @@ return new class extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email')->unique();
+            $table->enum('role', ['superad', 'admin']) -> default=('admin');
             $table->timestamp('email_verified_at')->nullable();
             $table->boolean('activated')->default(0);
             $table->string('password');

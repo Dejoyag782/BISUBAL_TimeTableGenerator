@@ -22,6 +22,13 @@
                 <li class="menu-link {{ ($page == 'timeslots') ? 'active' : '' }}">
                     <a href="/timeslots"><span class="fa fa-clock-o"></span><span class="text">Periods</span></a>
                 </li>
+                {{-- Users Nav --}}
+                @if (auth()->user()->role == 'superad')
+                <li class="menu-link" style="margin-bottom: 10px;">
+                    <a href="/user-management"><span class="fa fa-user"></span><span class="text">Users</span></a>
+                </li>
+                @endif
+                
             </ul>
         </div>
     </div>

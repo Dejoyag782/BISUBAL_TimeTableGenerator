@@ -33,137 +33,141 @@ class TimetableRenderer
      */
    // ...
 
-    public function render()
-    {
-        list($data, $professorSchedules) = $this->generateData(explode(",", $this->timetable->chromosome), explode(",", $this->timetable->scheme));
-        
-        $days = $this->timetable->days()->orderBy('id', 'ASC')->get();
-        $timeslots = TimeslotModel::orderBy('rank', 'ASC')->get();
-        $classes = CollegeClassModel::all();
-        
-        $tableTemplate = '<h3 class="text-center">{TITLE}</h3>
-                        <div style="page-break-after: always">
-                            <table class="table table-bordered">
-                                <thead>
-                                    {HEADING}
-                                </thead>
-                                <tbody>
-                                    {BODY}
-                                </tbody>
-                            </table>
-                        </div>';
-        
-        $content = "";
-        
-        foreach ($classes as $class) {
-            $header = "<tr class='table-head'>";
-            $header .= "<td>Days→<br>↓Hours</td>"; // Change this line to display hours as header
-            
-            foreach ($days as $day) {
-                $header .= "\t<td>" . strtoupper($day->short_name) . "</td>";
-            }
-            
-            $header .= "</tr>";
-            
-            $body = "";
-            
-            foreach ($timeslots as $timeslot) {
-                $body .= "<tr><td style='width: 50px; height: 50px;'>" . $timeslot->time . "</td>"; // Display hours in the first column
-                
-                foreach ($days as $day) {
-                    if (isset($data[$class->id][$day->name][$timeslot->time])) {
-                        $body .= "<td class='text-center' style='width: 50px; height: 50px;'>";
-                        $slotData = $data[$class->id][$day->name][$timeslot->time];
-                        $courseCode = $slotData['course_code'];
-                        $courseName = $slotData['course_name'];
-                        $professor = $slotData['professor'];
-                        $room = $slotData['room'];
-                        
-                        $body .= "<span class='course_code'>{$courseCode}</span><br />";
-                        $body .= "<span class='room pull-left'>{$room}</span>";
-                        $body .= "<span class='professor pull-right'>{$professor}</span>";
-                        
-                        $body .= "</td>";
-                    } else {
-                        $body .= "<td style='width: 100px; height: 50px;'></td>";
-                    }
-                }
-                $body .= "</tr>";
-            }
-            
-            $title = $class->name;
-            $content .= str_replace(['{TITLE}', '{HEADING}', '{BODY}'], [$title, $header, $body], $tableTemplate);
-        }
-        
-        // Return the generated content instead of saving it to a file
-        return $content;
-    }
-
+   public function render()
+   {
+       list($data, $professorSchedules) = $this->generateData(explode(",", $this->timetable->chromosome), explode(",", $this->timetable->scheme));
+   
+       $days = $this->timetable->days()->orderBy('id', 'ASC')->get();
+       $timeslots = TimeslotModel::orderBy('rank', 'ASC')->get();
+       $classes = CollegeClassModel::all();
+   
+       $tableTemplate = '<h3 class="text-center">{TITLE}</h3>
+                       <div style="page-break-after: always">
+                           <table class="table table-bordered">
+                               <thead>
+                                   {HEADING}
+                               </thead>
+                               <tbody>
+                                   {BODY}
+                               </tbody>
+                           </table>
+                       </div>';
+   
+       $content = "";
+   
+       foreach ($classes as $class) {
+           $header = "<tr class='table-head'>";
+           $header .= "<td>Days→<br>↓Hours</td>"; // Change this line to display hours as header
+   
+           foreach ($days as $day) {
+               $header .= "\t<td>" . strtoupper($day->short_name) . "</td>";
+           }
+   
+           $header .= "</tr>";
+   
+           $body = "";
+   
+           foreach ($timeslots as $timeslot) {
+               $body .= "<tr><td style='width: 50px; height: 50px;'>" . $timeslot->time . "</td>"; // Display hours in the first column
+   
+               foreach ($days as $day) {
+                   if (isset($data[$class->id][$day->name][$timeslot->time])) {
+                       $body .= "<td class='text-center' style='width: 50px; height: 50px;'>";
+                       $slotData = $data[$class->id][$day->name][$timeslot->time];
+                       $courseCode = $slotData['course_code'];
+                       $courseName = $slotData['course_name'];
+                       $professor = $slotData['professor'];
+                       $room = $slotData['room'];
+   
+                       $body .= "<span class='course_code'>{$courseCode}</span><br />";
+                       $body .= "<span class='room pull-left'>{$room}</span>";
+                       $body .= "<span class='professor pull-right'>{$professor}</span>";
+   
+                       $body .= "</td>";
+                   } else {
+                       $body .= "<td style='width: 100px; height: 50px;'></td>";
+                   }
+               }
+               $body .= "</tr>";
+           }
+   
+           $title = $class->name;
+           $content .= str_replace(['{TITLE}', '{HEADING}', '{BODY}'], [$title, $header, $body], $tableTemplate);
+       }
+   
+       $path = 'public/timetables/timetable_' . $this->timetable->id . '.html';
+       Storage::put($path, $content);
+   
+       $this->timetable->update([
+           'file_url' => $path
+       ]);
+   }
    
 //---------------------------------------------------------Start of Faculty Load Renderer-----------------------------------------------------------//
-    public function renderFacultyLoad()
-    {
-        list($data, $professorSchedules) = $this->generateData(explode(",", $this->timetable->chromosome), explode(",", $this->timetable->scheme));
-        
-        $days = $this->timetable->days()->orderBy('id', 'ASC')->get();
-        $timeslots = TimeslotModel::orderBy('rank', 'ASC')->get();
-        $professors = ProfessorModel::all();
-        
-        $tableTemplate = '<h3 class="text-center">{TITLE}</h3>
-                        <div style="page-break-after: always">
-                            <table class="table table-bordered">
-                                <thead>
-                                    {HEADING}
-                                </thead>
-                                <tbody>
-                                    {BODY}
-                                </tbody>
-                            </table>
-                        </div>';
-        
-        $content = "";
-        
-        foreach ($professors as $professor) {
-            $professorHeader = "<tr class='table-head'>";
-            $professorHeader .= "<td>Days→<br>↓Hours</td>"; // Empty cell in the first column for hours
-            
-            foreach ($days as $day) {
-                $professorHeader .= "\t<td>" . strtoupper($day->short_name) . "</td>";
-            }
-            
-            $professorHeader .= "</tr>";
-            
-            $professorBody = "";
-            
-            foreach ($timeslots as $timeslot) {
-                $professorBody .= "<tr><td style='width: 50px; height: 50px;'>" . $timeslot->time . "</td>";
-                
-                foreach ($days as $day) {
-                    $professorBody .= "<td style='width: 50px; height: 50px;'>";
-                    $facultyLoadValue = $this->getFacultyLoadForTimeslot($professor->id, $data, $day->name, $timeslot->time);
-                    $professorScheduleValue = $this->getProfessorScheduleValue($professor->id, $professorSchedules, $day->name, $timeslot->time);
-                    
-                    if ($facultyLoadValue > 0) {
-                        $professorBody .= "<div class='faculty-load'>{$facultyLoadValue}</div>";
-                    }
-                    
-                    if ($professorScheduleValue !== null) {
-                        $professorBody .= "<div class='professor-schedule'>{$professorScheduleValue}</div>";
-                    }
-                    
-                    $professorBody .= "</td>";
-                }
-                $professorBody .= "</tr>";
-            }
-            
-            $professorTitle = $professor->name;
-            $content .= str_replace(['{TITLE}', '{HEADING}', '{BODY}'], [$professorTitle, $professorHeader, $professorBody], $tableTemplate);
-        }
-        
-        // Return the generated content instead of saving it to a file
-        return $content;
-    }
-
+   public function renderFacultyLoad()
+   {
+       list($data, $professorSchedules) = $this->generateData(explode(",", $this->timetable->chromosome), explode(",", $this->timetable->scheme));
+   
+       $days = $this->timetable->days()->orderBy('id', 'ASC')->get();
+       $timeslots = TimeslotModel::orderBy('rank', 'ASC')->get();
+       $professors = ProfessorModel::all();
+   
+       $tableTemplate = '<h3 class="text-center">{TITLE}</h3>
+                       <div style="page-break-after: always">
+                           <table class="table table-bordered">
+                               <thead>
+                                   {HEADING}
+                               </thead>
+                               <tbody>
+                                   {BODY}
+                               </tbody>
+                           </table>
+                       </div>';
+   
+       $content = "";
+   
+       foreach ($professors as $professor) {
+           $professorHeader = "<tr class='table-head'>";
+           $professorHeader .= "<td>Days→<br>↓Hours</td>"; // Empty cell in the first column for hours
+   
+           foreach ($days as $day) {
+               $professorHeader .= "\t<td>" . strtoupper($day->short_name) . "</td>";
+           }
+   
+           $professorHeader .= "</tr>";
+   
+           $professorBody = "";
+   
+           foreach ($timeslots as $timeslot) {
+               $professorBody .= "<tr><td style='width: 50px; height: 50px;'>" . $timeslot->time . "</td>";
+   
+               foreach ($days as $day) {
+                   $professorBody .= "<td style='width: 50px; height: 50px;'>";
+                   $facultyLoadValue = $this->getFacultyLoadForTimeslot($professor->id, $data, $day->name, $timeslot->time);
+                   $professorScheduleValue = $this->getProfessorScheduleValue($professor->id, $professorSchedules, $day->name, $timeslot->time);
+   
+                   if ($facultyLoadValue > 0) {
+                       $professorBody .= "<div class='faculty-load'>{$facultyLoadValue}</div>";
+                   }
+   
+                   if ($professorScheduleValue !== null) {
+                       $professorBody .= "<div class='professor-schedule'>{$professorScheduleValue}</div>";
+                   }
+   
+                   $professorBody .= "</td>";
+               }
+               $professorBody .= "</tr>";
+           }
+   
+           $professorTitle = $professor->name;
+           $content .= str_replace(['{TITLE}', '{HEADING}', '{BODY}'], [$professorTitle, $professorHeader, $professorBody], $tableTemplate);
+       }
+   
+       $path = 'public/timetables/faculty_load_' . $this->timetable->id . '.html';
+       Storage::put($path, $content);
+   
+       return $content;
+   }
 
     
     protected function getFacultyLoadForTimeslot($professorId, $data, $dayName, $timeslot)
@@ -301,10 +305,11 @@ class TimetableRenderer
             $content .= str_replace(['{TITLE}', '{HEADING}', '{BODY}'], [$title, $header, $body], $tableTemplate);
         }
 
-        // Return the generated content instead of saving it to a file
+        $path = 'public/timetables/room_usage_' . $this->timetable->id . '.html';
+        Storage::put($path, $content);
+
         return $content;
     }
-
 
     protected function getRoomUsageId($roomUsages, $roomId, $dayName, $timeslot)
     {
@@ -332,38 +337,37 @@ class TimetableRenderer
         
 
 //--------------------------------------------------Start of Concatenate Timetables-------------------------------------------------------------------------//
-public function renderAndSave()
-{
-    // Run the render method to get the content of the timetable
-    $timetableContent = $this->render();
+    public function renderAndSave()
+    {
+        // Run the render method to get the content of the timetable
+        $this->render();
+        $timetableContent = Storage::get($this->timetable->file_url);
 
-    // Run the renderFacultyLoad method to get the content of the faculty load timetable
-    $facultyLoadContent = $this->renderFacultyLoad();
+        // Run the renderFacultyLoad method to get the content of the faculty load timetable
+        $facultyLoadContent = $this->renderFacultyLoad();
 
-    // Run the renderRoomUsage method to get the content of the room usage timetable
-    $roomUsageContent = $this->renderRoomUsage();
+        // Run the renderRoomUsage method to get the content of the room usage timetable
+        $roomUsageContent = $this->renderRoomUsage();
 
-    // Add labels or titles to each section with blank pages
-    $timetableContent = '<div style="page-break-after: always; margin:auto;"><h2>Student Load</h2></div>' . $timetableContent;
-    $facultyLoadContent = '<div style="page-break-after: always; margin:auto;"><h2>Professor Load</h2></div>' . $facultyLoadContent;
-    $roomUsageContent = '<div style="page-break-after: always; margin:auto;"><h2>Room Utilization</h2></div>' . $roomUsageContent;
+        // Add labels or titles to each section with blank pages
+        $timetableContent = '<div style="page-break-before: always;"><h2>Student Load</h2></div>' . $timetableContent;
+        $facultyLoadContent = '<div style="page-break-before: always;"><h2>Professor Load</h2></div>' . $facultyLoadContent;
+        $roomUsageContent = '<div style="page-break-before: always;"><h2>Room Utilization</h2></div>' . $roomUsageContent;
 
-    // Concatenate the content of all timetables
-    $combinedContent = $timetableContent . $facultyLoadContent . $roomUsageContent;
+        // Concatenate the content of all timetables
+        $combinedContent = $timetableContent . $facultyLoadContent . $roomUsageContent;
 
-    // Save the combined content in a single HTML file
-    $combinedPath = 'public/timetables/combined_' . $this->timetable->id . '.html';
-    Storage::put($combinedPath, $combinedContent);
+        // Save the combined content in a single HTML file
+        $combinedPath = 'public/timetables/combined_' . $this->timetable->id . '.html';
+        Storage::put($combinedPath, $combinedContent);
 
-    // Update the timetable's file_url to point to the combined file
-    $this->timetable->update([
-        'file_url' => $combinedPath
-    ]);
+        // Update the timetable's file_url to point to the combined file
+        $this->timetable->update([
+            'file_url' => $combinedPath
+        ]);
 
-    return $combinedContent;
-}
-
-
+        return $combinedContent;
+    }
 
 //--------------------------------------------------End of Concatenate Timetables-------------------------------------------------------------------------//
 

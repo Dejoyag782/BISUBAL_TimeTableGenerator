@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use App\Http\Middleware\CheckRole;
 
 class Kernel extends HttpKernel
 {
@@ -59,6 +60,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
 
         // Custom middlewares
-        'activated' => \App\Http\Middleware\CheckUserActivation::class
+        'activated' => \App\Http\Middleware\CheckUserActivation::class,
+        'checkRole' => CheckRole::class
     ];
 }
