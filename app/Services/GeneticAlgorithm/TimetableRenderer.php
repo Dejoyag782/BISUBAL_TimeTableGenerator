@@ -41,7 +41,13 @@ class TimetableRenderer
         $timeslots = TimeslotModel::orderBy('rank', 'ASC')->get();
         $classes = CollegeClassModel::all();
         
-        $tableTemplate = '<h3 class="text-center">{TITLE}</h3>
+        $tableTemplate = '
+                        <div style="align-items:center; text-align:center;"><h5>Republic of the Philippines
+                                                                        <br>BOHOL ISLAND STATE UNIVERSITY
+                                                                        <br>Balilihan Campus
+                                                                        <br>Magsija, Balilihan, Bohol</h5>
+                        </div>
+                        <h3 class="text-left">COURSE,YR. & SEC: {TITLE}</h3>
                         <div style="page-break-after: always">
                             <table class="table table-bordered">
                                 <thead>
@@ -109,7 +115,13 @@ class TimetableRenderer
         $timeslots = TimeslotModel::orderBy('rank', 'ASC')->get();
         $professors = ProfessorModel::all();
         
-        $tableTemplate = '<h3 class="text-center">{TITLE}</h3>
+        $tableTemplate = '
+                        <div style="align-items:center; text-align:center;"><h5>Republic of the Philippines
+                                                                        <br>BOHOL ISLAND STATE UNIVERSITY
+                                                                        <br>Balilihan Campus
+                                                                        <br>Magsija, Balilihan, Bohol</h5>
+                        </div>
+                        <h3 class="text-left">PROF NAME: {TITLE}</h3>
                         <div style="page-break-after: always">
                             <table class="table table-bordered">
                                 <thead>
@@ -255,7 +267,13 @@ class TimetableRenderer
         $timeslots = TimeslotModel::orderBy('rank', 'ASC')->get();
         $rooms = RoomModel::all();
 
-        $tableTemplate = '<h3 class="text-center">{TITLE}</h3>
+        $tableTemplate = '
+                        <div style="align-items:center; text-align:center;"><h5>Republic of the Philippines
+                                                                        <br>BOHOL ISLAND STATE UNIVERSITY
+                                                                        <br>Balilihan Campus
+                                                                        <br>Magsija, Balilihan, Bohol</h5>
+                        </div>  
+                        <h3 class="text-left">ROOM: {TITLE}</h3>
                         <div style="page-break-after: always">
                             <table class="table table-bordered">
                                 <thead>
