@@ -42,10 +42,13 @@ class TimetableRenderer
         $classes = CollegeClassModel::all();
         
         $tableTemplate = '
-                        <div style="align-items:center; text-align:center;"><h5>Republic of the Philippines
+                        <div style="align-items:center;">
+                        <div style="text-align:center; align-items:center;">
+                        <img class="d-xl-flex justify-content-xl-left align-items-xl-left" src="http://127.0.0.1:8000/welcome_assets/img/screen-content-phone.png" style="width: 4em;height: 4em;margin-right: 300px;text-align: left; margin-bottom:-100px;">
+                        </div><div style=" text-align:center;"><h5>Republic of the Philippines
                                                                         <br>BOHOL ISLAND STATE UNIVERSITY
                                                                         <br>Balilihan Campus
-                                                                        <br>Magsija, Balilihan, Bohol</h5>
+                                                                        <br>Magsija, Balilihan, Bohol</h5></div>
                         </div>
                         <h3 class="text-left">COURSE,YR. & SEC: {TITLE}</h3>
                         <div style="page-break-after: always">
@@ -115,8 +118,10 @@ class TimetableRenderer
         $timeslots = TimeslotModel::orderBy('rank', 'ASC')->get();
         $professors = ProfessorModel::all();
         
-        $tableTemplate = '
-                        <div style="align-items:center; text-align:center;"><h5>Republic of the Philippines
+        $tableTemplate = '<div style="align-items:center;">
+                                <div style="text-align:center; align-items:center;">
+                                <img class="d-xl-flex justify-content-xl-left align-items-xl-left" src="http://127.0.0.1:8000/welcome_assets/img/screen-content-phone.png" style="width: 4em;height: 4em;margin-right: 300px;text-align: left; margin-bottom:-100px;">
+                                </div><div style=" text-align:center;"><h5>Republic of the Philippines
                                                                         <br>BOHOL ISLAND STATE UNIVERSITY
                                                                         <br>Balilihan Campus
                                                                         <br>Magsija, Balilihan, Bohol</h5>
@@ -267,8 +272,10 @@ class TimetableRenderer
         $timeslots = TimeslotModel::orderBy('rank', 'ASC')->get();
         $rooms = RoomModel::all();
 
-        $tableTemplate = '
-                        <div style="align-items:center; text-align:center;"><h5>Republic of the Philippines
+        $tableTemplate = '<div style="align-items:center;">
+                                <div style="text-align:center; align-items:center;">
+                                <img class="d-xl-flex justify-content-xl-left align-items-xl-left" src="http://127.0.0.1:8000/welcome_assets/img/screen-content-phone.png" style="width: 4em;height: 4em;margin-right: 300px;text-align: left; margin-bottom:-100px;">
+                                </div><div style=" text-align:center;"><h5>Republic of the Philippines
                                                                         <br>BOHOL ISLAND STATE UNIVERSITY
                                                                         <br>Balilihan Campus
                                                                         <br>Magsija, Balilihan, Bohol</h5>
