@@ -51,7 +51,7 @@ class Population
         for ($i = 0; $i < $populationSize; $i++) {
             $population->population[$i] = Individual::random($chromosomeLength);
         }
-
+              
         return $population;
     }
 

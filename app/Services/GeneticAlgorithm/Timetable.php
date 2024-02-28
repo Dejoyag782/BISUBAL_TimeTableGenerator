@@ -148,6 +148,7 @@ class Timetable
         $this->modules[$moduleId] = new Module($moduleId, $professorIds);
     }
 
+
     /**
      * Add a group to this timetable
      *
@@ -190,6 +191,12 @@ class Timetable
 
             foreach ($moduleIds as $moduleId) {
                 $module = $this->getModule($moduleId);
+                    // print "\nOn Module " . $module->getModuleCode() . "\n";
+
+                    // Check if the module code contains "Lab"
+                    $isLab = strpos($module->getModuleCode(), "Lab") !== false;
+                    $hours = $this->extractHours($module->getModuleCode());
+
 
                 for ($i = 1; $i <= $module->getSlots($id); $i++) {
                     $classes[$classIndex] = new CollegeClass($classIndex, $group->getId(), $moduleId);
@@ -207,10 +214,34 @@ class Timetable
                     $chromosomePos++;
 
                     $classIndex++;
+
+                    if ($isLab) {
+
+                        for ($j = 0; $j < $hours-1; $j++) {
+                    $classes[$classIndex] = new CollegeClass($classIndex, $group->getId(), $moduleId);
+
+                    // Add timeslot
+                    $classes[$classIndex]->addTimeslot($chromosome[$chromosomePos]);
+                    $chromosomePos++;
+
+                    // Add room
+                    $classes[$classIndex]->addRoom($chromosome[$chromosomePos]);
+                    $chromosomePos++;
+
+                    // Add professor
+                    $classes[$classIndex]->addProfessor($chromosome[$chromosomePos]);
+                    $chromosomePos++;
+
+                    $classIndex++;
+                        }
+
+                    }
+
                 }
             }
         }
 
+        // print_r($classes);
         $this->classes = $classes;
     }
 
@@ -225,14 +256,23 @@ class Timetable
 
         foreach ($this->groups as $id => $group) {
             $moduleIds = $group->getModuleIds();
+            // print_r($moduleIds);
 
             $scheme[] = 'G' . $id;
 
             foreach ($moduleIds as $moduleId) {
                 $module = $this->getModule($moduleId);
-
+                $moduleCode = $module->getModuleCode();
+                $hours = $this->extractHours($module->getModuleCode());
+                
+// Add diri ug logic mo check if ang modulecode nga corresponding sa moduleID kay naay Lab 
                 for ($i = 1; $i <= $module->getSlots($id); $i++) {
                     $scheme[] = $moduleId;
+                    if(strpos($moduleCode, "Lab") !== false){
+                        for ($j = 0; $j < $hours-1; $j++) {
+                        $scheme[] = $moduleId;
+                        }
+                    }
                 }
             }
         }
@@ -240,6 +280,16 @@ class Timetable
         return implode(",", $scheme);
     }
 
+    private function extractHours($moduleCode)
+    {
+        // Extract number of hours using regex
+        if (preg_match('/(\d+)hr/', $moduleCode, $matches)) {
+            return (int)$matches[1];
+        }
+
+        return 0; // Default to 0 if no match found
+    }
+    
     /**
      * Get a room by ID
      *
@@ -335,6 +385,7 @@ class Timetable
      */
     public function getRandomTimeslot()
     {
+        // print_r($this->timeslots[array_rand($this->timeslots)]);
         return $this->timeslots[array_rand($this->timeslots)];
     }
 

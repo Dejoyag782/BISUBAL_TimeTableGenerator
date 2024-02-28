@@ -17,7 +17,7 @@ class TimetableRenderer
     /**
      * Create a new instance of this class
      *
-     * @param App\Models\Timetable Timetable whose data we are rendering
+     * @param \App\Models\Timetable Timetable whose data we are rendering
      */
     public function __construct($timetable)
     {
@@ -64,45 +64,66 @@ class TimetableRenderer
         
         $content = "";
         
-        foreach ($classes as $class) {
+            foreach ($classes as $class) {
             $header = "<tr class='table-head'>";
-            $header .= "<td>Days→<br>↓Hours</td>"; // Change this line to display hours as header
-            
-            foreach ($days as $day) {
-                $header .= "\t<td>" . strtoupper($day->short_name) . "</td>";
-            }
-            
-            $header .= "</tr>";
-            
-            $body = "";
-            
-            foreach ($timeslots as $timeslot) {
-                $body .= "<tr><td style='width: 50px; height: 50px;'>" . $timeslot->time . "</td>"; // Display hours in the first column
-                
+            $header .= "<td>Days→<br>↓Hours</td>"; // Display hours as header
                 foreach ($days as $day) {
-                    if (isset($data[$class->id][$day->name][$timeslot->time])) {
-                        $body .= "<td class='text-center' style='width: 50px; height: 50px;'>";
-                        $slotData = $data[$class->id][$day->name][$timeslot->time];
-                        $courseCode = $slotData['course_code'];
-                        $courseName = $slotData['course_name'];
-                        $professor = $slotData['professor'];
-                        $room = $slotData['room'];
-                        
-                        $body .= "<span class='course_code'>{$courseCode}</span><br />";
-                        $body .= "<span class='room pull-left'>{$room}</span>";
-                        $body .= "<span class='professor pull-right'>{$professor}</span>";
-                        
-                        $body .= "</td>";
-                    } else {
-                        $body .= "<td style='width: 100px; height: 50px;'></td>";
-                    }
+                    $header .= "<td>" . strtoupper($day->short_name) . "</td>";
                 }
+                $header .= "</tr>";
+
+                $body = "";
+
+                foreach ($timeslots as $timeslot) {
+                    $body .= "<tr>";
+                    
+                    // Display hours in the first column
+                    $body .= "<td style='width: 50px; height: 50px;'>" . $timeslot->time . "</td>";
+
+                    foreach ($days as $day) {
+                        if (isset($data[$class->id][$day->name][$timeslot->time])) {
+                            $slotData = $data[$class->id][$day->name][$timeslot->time];
+                            $courseCode = $slotData['course_code'];
+                            $courseName = $slotData['course_name'];
+                            $professor = $slotData['professor'];
+                            $room = $slotData['room'];
+
+                            if (strpos($courseCode, 'Lab') !== false) {
+                                preg_match('/Lab : (\d+)hr/', $courseCode, $matches);
+                                if (!empty($matches[1])) {
+                                    $labHours = intval($matches[1]);
+                                    // Generate cell for the first row of the lab class
+                                    // $body .= "<td class='text-center' style='width: 50px; height: 50px;' rowspan='{$labHours}'>";
+                                    $body .= "<td class='text-center' style='width: 50px; height: 50px;' rowspan='1'>";
+                                    // Your existing code to populate cell content...
+                                    $body .= "<span class='course_code'>$courseCode</span><br />";
+                                    $body .= "<span class='room pull-left'>$room</span>";
+                                    $body .= "<span class='professor pull-right'>$professor</span>";
+                                    $body .= "</td>";
+
+                                }
+                            } else {
+                                // Generate cell for non-lab class
+                                $body .= "<td class='text-center' style='width: 50px; height: 50px;'>";
+                                $body .= "<span class='course_code'>{$courseCode}</span><br />";
+                                $body .= "<span class='room pull-left'>{$room}</span>";
+                                $body .= "<span class='professor pull-right'>{$professor}</span>";
+                                $body .= "</td>";
+
+                            }
+                        } else {
+                                // Generate empty cell if no data available
+                                $body .= "<td style='width: 100px; height: 50px;'></td>";                        
+                        }
+                    }
+                
                 $body .= "</tr>";
             }
-            
-            $title = $class->name;
-            $content .= str_replace(['{TITLE}', '{HEADING}', '{BODY}'], [$title, $header, $body], $tableTemplate);
-        }
+
+        $title = $class->name;
+        $content .= str_replace(['{TITLE}', '{HEADING}', '{BODY}'], [$title, $header, $body], $tableTemplate);
+    }
+
         
         // Return the generated content instead of saving it to a file
         return $content;

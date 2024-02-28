@@ -18,14 +18,14 @@ class TimetableGA
     /**
      * Timetable we want to run the algorithm for
      *
-     * @var App\Models\Timetable
+     * @var \App\Models\Timetable
      */
     protected $timetable;
 
     /**
      * Create a new instance of TimetableGA class
      *
-     * @param App\Models\Timetable $timetable Timetable we want to run the algorithm
+     * @param \App\Models\Timetable $timetable Timetable we want to run the algorithm
      *                                        to generate
      */
     public function __construct(TimetableModel $timetable)
@@ -54,13 +54,19 @@ class TimetableGA
         $timeslots = TimeslotModel::all();
         $count = 1;
 
+        print "\n********************************************************************************************************************************\n";
+        print "[Start of Timeslots:\n";
         foreach ($days as $day) {
             foreach ($timeslots as $timeslot) {
                 $timeslotId = 'D' . $day->id . "T" . $timeslot->id;
                 $nextTimeslotId = $this->getNextTimeslotId($day, $timeslot);
+                print $nextTimeslotId."->";
                 $timetable->addTimeslot($timeslotId, $nextTimeslotId);
             }
         }
+        print "\n:End of Timeslots]";
+        print "\n********************************************************************************************************************************\n";
+
 
         // Set up professors
         $professors = ProfessorModel::all();
@@ -80,6 +86,7 @@ class TimetableGA
             ->where('academic_period_id', $this->timetable->academic_period_id)
             ->selectRaw('distinct course_id')
             ->get();
+            
 
         $semesterCourseIds = [];
 
@@ -89,15 +96,52 @@ class TimetableGA
 
         $courses = Course::whereIn('id', $semesterCourseIds)->get();
 
-        foreach ($courses as $course) {
-            $professorIds  = [];
 
-            foreach ($course->professors as $professor) {
-                $professorIds[] = $professor->id;
+        // Separate lab courses from other courses
+        $labCourseIds = [];
+        $otherCourseIds = [];
+
+
+            foreach ($results as $result) {
+                $course = Course::find($result->course_id);
+                if (strpos($course->course_code, 'Lab') !== false) {
+                    $labCourseIds[] = $result->course_id;
+                } else {
+                    $otherCourseIds[] = $result->course_id;
+                }
+                
             }
 
-            $timetable->addModule($course->id, $professorIds);
-        }
+            // Retrieve lab and non-lab courses
+            $labCourses = Course::whereIn('id', $labCourseIds)->get();
+            $otherCourses = Course::whereIn('id', $otherCourseIds)->get();
+
+            echo "\nAcademic Period: {$this->timetable->academic_period_id}\n\n";
+
+            // Print lab courses
+            echo "---------------------------------------------------Lab Courses:-------------------------------------------------------\n";
+            foreach ($labCourses as $course) {               
+                echo $course->name . " - " . $course->course_code . "\n";
+            }
+
+            // Print non-lab courses
+            echo "---------------------------------------------------Non-Lab Courses:---------------------------------------------------\n";
+            foreach ($otherCourses as $course) {
+                echo $course->name . " - " . $course->course_code . "\n";
+            }
+
+            $professorIds=[];
+
+            foreach ($courses as $course) {
+                $professorIds  = [];
+    
+                foreach ($course->professors as $professor) {
+                    $professorIds[] = $professor->id;
+                }
+    
+                $timetable->addModule($course->id, $professorIds);
+            }
+            
 
         // Set up class groups
         $classes = CollegeClassModel::all();
@@ -125,6 +169,7 @@ class TimetableGA
     public function getNextTimeslotId($day, $timeslot)
     {
         $highestRank = TimeslotModel::count();
+        
         $currentRank = (int)($timeslot->rank);
         $id = '';
         $endId = 'D0T0';
@@ -141,6 +186,7 @@ class TimetableGA
             $id = $endId;
         }
 
+        
         return $id;
     }
 

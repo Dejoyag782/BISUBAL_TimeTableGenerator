@@ -124,4 +124,4 @@ class Module
         $pos = rand(0, count($this->professorIds) - 1);
         return $this->professorIds[$pos];
     }
-}
+}   

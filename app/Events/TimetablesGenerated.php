@@ -16,8 +16,8 @@ class TimetablesGenerated
 
     /**
      * Timetable generated
-     *
-     * @var App\Models\Timetable
+     * 
+     * @var \App\Models\Timetable
      */
     public $timetable;
 
