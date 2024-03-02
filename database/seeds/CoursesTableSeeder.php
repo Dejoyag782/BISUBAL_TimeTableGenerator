@@ -21,6 +21,10 @@ class CoursesTableSeeder extends Seeder
                 'course_code' => 'CSM 302'
             ],
             [
+                'name' => 'Computer Graphics Lab',
+                'course_code' => 'CSM 302 Lab : 2hr'
+            ],
+            [
                 'name' => 'Data Structures and Algorithms I',
                 'course_code' => 'CSM 303'
             ],
