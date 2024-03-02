@@ -94,7 +94,7 @@ class TimetableRenderer
                                     $labHours = intval($matches[1]);
                                     // Generate cell for the first row of the lab class
                                     // $body .= "<td class='text-center' style='width: 50px; height: 50px;' rowspan='{$labHours}'>";
-                                    $body .= "<td class='text-center' style='width: 50px; height: 50px;' rowspan='1'>";
+                                    $body .= "<td class='text-center' style='width: 50px; height: 50px; background-color: #cccccc !important;'>";
                                     // Your existing code to populate cell content...
                                     $body .= "<span class='course_code'>$courseCode</span><br />";
                                     $body .= "<span class='room pull-left'>$room</span>";
@@ -177,9 +177,19 @@ class TimetableRenderer
                 $professorBody .= "<tr><td style='width: 50px; height: 50px;'>" . $timeslot->time . "</td>";
                 
                 foreach ($days as $day) {
-                    $professorBody .= "<td style='width: 50px; height: 50px;'>";
+
                     $facultyLoadValue = $this->getFacultyLoadForTimeslot($professor->id, $data, $day->name, $timeslot->time);
                     $professorScheduleValue = $this->getProfessorScheduleValue($professor->id, $professorSchedules, $day->name, $timeslot->time);
+                    
+                    if ($professorScheduleValue !== null) {
+                        if (strpos($professorScheduleValue, 'Lab') !== false) {
+                            $professorBody .= "<td style='width: 50px; height: 50px; background-color: #cccccc !important;'>";
+                        } else {
+                            $professorBody .= "<td style='width: 50px; height: 50px;'>";
+                        }
+                    }else{
+                        $professorBody .= "<td style='width: 50px; height: 50px;'>";
+                    }
                     
                     if ($facultyLoadValue > 0) {
                         $professorBody .= "<div class='faculty-load'>{$facultyLoadValue}</div>";
@@ -331,9 +341,18 @@ class TimetableRenderer
                 $body .= "<tr><td style='width: 50px; height: 50px;'>" . $timeslot->time . "</td>";
 
                 foreach ($days as $day) {
-                    $body .= "<td style='width: 50px; height: 50px;'>";
                     $roomUsageId = $this->getRoomUsageId($roomUsages, $room->id, $day->name, $timeslot->time);
 
+                    if ($roomUsageId !== null) {
+                        if (strpos($roomUsageId, 'Lab') !== false) {
+                            $body .= "<td style='width: 50px; height: 50px; background-color: #cccccc !important;'>";
+                        } else {
+                            $body .= "<td style='width: 50px; height: 50px;'>";
+                        }
+                    }else{
+                        $body .= "<td style='width: 50px; height: 50px;'>";
+                    }
+                    
                     if ($roomUsageId !== null) {
                         $body .= "<div class='room-usage'>$roomUsageId</div>";
                     }
