@@ -35,7 +35,7 @@ class ExportDataController extends Controller
         }
 
         // Courses
-        $data[] = ['id','course_code','name'];
+        $data[] = ['id','subject_code','name'];
         $courses = Course::all();
         foreach ($courses as $course) {
             $data[] = [$course->id, $course->course_code, $course->name];
@@ -43,7 +43,7 @@ class ExportDataController extends Controller
 
         // Courses_classes
         $coursesClasses = DB::table('courses_classes')->select('id','course_id', 'class_id', 'meetings', 'academic_period_id')->get();
-        $data[] = ['id','course_id', 'class_id', 'meetings', 'academic_period_id'];
+        $data[] = ['id','subject_id', 'section_id', 'meetings', 'academic_period_id'];
         foreach ($coursesClasses as $courseClass) {
             $data[] = [
                 $courseClass->id,
@@ -56,7 +56,7 @@ class ExportDataController extends Controller
 
         // Courses_Professors
         $coursesProfessors = DB::table('courses_professors')->select('id','course_id', 'professor_id')->get();
-        $data[] = ['id','course_id', 'professor_id'];
+        $data[] = ['id','subject_id', 'professor_id'];
         foreach ($coursesProfessors as $courseProfessor) {
             $data[] = [
                 $courseProfessor->id,
