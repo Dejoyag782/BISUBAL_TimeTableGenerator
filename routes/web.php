@@ -11,6 +11,7 @@ use App\Http\Controllers\CollegeClassesController;
 use App\Http\Controllers\TimetablesController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\UsersManagerController;
+use App\Http\Controllers\ExportDataController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -43,6 +44,8 @@ Route::group(['middleware' => ['auth', 'checkRole:superad', 'activated']], funct
     });
 
 });
+
+Route::get('/export-data', [ExportDataController::class, 'export'])->name('export.data');
 
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 
