@@ -50,7 +50,7 @@
 
             <nav class="navbar navbar-light navbar-expand-md navigation-clean" style="z-index:10; border-radius: 0 0 0 0; width:100%; border-bottom: 5px solid white;">
                 <div class="container"><a href="{{ url('/') }}"><img class="d-xl-flex justify-content-xl-center align-items-xl-center" src="{{asset('welcome_assets/img/screen-content-phone.png')}}" style="width: 3em;height: 3em;margin-right: 10px;text-align: center;"></a>
-                <a class="navbar-brand nav-title" href="{{ url('/') }}">BISU BALILIHAN<span class="navbar-brand-span">&nbsp;TIME TABLE GENERATOR</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                <a class="navbar-brand nav-title" href="{{ url('/') }}">BISU BALILIHAN<span class="navbar-brand-span">&nbsp;TIMETABLE GENERATOR</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
                     <div class="collapse navbar-collapse d-xl-flex d-xxl-flex justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" id="navcol-1" style="align-items:end;">
                         <ul class="navbar-nav d-xxl-flex ms-auto justify-content-xxl-center align-items-xxl-center">
                         @guest

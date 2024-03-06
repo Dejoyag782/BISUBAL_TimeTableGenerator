@@ -6,7 +6,7 @@
                 <tr class="table-head">
                     <th style="width: 30%">Name</th>
                     <th style="width: 10%">Size</th>
-                    <th style="width: 30%">Courses</th>
+                    <th style="width: 30%">Subjects</th>
                     <th style="width: 20%">Unavailable Rooms</th>
                     <th style="width: 10%">Actions</th>
                 </tr>

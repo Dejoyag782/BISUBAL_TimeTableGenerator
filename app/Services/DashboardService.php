@@ -24,12 +24,12 @@ class DashboardService
         $data = [
             'cards' => [
                 [
-                    'title' => 'Lecture Rooms',
+                    'title' => 'Rooms',
                     'icon' => 'home',
                     'value' => $roomsCount
                 ],
                 [
-                    'title' => 'Courses',
+                    'title' => 'Subjects',
                     'icon' => 'book',
                     'value' => $coursesCount
                 ],
@@ -39,7 +39,7 @@ class DashboardService
                     'value' => $professorsCount
                 ],
                 [
-                    'title' => 'Classes',
+                    'title' => 'Sections',
                     'icon' => 'users',
                     'value' => $classesCount
                 ]

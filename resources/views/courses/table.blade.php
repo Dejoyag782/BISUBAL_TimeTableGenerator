@@ -4,7 +4,7 @@
         <table class="table table-bordered">
             <thead>
                 <tr class="table-head">
-                    <th style="width: 30%">Course Code</th>
+                    <th style="width: 30%">Subject Code</th>
                     <th style="width: 30%">Name</th>
                     <th style="width: 15%">Taught By</th>
                     <th style="width: 15%">Room Preferred<span style="font-size:7pt; text-align:center; align-items:center;"> (Lab)</span></th>

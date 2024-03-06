@@ -46,7 +46,7 @@
 <body>
     <nav class="navbar navbar-light navbar-expand-md navigation-clean">
         <div class="container"><img class="d-xl-flex justify-content-xl-center align-items-xl-center" src="welcome_assets/img/screen-content-phone.png" style="width: 3em;height: 3em;margin-right: 10px;text-align: center;">
-        <a class="navbar-brand nav-title" href="#">BISU BALILIHAN<span class="navbar-brand-span">&nbsp;TIME TABLE GENERATOR</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <a class="navbar-brand nav-title" href="#">BISU BALILIHAN<span class="navbar-brand-span">&nbsp;TIMETABLE GENERATOR</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse d-xl-flex d-xxl-flex justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" id="navcol-1">
                 <ul class="navbar-nav d-xxl-flex ms-auto justify-content-xxl-center align-items-xxl-center">
                     <li class="nav-item"><a class="nav-link" href="#" style="color: var(--bs-light);">Tutorial</a></li>
@@ -62,7 +62,7 @@
                 <div class="col-md-8">
                     <div class="intro">
                         <h2>Faster Schedule Making</h2>
-                        <p>This time table generator uses generative algorithms to make class schedules a lot easier and faster.</p>
+                        <p>This timetable generator uses generatic algorithms in making class schedules a lot easier and faster.</p>
                         <a class="btn btn-primary buttons" role="button" href="{{route('dashboard')}}">Start making timetables</a>
                     </div>
                 </div>
