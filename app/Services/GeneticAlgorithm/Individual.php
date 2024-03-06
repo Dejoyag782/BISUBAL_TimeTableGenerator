@@ -1,5 +1,6 @@
 <?php
 namespace App\Services\GeneticAlgorithm;
+use DB;
 
 class Individual
 {
@@ -17,6 +18,20 @@ class Individual
      * @var double
      */
     private $fitness;
+
+    private function getRoomIdFromPreference($courseCode)
+    {
+        // Assuming you have access to database connection
+        $queryResult = DB::table('courses')->where('course_code', $courseCode)->first();
+        if ($queryResult) {
+            // Assuming room_preference is a column in the courses table
+            return $queryResult->room_preference;
+        } else {
+            // Handle case when course code is not found
+            return null;
+        }
+    }
+
 
 
     /**
@@ -151,11 +166,18 @@ class Individual
                             $chromosomeIndex++;
                             // print $timeslotId.",";
 
-                            // Add random room
-                            $roomId = $timetable->getRandomRoom()->getId();
+
+                            // Add random room if room preference is not available
+                            $courseCode = $module->getModuleCode(); // Assuming module code represents course code
+                            if ($this->getRoomIdFromPreference($courseCode)!==null){
+                                $roomId = $this->getRoomIdFromPreference($courseCode);
+                            }else{
+                                $roomId = $timetable->getRandomRoom()->getId();
+                            }
                             $newChromosome[$chromosomeIndex] = $roomId;
                             $chromosomeIndex++;
                             // print $roomId.",";
+                            
 
                             // Add random professor
                             $professor = $module->getRandomProfessorId();
