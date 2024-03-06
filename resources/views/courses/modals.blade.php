@@ -24,7 +24,7 @@
 
                             <div class="form-group">
                                 <label>Course Code</label>
-                                <input type="text" name="course_code" class="form-control">
+                                <input type="text" id="course_code" name="course_code" class="form-control">
                             </div>
 
                             <div class="form-group">
@@ -39,6 +39,22 @@
                                     </select>
                                 </div>
                             </div>
+
+                            <div class="form-group" id="roomDiv" hidden>
+                                <label>Preferred Room</label>
+
+                                <div class="select2-wrapper">
+                                    <select id="room-select" name="room_preference" class="form-control select2">
+                                        <option value="">Select Room</option>
+                                        @foreach ($rooms as $room)
+                                            <option  value="{{ $room->id }}">{{ $room->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+
+
                         </div>
                     </div>
                 </div>
@@ -60,3 +76,4 @@
         </div>
     </div>
 </div>
+
