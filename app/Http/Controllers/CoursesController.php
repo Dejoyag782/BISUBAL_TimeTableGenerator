@@ -8,7 +8,7 @@ use App\Services\CoursesService;
 
 use App\Models\Course;
 use App\Models\Professor;
-
+use DB;
 class CoursesController extends Controller
 {
     /**
@@ -43,11 +43,19 @@ class CoursesController extends Controller
 
         $professors = Professor::all();
 
+        $rooms = DB::table('rooms')->select('id','name')->get();
+
+        // Fetch the room names for the courses
+        foreach ($courses as $course) {
+            $room = $rooms->where('id', $course->room_preference)->first(); // Find the room with the corresponding ID
+            $course->room_name = $room ? $room->name : ''; // Set the room name as a property of the course
+        }
+
         if ($request->ajax()) {
             return view('courses.table', compact('courses'));
         }
 
-        return view('courses.index', compact('courses', 'professors'));
+        return view('courses.index', compact('courses', 'professors', 'rooms'));
     }
 
     /**
@@ -104,7 +112,7 @@ class CoursesController extends Controller
     {
         $rules = [
             'name' => 'required',
-            'course_code' => 'required|unique:courses,course_code,' . $id
+            'course_code' => 'required|unique:courses,course_code,' . $id,
         ];
 
         $messages = [
