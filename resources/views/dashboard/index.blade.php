@@ -39,7 +39,7 @@ Dashboard
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 col-lg-offset-4 col-md-offset-4 col-sm-offset-4">
                 <button class="btn-primary timetable-btn btn-block" id="resource-add-button"><i class="fa fa-calendar"></i> Generate New Timetables</button>
                 <form class="btn-block" action="{{ route('export.data') }}" method="GET">
-                    <button style="border-radius:3px;" class="btn-warning timetable-btn btn-block" type="submit"><i class="fa fa-save"></i> Export Data to CSV</button>
+                    <button style="border-radius:3px;" class="btn-warning timetable-btn btn-block" type="submit"><i class="fa fa-download"></i> Export Data into SQL</button>
                 </form>
             </div>
         </div>
