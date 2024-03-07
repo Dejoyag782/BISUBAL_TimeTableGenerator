@@ -136,11 +136,6 @@ class CoursesTableSeeder extends Seeder
                 'name' => 'French',
                 'course_code' => 'CSM 414',
                 'room_preference' => null
-            ],
-            [
-                'name' => 'Software Engineering II',
-                'course_code' => 'CSM 415',
-                'room_preference' => null
             ]
         ]);
     }
