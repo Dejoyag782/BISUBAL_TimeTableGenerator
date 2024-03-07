@@ -169,15 +169,19 @@ class Individual
 
                             // Add random room if room preference is not available
                             $courseCode = $module->getModuleCode(); // Assuming module code represents course code
-                            if ($this->getRoomIdFromPreference($courseCode)!==null){
-                                $roomId = $this->getRoomIdFromPreference($courseCode);
-                            }else{
-                                $roomId = $timetable->getRandomRoom()->getId();
-                            }
+                                if ($this->getRoomIdFromPreference($courseCode)!==null){
+                                    $roomId = $this->getRoomIdFromPreference($courseCode);
+                                }else{
+                                    $roomId = $timetable->getRandomRoom()->getId();
+                                }
                             $newChromosome[$chromosomeIndex] = $roomId;
                             $chromosomeIndex++;
                             // print $roomId.",";
                             
+                            // Add random room
+                            // $roomId = $timetable->getRandomRoom()->getId();
+                            // $newChromosome[$chromosomeIndex] = $roomId;
+                            // $chromosomeIndex++;
 
                             // Add random professor
                             $professor = $module->getRandomProfessorId();
@@ -208,24 +212,24 @@ class Individual
                             }
                            
 
-                            // $module->increaseAllocatedSlots();
-                            // $timeslot = $timetable->getTimeslot($timeslotId);
+                            $module->increaseAllocatedSlots();
+                            $timeslot = $timetable->getTimeslot($timeslotId);
 
-                            // $timeslotId = $timeslot->getNext();
-                            // while (($i + 1) <= $timetable->maxContinuousSlots && ($module->getSlots() != $module->getAllocatedSlots()) && ($timeslotId > -1)) {
-                            //     $newChromosome[$chromosomeIndex] = $timeslotId;
-                            //     $chromosomeIndex++;
+                            $timeslotId = $timeslot->getNext();
+                            while (($i + 1) <= $timetable->maxContinuousSlots && ($module->getSlots() != $module->getAllocatedSlots()) && ($timeslotId > -1)) {
+                                $newChromosome[$chromosomeIndex] = $timeslotId;
+                                $chromosomeIndex++;
 
-                            //     $newChromosome[$chromosomeIndex] = $roomId;
-                            //     $chromosomeIndex++;
+                                $newChromosome[$chromosomeIndex] = $roomId;
+                                $chromosomeIndex++;
 
-                            //     $newChromosome[$chromosomeIndex] = $professor;
-                            //     $chromosomeIndex++;
+                                $newChromosome[$chromosomeIndex] = $professor;
+                                $chromosomeIndex++;
 
-                            //     $timeslotId = $timetable->getTimeslot($timeslotId)->getNext();
-                            //     $module->increaseAllocatedSlots();
-                            //     $i += 1;
-                            // }
+                                $timeslotId = $timetable->getTimeslot($timeslotId)->getNext();
+                                $module->increaseAllocatedSlots();
+                                $i += 1;
+                            }
                             $timeslotLab = false;
                         }
                     }else{
