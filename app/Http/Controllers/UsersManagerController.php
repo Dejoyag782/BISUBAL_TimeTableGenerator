@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use App\Models\User;
+use DB;
 use Datatables;
 
 
@@ -19,17 +20,22 @@ class UsersManagerController extends Controller
     //   *
     //   * @return \Illuminate\Http\Response
     //   */
-     public function index()
-     {
-         if(request()->ajax()) {
-             return datatables()->of(User::select('*'))
-             ->addColumn('action', 'user/user-action')
-             ->rawColumns(['action'])
-             ->addIndexColumn()
-             ->make(true);
-         }
-         return view('user.index');
-     }
+    public function index()
+    {
+        $department = DB::table('departments')->select('id','name')->get();
+        if(request()->ajax()) {
+            return datatables()->of(User::select('users.*', 'departments.short_name as department_short_name')
+                ->leftJoin('departments', 'users.department', '=', 'departments.id'))
+                ->addColumn('action', 'user/user-action')
+                ->rawColumns(['action'])
+                ->addIndexColumn()
+                ->make(true);
+        }
+
+        return view('user.index',compact('department'));
+    }
+
+    
        
        
     //  /**
@@ -47,6 +53,8 @@ class UsersManagerController extends Controller
             'name' => $request->name, 
             'email' => $request->email,
             'role' => $request->role,
+            'department' => $request->department,
+            'designation' => $request->designation,
         ];
     
         // Check if password is provided in the request
@@ -87,6 +95,8 @@ class UsersManagerController extends Controller
          return User::create([
              'name' => $data['name'],
              'email' => $data['email'],
+             'department' => $data['department'],
+             'designation' => $data['designation'],
              'password' => Hash::make($data['password']),
          ]);
      }
@@ -94,6 +104,7 @@ class UsersManagerController extends Controller
      //  show
     public function getUserDetails($id)
     {
+        
         $user = User::find($id);
         return response()->json($user);
     }

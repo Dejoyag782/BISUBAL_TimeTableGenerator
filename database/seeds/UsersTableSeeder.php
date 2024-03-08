@@ -15,6 +15,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'SuperAdministrator',
             'email' => 'superadmin@localhost',
             'role' => 'superad',
+            'designation' => 'admin',
             'password' => bcrypt('superadmin'),
         ]);
 
@@ -22,6 +23,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'Administrator',
             'email' => 'admin@localhost',
             'role' => 'admin',
+            'designation' => 'admin',
             'password' => bcrypt('admin'),
         ]);
     }

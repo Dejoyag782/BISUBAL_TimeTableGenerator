@@ -47,6 +47,38 @@ My Account
                                             <input type="email" class="form-control" placeholder="Email" name="email" value="{{ $user->email }}">
                                         </div>
 
+                                        @if (auth()->user()->role == 'superad')
+                                        <input id="designation" name="designation" value="admin" hidden="true">
+                                        @endif
+
+                                        @if (auth()->user()->role == 'admin')
+                                        <div class="form-group">
+                                            <label>Department</label>
+                                            <div class="select2-wrapper">
+                                                <select id="department" name="department" class="form-control select2">
+                                                <option value="">Select Department</option>
+                                                    @foreach ($department as $department)
+                                                        <option  value="{{ $department->id }}">{{ $department->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Designation</label>
+
+                                            <div class="select2-wrapper">
+                                                <select id="designation" name="designation" class="form-control select2">
+                                                    <option value="admin">Admin</option>
+                                                    <option value="chairperson">Chairperson</option>
+                                                    <option value="dean">Dean</option>
+                                                    <option value="campusDirector">Campus Director</option>
+                                                    
+                                                </select>
+                                            </div>
+                                        </div>
+                                        @endif
+
                                         <div class="form-group">
                                             <label>Password</label>
                                             <input type="password" class="form-control" placeholder="Password" name="password">

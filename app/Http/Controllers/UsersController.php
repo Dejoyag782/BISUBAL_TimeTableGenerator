@@ -65,8 +65,10 @@ class UsersController extends Controller
     {
         $user = Auth::user();
 
+        $department = DB::table('departments')->select('id','name')->get();
+
         
-        return view('users.activate', compact('user'));
+        return view('users.activate', compact('user','department'));
     }
 
     /**
@@ -98,6 +100,8 @@ class UsersController extends Controller
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
+            'department'=> $request->department,
+            'designation'=>$request->designation,
             'password' => bcrypt($request->password),
             'activated' => true
         ]);

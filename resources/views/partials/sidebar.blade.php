@@ -10,6 +10,9 @@
                 <li class="menu-link {{ ($page == 'rooms') ? 'active' : '' }}">
                     <a href="/rooms"><span class="fa fa-home"></span><span class="text">Rooms</span></a>
                 </li>
+                <li class="menu-link {{ ($page == 'departments') ? 'active' : '' }}">
+                    <a href="/departments"><span class="fa fa-university"></span><span class="text">Departments</span></a>
+                </li>
                 <li class="menu-link {{ ($page == 'courses') ? 'active' : '' }}">
                     <a href="/courses"><span class="fa fa-book"></span><span class="text">Subjects</span></a>
                 </li>

@@ -50,6 +50,8 @@ Users
                     <th>Role</th>
                     <th>Name</th>
                     <th>Email</th>
+                    <th>Department</th>
+                    <th>Designation</th>
                     <th width="150px">Action</th>
                   </tr>
                </thead>

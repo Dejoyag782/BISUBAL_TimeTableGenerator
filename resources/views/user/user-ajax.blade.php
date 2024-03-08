@@ -15,7 +15,9 @@
           columns: [
               {data: 'role', name: 'role'},
               {data: 'name', name: 'name'},
-              {data: 'email', name: 'email'},
+              {data: 'email', name: 'email'},              
+              {data: 'department_short_name', name: 'department'},
+              {data: 'designation', name: 'designation'},
               {data: 'action', name: 'action', orderable: false},
           ],
           order: [[0, 'desc']]

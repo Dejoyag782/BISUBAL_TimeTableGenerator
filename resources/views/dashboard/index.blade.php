@@ -15,18 +15,18 @@ Dashboard
     <div class="page-body menubar">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="row cards-container">
+                <div class="row cards-container"  style="justify-content:center;">
                     <?php $count = 1; ?>
                     @foreach ($data['cards'] as $card)
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <div class="card card-{{ $count++ }}">
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width:20%;">
+                        <div class="card card-{{ $count++ }}" style="background-color:#6610F2; margin-bottom:1em;">
                             <div class="card-title">
-                                <span class="pull-right icon fa fa-{{$card['icon'] }}"></span>
-                                <h3>{{ $card['title'] }}</h3>
+                                <span  style="font-size: 2em;" class="pull-right icon fa fa-{{$card['icon'] }}"></span>
+                                <h4>{{ $card['title'] }}</h4>
                             </div>
 
                             <div class="card-body">
-                                <span>{{ $card['value'] }}</span>
+                                <span style="font-size: 1em;">{{ $card['value'] }}</span>
                             </div>
                         </div>
                     </div>

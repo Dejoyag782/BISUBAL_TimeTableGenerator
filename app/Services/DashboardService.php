@@ -6,6 +6,7 @@ use App\Models\Room;
 use App\Models\Course;
 use App\Models\Professor;
 use App\Models\CollegeClass;
+use App\Models\Department;
 
 class DashboardService
 {
@@ -20,6 +21,7 @@ class DashboardService
         $coursesCount = Course::count();
         $professorsCount = Professor::count();
         $classesCount = CollegeClass::count();
+        $departmentCount = Department::count();
 
         $data = [
             'cards' => [
@@ -42,6 +44,11 @@ class DashboardService
                     'title' => 'Sections',
                     'icon' => 'users',
                     'value' => $classesCount
+                ],
+                [
+                    'title' => 'Departments',
+                    'icon' => 'university',
+                    'value' => $departmentCount
                 ]
             ]
         ];

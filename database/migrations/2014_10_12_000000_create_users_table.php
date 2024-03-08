@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->enum('role', ['superad', 'admin']) -> default=('admin');
+            $table->integer('department')->nullable()->unsigned();
+            $table->enum('designation', ['dean', 'chairperson','campusdirector','admin']) -> default=('admin');
             $table->timestamp('email_verified_at')->nullable();
             $table->boolean('activated')->default(0);
             $table->string('password');

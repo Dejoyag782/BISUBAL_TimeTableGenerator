@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\DashboardController;
@@ -12,6 +11,7 @@ use App\Http\Controllers\TimetablesController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\UsersManagerController;
 use App\Http\Controllers\ExportDataController;
+use App\Http\Controllers\DepartmentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -53,6 +53,9 @@ Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'inde
 
 // Routes for rooms module
 Route::resource('rooms', RoomsController::class);
+
+// Routes for courses module
+Route::resource('departments', DepartmentController::class);
 
 // Routes for courses module
 Route::resource('courses', CoursesController::class);

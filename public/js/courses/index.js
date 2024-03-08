@@ -15,7 +15,9 @@ Course.prototype.prepareForUpdate = function (resource) {
     $('input[name=name]').val(resource.name);
     $('input[name=course_code]').val(resource.course_code);
     $('#professors-select').val(resource.professor_ids).change();
+    console.log(resource.professor_ids);
     $('#room-select').val(resource.room_preference).change();
+    console.log(resource.professor_ids);
     if(testlowerCase.includes('lab')){
         roomDiv.removeAttribute('hidden');
         $('#room-select').val(resource.room_preference).change();
