@@ -787,6 +787,7 @@ class ComposerStaticInita1a39a2d5c4a38a610987e7a120cc2d2
         'Carbon\\TranslatorImmutable' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/TranslatorImmutable.php',
         'Carbon\\TranslatorStrongTypeInterface' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/TranslatorStrongTypeInterface.php',
         'ClassesTableSeeder' => __DIR__ . '/../..' . '/database/seeds/ClassesTableSeeder.php',
+        'DepartmentTableSeeder' => __DIR__ . '/../..' . '/database/seeds/DepartmentTableSeeder.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'CoursesTableSeeder' => __DIR__ . '/../..' . '/database/seeds/CoursesTableSeeder.php',
         'Cron\\AbstractField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/AbstractField.php',
