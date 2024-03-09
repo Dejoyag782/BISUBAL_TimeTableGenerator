@@ -29,7 +29,8 @@ class ProfessorsService extends AbstractService
     {
         $professor = Professor::create([
             'name' => $data['name'],
-            'email' => $data['email']
+            'email' => $data['email'],
+            'department' => $data['department']
         ]);
 
         if (!$professor) {
@@ -102,7 +103,8 @@ class ProfessorsService extends AbstractService
 
         $professor->update([
             'name' => $data['name'],
-            'email' => $data['email']
+            'email' => $data['email'],
+            'department' => $data['department']
         ]);
 
         if (!isset($data['course_ids'])) {
