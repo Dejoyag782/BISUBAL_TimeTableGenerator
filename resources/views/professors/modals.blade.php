@@ -56,6 +56,20 @@
                                     </select>
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                <label>Department</label>
+
+                                <div class="select2-wrapper">
+                                    <select id="department-select" name="department" class="form-control select2">
+                                        <option value="">General Studies</option>
+                                        @foreach ($departments as $department)
+                                            <option  value="{{ $department->id }}">{{ $department->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
