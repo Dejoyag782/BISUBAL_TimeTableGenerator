@@ -2,6 +2,7 @@
 
 namespace App\Services\GeneticAlgorithm;
 
+use Illuminate\Database\Eloquent\Concerns\HasAttributes;
 use Storage;
 
 use App\Models\Day as DayModel;
@@ -10,6 +11,9 @@ use App\Models\Course as CourseModel;
 use App\Models\Timeslot as TimeslotModel;
 use App\Models\CollegeClass as CollegeClassModel;
 use App\Models\Professor as ProfessorModel;
+use App\Models\User as UserModel;
+use App\Models\Department as DepartmentModel;
+use DB;
 
 class TimetableRenderer
 {
@@ -39,9 +43,12 @@ class TimetableRenderer
         
         $days = $this->timetable->days()->orderBy('id', 'ASC')->get();
         $timeslots = TimeslotModel::orderBy('rank', 'ASC')->get();
+        $departments = DepartmentModel::all();
+        $users = UserModel::all();
         $classes = CollegeClassModel::all();
         
         $tableTemplate = '
+                        
                         <div style="align-items:center;">
                         <div style="text-align:center; align-items:center;">
                         <img class="d-xl-flex justify-content-xl-left align-items-xl-left" src="http://127.0.0.1:8000/welcome_assets/img/screen-content-phone.png" style="width: 4em;height: 4em;margin-right: 300px;text-align: left; margin-bottom:-100px;">
@@ -60,7 +67,27 @@ class TimetableRenderer
                                     {BODY}
                                 </tbody>
                             </table>
-                        </div>';
+                            <h5 class="text-left">Prepared by:</h5>
+                            <h3 class="text-left" style="text-decoration:underline; margin-left:80px;">____{CHAIRPERSON}____</h3>
+                            <h5 class="text-left" style="margin-left:120px;">Chairperson,{DEPARTMENT}</h5>
+
+                            <div style="margin-top:-73px;">
+                            <h5 class="text-right" style="margin-right:250px;">Reviewed by:</h5>
+                            <h3 class="text-right" style="text-decoration:underline; ">____{DEAN}____</h3>
+                            <h5 class="text-right" style="margin-right:70px;">Dean,{DEPARTMENT}</h5>
+                            </div>
+
+                            <div style="margin-top:50px;">
+                            <h5 class="text-right" style="margin-right:265px;">Approved:</h5>
+                            <h3 class="text-right" style="text-decoration:underline; ">____{CAMPUSDIRECTOR}____</h3>
+                            <h5 class="text-right" style="margin-right:70px;">Campus Director</h5>
+                            </div>   
+
+                        </div>
+
+                                           
+                        
+                        ';
         
         $content = "";
         
@@ -121,7 +148,55 @@ class TimetableRenderer
             }
 
         $title = $class->name;
-        $content .= str_replace(['{TITLE}', '{HEADING}', '{BODY}'], [$title, $header, $body], $tableTemplate);
+
+        // to get the prepper,reviewer, and dean;
+                foreach($departments as $department){
+                    
+                    $courses = $department->courses_under; 
+                    $coursesArray = json_decode($courses);
+                    // print($courses);
+                    // print("\n".$class->id);
+
+                    if (in_array($class->id, $coursesArray)) {
+                        // $class->id exists in $coursesArray
+                        $prepper = $department->id;
+
+                        foreach ($users as $user) {
+                            $departmentId = $user->department;
+                            
+                        
+                            switch ($departmentId) {
+                                case $prepper:
+                                    if ($user->designation === "dean") {
+                                        $dean = $user->name;
+                                        // print("\n dean_name:" . $dean." department:". $department->short_name);
+                                    } elseif ($user->designation === "chairperson") {
+                                        $chairperson = $user->name;
+                                        // print("\n chairperson_name:" . $chairperson." department:". $department->short_name);
+                                    }
+                                    break;
+                                case null:
+                                    if ($user->designation === "campusdirector") {
+                                        $campusdirector = $user->name;
+                                        // print("\n cd_name:" . $campusdirector."\n");
+                                    }
+                                    break;
+                                // Add more cases for other departments if necessary
+                            }
+                        }
+                        
+
+                        
+                        $departmentSign = $department->short_name;
+
+                    } else {
+                        // $class->id does not exist in $coursesArray
+                        // Handle the case where $class->id doesn't exist
+                    }
+                }
+            
+
+        $content .= str_replace(['{TITLE}', '{HEADING}', '{DEAN}', '{CHAIRPERSON}', '{CAMPUSDIRECTOR}', '{DEPARTMENT}','{BODY}'], [$title, $header, $dean, $chairperson, $campusdirector, $departmentSign, $body], $tableTemplate);
     }
 
         
@@ -138,6 +213,8 @@ class TimetableRenderer
         $days = $this->timetable->days()->orderBy('id', 'ASC')->get();
         $timeslots = TimeslotModel::orderBy('rank', 'ASC')->get();
         $professors = ProfessorModel::all();
+        $users = UserModel::all();
+        $departments = DepartmentModel::all();
         
         $tableTemplate = '<div style="align-items:center;">
                                 <div style="text-align:center; align-items:center;">
@@ -157,6 +234,27 @@ class TimetableRenderer
                                     {BODY}
                                 </tbody>
                             </table>
+
+                            <h5 class="text-left">Prepared by:</h5>
+                            <h3 class="text-left" style="text-decoration:underline; margin-left:80px;">____{CHAIRPERSON}____</h3>
+                            <h5 class="text-left" style="margin-left:120px;">Chairperson,{DEPARTMENT}</h5>
+
+                            <h5 class="text-left" style="margin-top:50px;">Conforme:</h5>
+                            <h3 class="text-left" style="text-decoration:underline; margin-left:80px;">____{TITLE}____</h3>
+                            <h5 class="text-left" style="margin-left:120px;">Associate Professor</h5>
+
+                            <div style="margin-top:-225px;">
+                            <h5 class="text-right" style="margin-right:250px;">Reviewed by:</h5>
+                            <h3 class="text-right" style="text-decoration:underline; ">____{DEAN}____</h3>
+                            <h5 class="text-right" style="margin-right:70px;">Dean,{DEPARTMENT}</h5>
+                            </div>
+
+                            <div style="margin-top:50px;">
+                            <h5 class="text-right" style="margin-right:265px;">Approved:</h5>
+                            <h3 class="text-right" style="text-decoration:underline; ">____{CAMPUSDIRECTOR}____</h3>
+                            <h5 class="text-right" style="margin-right:70px;">Campus Director</h5>
+                            </div>   
+
                         </div>';
         
         $content = "";
@@ -205,7 +303,48 @@ class TimetableRenderer
             }
             
             $professorTitle = $professor->name;
-            $content .= str_replace(['{TITLE}', '{HEADING}', '{BODY}'], [$professorTitle, $professorHeader, $professorBody], $tableTemplate);
+
+                // Get users department ID's
+                foreach ($users as $user) {
+                    $userDepID = $user->department;
+
+                    if ($user->designation === "campusdirector") {
+                        $campusdirector = $user->name;
+                        
+                        // print("\n cd_name:" . $campusdirector."\n");
+                    }
+
+                    // compare userDepartmentID with departmentID
+                    foreach ($departments as $department) {
+                        if($userDepID == $department->id){
+
+                            // check corresponding user based on department id
+                            foreach ($users as $user) {
+                                if ($user->department == $department->id && $user->designation === "dean") {
+                                    $dean = $user->name;                                
+                                    // print("\n cd_name:" . $campusdirector."\n");
+                                }      
+                                if ($user->department == $department->id && $user->designation === "chairperson") {
+                                    $chairperson = $user->name;                                
+                                    // print("\n cd_name:" . $campusdirector."\n");
+                                }    
+                            }                    
+                            // if ($user->designation === "chairperson") {
+                            //     $chairperson = $user->name;                                
+                            //     // print("\n cd_name:" . $campusdirector."\n");
+                            // }
+
+                            $departmentSign = $department->short_name;
+                        }
+                    }
+                    
+                }
+
+                
+
+            // }
+            
+            $content .= str_replace(['{TITLE}', '{HEADING}','{CHAIRPERSON}', '{DEAN}', '{DEPARTMENT}', '{CAMPUSDIRECTOR}', '{BODY}'], [$professorTitle, $professorHeader, $chairperson, $dean, $departmentSign, $campusdirector, $professorBody], $tableTemplate);
         }
         
         // Return the generated content instead of saving it to a file
