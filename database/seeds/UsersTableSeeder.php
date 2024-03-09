@@ -26,5 +26,31 @@ class UsersTableSeeder extends Seeder
             'designation' => 'admin',
             'password' => bcrypt('admin'),
         ]);
+
+        DB::table('users')->insert([
+            'name' => 'Benjamin Omamalin',
+            'email' => 'admin1@localhost',
+            'role' => 'admin',
+            'department' => 1,
+            'designation' => 'dean',
+            'password' => bcrypt('admin'),
+        ]);
+
+        DB::table('users')->insert([
+            'name' => 'Catherine Leah Gabo',
+            'email' => 'admin2@localhost',
+            'role' => 'admin',
+            'department' => 1,
+            'designation' => 'chairperson',
+            'password' => bcrypt('admin'),
+        ]);
+
+        DB::table('users')->insert([
+            'name' => 'Jean F. Nebrea',
+            'email' => 'admin3@localhost',
+            'role' => 'admin',
+            'designation' => 'campusdirector',
+            'password' => bcrypt('admin'),
+        ]);
     }
 }
