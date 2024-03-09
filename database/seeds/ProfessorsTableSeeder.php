@@ -13,37 +13,48 @@ class ProfessorsTableSeeder extends Seeder
     {
         DB::table('professors')->insert([
             [
-                'name' => 'Benjamin Omamalin'
+                'name' => 'Benjamin Omamalin',
+                'department' => 1
             ],
             [
-                'name' => 'Eduardo Carpio'
+                'name' => 'Eduardo Carpio',
+                'department' => 1
             ],
             [
-                'name' => 'Catherine Lea Gabo'
+                'name' => 'Catherine Lea Gabo',
+                'department' => 1
             ],
             [
-                'name' => 'Winzeal Agoc'
+                'name' => 'Winzeal Agoc',
+                'department' => 1
             ],
             [
-                'name' => 'Julie Bitasolo'
+                'name' => 'Julie Bitasolo',
+                'department' => 1
             ],
             [
-                'name' => 'Fermo Jay Asufra Jr.'
+                'name' => 'Fermo Jay Asufra Jr.',
+                'department' => 1
             ],
             [
                 'name' => 'Dr Papa Yaw Afriyie',
+                'department' => 2
             ],
             [
-                'name' => 'Dr Benjamin Ikeh'
+                'name' => 'Dr Benjamin Ikeh',
+                'department' => 2
             ],
             [
-                'name' => 'Larry Gates'
+                'name' => 'Larry Gates',
+                'department' => 3
             ],
             [
-                'name' => 'John Showman'
+                'name' => 'John Showman',
+                'department' => 3
             ],
             [
-                'name' => 'Richard Hendricks'
+                'name' => 'Richard Hendricks',
+                'department' => 3
             ]
         ]);
 
