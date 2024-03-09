@@ -11,6 +11,7 @@ use App\Models\Course;
 use App\Models\Timeslot;
 use App\Models\Professor;
 use App\Models\UnavailableTimeslot;
+use App\Models\Department;
 
 class ProfessorsController extends Controller
 {
@@ -47,16 +48,23 @@ class ProfessorsController extends Controller
             'paginate' => 'true',
             'per_page' => 20
         ]);
-
+    
         $courses = Course::all();
         $days = Day::all();
         $timeslots = Timeslot::all();
+        $departments = Department::all();
+
+        // Fetch the room names for the courses
+        foreach ($professors as $professor) {
+            $department = $departments->where('id', $professor->department)->first(); // Find the room with the corresponding ID
+            $professor->short_name = $department ? $department->short_name : ''; // Set the room name as a property of the course
+        }
 
         if ($request->ajax()) {
             return view('professors.table', compact('professors'));
         }
 
-        return view('professors.index', compact('professors', 'courses', 'days', 'timeslots'));
+        return view('professors.index', compact('professors', 'courses', 'days', 'timeslots', 'departments'));
     }
 
     /**
