@@ -6,8 +6,9 @@
                 <tr class="table-head">
                     <th style="width: 20%">Name</th>
                     <th style="width: 20%">Email</th>
-                    <th style="width: 30%">Courses Taught</th>
-                    <th style="width: 20%">Unavailable Periods</th>
+                    <th style="width: 20%">Courses Taught</th>
+                    <th style="width: 20%">Unavailable Periods</th>                    
+                    <th style="width: 10%">Department</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -39,6 +40,7 @@
                             <p>No unavailable periods</p>
                         @endif
                     </td>
+                    <td>{{ $professor->short_name }}</td>
                     <td>
                     <button class="btn btn-primary btn-sm resource-update-btn" data-id="{{ $professor->id }}"><i class="fa fa-pencil"></i></button>
                     <button class="btn btn-danger btn-sm resource-delete-btn" data-id="{{ $professor->id }}"><i class="fa fa-trash-o"></i></button></td>
