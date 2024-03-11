@@ -5,8 +5,8 @@
             <thead>
                 <tr class="table-head">
                     <td>Timetable Name</td>
-                    <td>Status</td>
-                    <td style="width: 10%">Print</td>
+                    <td style="width: 30%">Status</td>
+                    <td style="width: 20%">Print</td>
                 </tr>
             </thead>
 
