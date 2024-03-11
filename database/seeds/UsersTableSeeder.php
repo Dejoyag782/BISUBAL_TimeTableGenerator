@@ -46,8 +46,16 @@ class UsersTableSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'name' => 'Jean F. Nebrea',
+            'name' => 'Jea Mae Tuico',
             'email' => 'admin3@localhost',
+            'role' => 'admin',
+            'designation' => 'chairperson',
+            'password' => bcrypt('admin'),
+        ]);
+
+        DB::table('users')->insert([
+            'name' => 'Jean F. Nebrea',
+            'email' => 'admin4@localhost',
             'role' => 'admin',
             'designation' => 'campusdirector',
             'password' => bcrypt('admin'),
