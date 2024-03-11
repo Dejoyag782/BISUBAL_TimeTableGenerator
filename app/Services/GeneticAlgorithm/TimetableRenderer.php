@@ -51,7 +51,8 @@ class TimetableRenderer
                         
                         <div style="align-items:center;">
                         <div style="text-align:center; align-items:center;">
-                        <img class="d-xl-flex justify-content-xl-left align-items-xl-left" src="http://127.0.0.1:8000/welcome_assets/img/screen-content-phone.png" style="width: 4em;height: 4em;margin-right: 300px;text-align: left; margin-bottom:-100px;">
+                        <img class="d-xl-flex justify-content-xl-left align-items-xl-left" src="../../../../welcome_assets/img/BPL.png" style="width: 4.2em;height: 4em;margin-right: 300px;text-align: left; margin-bottom:-100px;">
+                        <img class="d-xl-flex justify-content-xl-left align-items-xl-left" src="../../../../welcome_assets/img/screen-content-phone.png" style="width: 4em;height: 4.2em;text-align: left; margin-bottom:-100px;">
                         </div><div style=" text-align:center;"><h5>Republic of the Philippines
                                                                         <br>BOHOL ISLAND STATE UNIVERSITY
                                                                         <br>Balilihan Campus
@@ -218,7 +219,8 @@ class TimetableRenderer
         
         $tableTemplate = '<div style="align-items:center;">
                                 <div style="text-align:center; align-items:center;">
-                                <img class="d-xl-flex justify-content-xl-left align-items-xl-left" src="http://127.0.0.1:8000/welcome_assets/img/screen-content-phone.png" style="width: 4em;height: 4em;margin-right: 300px;text-align: left; margin-bottom:-100px;">
+                                <img class="d-xl-flex justify-content-xl-left align-items-xl-left" src="../../../../welcome_assets/img/BPL.png" style="width: 4.2em;height: 4em;margin-right: 300px;text-align: left; margin-bottom:-100px;">
+                                <img class="d-xl-flex justify-content-xl-left align-items-xl-left" src="../../../../welcome_assets/img/screen-content-phone.png" style="width: 4em;height: 4.2em;text-align: left; margin-bottom:-100px;">
                                 </div><div style=" text-align:center;"><h5>Republic of the Philippines
                                                                         <br>BOHOL ISLAND STATE UNIVERSITY
                                                                         <br>Balilihan Campus
@@ -450,7 +452,8 @@ class TimetableRenderer
 
         $tableTemplate = '<div style="align-items:center;">
                                 <div style="text-align:center; align-items:center;">
-                                <img class="d-xl-flex justify-content-xl-left align-items-xl-left" src="http://127.0.0.1:8000/welcome_assets/img/screen-content-phone.png" style="width: 4em;height: 4em;margin-right: 300px;text-align: left; margin-bottom:-100px;">
+                                <img class="d-xl-flex justify-content-xl-left align-items-xl-left" src="../../../../welcome_assets/img/BPL.png" style="width: 4.2em;height: 4em;margin-right: 300px;text-align: left; margin-bottom:-100px;">
+                                <img class="d-xl-flex justify-content-xl-left align-items-xl-left" src="../../../../welcome_assets/img/screen-content-phone.png" style="width: 4em;height: 4.2em;text-align: left; margin-bottom:-100px;">
                                 </div><div style=" text-align:center;"><h5>Republic of the Philippines
                                                                         <br>BOHOL ISLAND STATE UNIVERSITY
                                                                         <br>Balilihan Campus
