@@ -142,7 +142,8 @@ class TimetablesController extends Controller
         // Delete the timetable
         $timetable->delete();
 
-        return response()->json(['deleted' => true]);
+        // Change the return statement at the end of your delete function
+        return response()->json(['deleted' => true, 'message' => 'Timetable deleted successfully']);
     }
 
 }
