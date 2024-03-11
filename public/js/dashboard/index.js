@@ -67,7 +67,7 @@ $(document).on('click', '.delete-btn', function(event) {
                 // Handle success response
                 console.log('Timetable deleted successfully');
                 // Optionally, you can reload the page or update the UI after deletion
-                // window.location.reload();
+                window.location.reload();
             },
             error: function (xhr, status, error) {
                 // Handle error response
@@ -76,4 +76,9 @@ $(document).on('click', '.delete-btn', function(event) {
         });
     }
 });
+
+  
+
+
+
 
