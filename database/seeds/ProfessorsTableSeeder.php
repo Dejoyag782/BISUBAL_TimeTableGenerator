@@ -50,7 +50,7 @@ class ProfessorsTableSeeder extends Seeder
             ],
             [
                 'name' => 'John Showman',
-                'department' => 3
+                'department' => null
             ],
             [
                 'name' => 'Richard Hendricks',
