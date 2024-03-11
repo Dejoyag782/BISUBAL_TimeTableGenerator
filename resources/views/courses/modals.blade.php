@@ -40,18 +40,44 @@
                                 </div>
                             </div>
 
-                            <div class="form-group" id="roomDiv" hidden>
-                                <label>Preferred Room</label>
-
-                                <div class="select2-wrapper">
-                                    <select id="room-select" name="room_preference" class="form-control select2">
-                                        <option value="">Select Room</option>
-                                        @foreach ($rooms as $room)
-                                            <option  value="{{ $room->id }}">{{ $room->name }}</option>
-                                        @endforeach
-                                    </select>
+                            <div style="background-color:white; padding:10px; margin-bottom:5px; border-radius:3px; border: solid #ccc 1px;">
+                                
+                                <div class="form-group" style="align-items:center; margin-bottom:-5px;">
+                                    <input type="button" style="widht:15px;height:15px; border-radius: 50%;" id="lab-checker"></button>
+                                    <label> Is Lab?</label>
                                 </div>
+                                
+
+                                <div class="form-group" id="selectDurationCont" style="align-items:center; margin-top:10px;" hidden>
+                                    <label>Duration</label>
+                                    <div class="select2-wrapper" style="background-color: #fff;">
+                                        <select id="duration" class="form-control select2">
+                                            <option  value="">Select Duration</option>
+                                            <option  value="1hr">1hr</option>
+                                            <option  value="2hr">2hr</option>
+                                            <option  value="3hr">3hr</option>
+                                            <option  value="4hr">4hr</option>
+                                            <option  value="5hr">5hr</option>
+                                        </select>
+                                    </div>
+                                </div>               
+                                
+                                <div class="form-group" id="roomDiv" hidden>
+                                    <label>Preferred Room</label>
+
+                                    <div class="select2-wrapper" style="align-items:center; margin-bottom:-3px;">
+                                        <select id="room-select" name="room_preference" class="form-control select2">
+                                            <option value="">Select Room</option>
+                                            @foreach ($rooms as $room)
+                                                <option  value="{{ $room->id }}">{{ $room->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
                             </div>
+
+                            
 
 
 
