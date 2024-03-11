@@ -44,7 +44,7 @@
                         <option value="admin">Admin</option>
                         <option value="chairperson">Chairperson</option>
                         <option value="dean">Dean</option>
-                        <option value="campusDirector">Campus Director</option>
+                        <option value="campusdirector">Campus Director</option>
                         
                     </select>
                 </div>
@@ -52,10 +52,13 @@
 
             <div class="form-group">
               <label >Role</label>
-              <select class="" aria-label="select role" id="role" name="role" >
-                  <option value="admin">Admin</option>
-                  <option value="superad">Super Admin</option>
-              </select>
+
+              <div class="select2-wrapper">
+                <select class="form-control select2" aria-label="select role" id="role" name="role" >
+                    <option value="superad">Super Admin</option>
+                    <option value="admin">Admin</option>                    
+                </select>
+              </div>
             </div>
 
             <div style="margin-top: 20px;">
