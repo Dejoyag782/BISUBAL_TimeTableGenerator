@@ -55,7 +55,13 @@
             $('#id').val(res.id);
             $('#name').val(res.name);
             $('#email').val(res.email);
-            $('#role').val(res.role);
+            if(res.department==null){
+                $('#department').val("").change();
+            }else{
+                $('#department').val(res.department).change();
+            }            
+            $('#designation').val(res.designation).change();
+            $('#role').val(res.role).change();
             $('#passwd').attr('hidden', 'hidden');
             $('#btn-change-user-pass').removeAttr('hidden');
             // Remove any existing password field
