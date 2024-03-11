@@ -237,7 +237,7 @@ class TimetableRenderer
 
                             <h5 class="text-left">Prepared by:</h5>
                             <h3 class="text-left" style="text-decoration:underline; margin-left:80px;">____{CHAIRPERSON}____</h3>
-                            <h5 class="text-left" style="margin-left:120px;">Chairperson,{DEPARTMENT}</h5>
+                            <h5 class="text-left" style="margin-left:120px;">Chairperson,{CHAIRPERSONDEP}</h5>
 
                             <h5 class="text-left" style="margin-top:50px;">Conforme:</h5>
                             <h3 class="text-left" style="text-decoration:underline; margin-left:80px;">____{TITLE}____</h3>
@@ -325,9 +325,15 @@ class TimetableRenderer
                                     // print("\n cd_name:" . $campusdirector."\n");
                                 }      
                                 if ($user->department == $department->id && $user->designation === "chairperson") {
-                                    $chairperson = $user->name;                                
+                                    $chairperson = $user->name;         
+                                    $chairpersonDep = $department->short_name;                       
                                     // print("\n cd_name:" . $campusdirector."\n");
                                 }    
+                                if ($user->department == null && $user->designation === "chairperson" && $professor->department == null){
+
+                                    $chairperson = $user->name;
+                                    $chairpersonDep = "General Studies";
+                                }
                             }                    
                             // if ($user->designation === "chairperson") {
                             //     $chairperson = $user->name;                                
@@ -344,7 +350,7 @@ class TimetableRenderer
 
             // }
             
-            $content .= str_replace(['{TITLE}', '{HEADING}','{CHAIRPERSON}', '{DEAN}', '{DEPARTMENT}', '{CAMPUSDIRECTOR}', '{BODY}'], [$professorTitle, $professorHeader, $chairperson, $dean, $departmentSign, $campusdirector, $professorBody], $tableTemplate);
+            $content .= str_replace(['{TITLE}', '{HEADING}','{CHAIRPERSON}', '{CHAIRPERSONDEP}', '{DEAN}', '{DEPARTMENT}', '{CAMPUSDIRECTOR}', '{BODY}'], [$professorTitle, $professorHeader, $chairperson, $chairpersonDep, $dean, $departmentSign, $campusdirector, $professorBody], $tableTemplate);
         }
         
         // Return the generated content instead of saving it to a file
@@ -466,7 +472,7 @@ class TimetableRenderer
 
         foreach ($rooms as $room) {
             $header = "<tr class='table-head'>";
-            $header .= "<td></td>"; // Empty cell in the first column for hours
+            $header .= "<td>Days→<br>↓Hours</td>"; // Empty cell in the first column for hours
 
             foreach ($days as $day) {
                 $header .= "\t<td>" . strtoupper($day->short_name) . "</td>";
