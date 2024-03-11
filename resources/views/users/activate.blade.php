@@ -72,7 +72,7 @@ My Account
                                                     <option value="admin">Admin</option>
                                                     <option value="chairperson">Chairperson</option>
                                                     <option value="dean">Dean</option>
-                                                    <option value="campusDirector">Campus Director</option>
+                                                    <option value="campusdirector">Campus Director</option>
                                                     
                                                 </select>
                                             </div>
