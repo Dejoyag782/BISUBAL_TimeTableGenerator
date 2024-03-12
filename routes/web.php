@@ -39,9 +39,9 @@ Route::group(['middleware' => ['auth', 'checkRole:superad', 'activated']], funct
     Route::get('get-user-details/{id}', [UsersManagerController::class, 'getUserDetails'])->name('user.details');
 
     // Route for registering users
-    Route::get('/register', function () {
-        return view('dashboard');
-    });
+    // Route::get('/register', function () {
+    //     return view('dashboard');
+    // });
 
 });
 
