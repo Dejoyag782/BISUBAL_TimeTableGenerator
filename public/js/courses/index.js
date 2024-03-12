@@ -145,5 +145,7 @@ window.addEventListener('load', function () {
 document.getElementById('cancel_resource_modal').addEventListener('click', function(){
     $('#room-select').val("").change();
     roomDiv.setAttribute('hidden', 'true');
-    checkboxButton.classList.toggle('checked');
+    if (checkboxButton.classList.contains('checked')) {
+        checkboxButton.classList.toggle('checked');
+    }    
 });
