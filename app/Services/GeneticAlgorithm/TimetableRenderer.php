@@ -56,7 +56,8 @@ class TimetableRenderer
                         </div><div style=" text-align:center;"><h5>Republic of the Philippines
                                                                         <br>BOHOL ISLAND STATE UNIVERSITY
                                                                         <br>Balilihan Campus
-                                                                        <br>Magsija, Balilihan, Bohol</h5></div>
+                                                                        <br>Magsija, Balilihan, Bohol</h5>
+                                                                        <h3>{DEPARTMENTNAME}</h3></div>
                         </div>
                         <h3 class="text-left">COURSE,YR. & SEC: {TITLE}</h3>
                         <div style="page-break-after: always">
@@ -187,7 +188,7 @@ class TimetableRenderer
                         }
                         
 
-                        
+                        $departmentName = $department->name;
                         $departmentSign = $department->short_name;
 
                     } else {
@@ -197,7 +198,7 @@ class TimetableRenderer
                 }
             
 
-        $content .= str_replace(['{TITLE}', '{HEADING}', '{DEAN}', '{CHAIRPERSON}', '{CAMPUSDIRECTOR}', '{DEPARTMENT}','{BODY}'], [$title, $header, $dean, $chairperson, $campusdirector, $departmentSign, $body], $tableTemplate);
+        $content .= str_replace(['{TITLE}', '{HEADING}', '{DEAN}', '{CHAIRPERSON}', '{CAMPUSDIRECTOR}', '{DEPARTMENTNAME}', '{DEPARTMENT}','{BODY}'], [$title, $header, $dean, $chairperson, $campusdirector, $departmentName, $departmentSign, $body], $tableTemplate);
     }
 
         
@@ -225,6 +226,7 @@ class TimetableRenderer
                                                                         <br>BOHOL ISLAND STATE UNIVERSITY
                                                                         <br>Balilihan Campus
                                                                         <br>Magsija, Balilihan, Bohol</h5>
+                                                                        <h3>{DEPARTMENTNAME}</h3>
                         </div>
                         <h3 class="text-left">PROF NAME: {TITLE}</h3>
                         <div style="page-break-after: always">
@@ -343,6 +345,7 @@ class TimetableRenderer
                             // }
 
                             $departmentSign = $department->short_name;
+                            $departmentName = $department->name;
                         }
                     }
                     
@@ -352,7 +355,7 @@ class TimetableRenderer
 
             // }
             
-            $content .= str_replace(['{TITLE}', '{HEADING}','{CHAIRPERSON}', '{CHAIRPERSONDEP}', '{DEAN}', '{DEPARTMENT}', '{CAMPUSDIRECTOR}', '{BODY}'], [$professorTitle, $professorHeader, $chairperson, $chairpersonDep, $dean, $departmentSign, $campusdirector, $professorBody], $tableTemplate);
+            $content .= str_replace(['{TITLE}', '{HEADING}','{CHAIRPERSON}', '{CHAIRPERSONDEP}', '{DEAN}', '{DEPARTMENTNAME}', '{DEPARTMENT}', '{CAMPUSDIRECTOR}', '{BODY}'], [$professorTitle, $professorHeader, $chairperson, $chairpersonDep, $dean, $departmentName, $departmentSign, $campusdirector, $professorBody], $tableTemplate);
         }
         
         // Return the generated content instead of saving it to a file
@@ -557,9 +560,21 @@ public function renderAndSave()
     $roomUsageContent = $this->renderRoomUsage();
 
     // Add labels or titles to each section with blank pages
-    $timetableContent = '<div style="page-break-after: always; margin:auto;"><h2>Student Load</h2></div>' . $timetableContent;
-    $facultyLoadContent = '<div style="page-break-after: always; margin:auto;"><h2>Professor Load</h2></div>' . $facultyLoadContent;
-    $roomUsageContent = '<div style="page-break-after: always; margin:auto;"><h2>Room Utilization</h2></div>' . $roomUsageContent;
+    $timetableContent = '<div style="page-break-after: always; margin:auto; width:100%; align-items: center; text-align: center;">
+    <br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br>
+    <h1 style="font-size: 10em; font-weight: bold;">STUDENT LOAD<br>SECTION</h1></div>' . $timetableContent;
+    $facultyLoadContent = '<div style="page-break-after: always; margin:auto; width:100%; align-items: center; text-align: center;">
+    <br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br>
+    <h1 style="font-size: 10em; font-weight: bold;">INSTRUCTOR LOAD<br>SECTION</h1></div>' . $facultyLoadContent;
+    $roomUsageContent = '<div style="page-break-after: always; margin:auto; width:100%; align-items: center; text-align: center;">
+    <br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br>
+    <h1 style="font-size: 10em; font-weight: bold;">ROOM UTILIZATION<br>SECTION</h1></div>' . $roomUsageContent;
 
     // Concatenate the content of all timetables
     $combinedContent = $timetableContent . $facultyLoadContent . $roomUsageContent;
@@ -573,6 +588,7 @@ public function renderAndSave()
         'file_url' => $combinedPath
     ]);
 
+    
     return $combinedContent;
 }
 
