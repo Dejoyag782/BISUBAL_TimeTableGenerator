@@ -6,6 +6,8 @@ use App\Models\Course;
 use App\Models\Timetable;
 use App\Models\Professor;
 use App\Models\CollegeClass;
+use App\Models\Department;
+
 use Illuminate\Support\Facades\DB;
 
 class TimetableService
@@ -24,11 +26,15 @@ class TimetableService
         $courseIds = DB::select($coursesQuery);
 
         if (count($courseIds)) {
-            $errors[] = "Some courses don't have professors.<a href=\"/courses?filter=no_professor\" target=\"_blank\">Click here to review them</a>";
+            $errors[] = "Some subjects don't have professors.<a href=\"/courses?filter=no_professor\" target=\"_blank\">Click here to review them</a>";
         }
 
         if (!CollegeClass::count()) {
-            $errors[] = "No classes have been added";
+            $errors[] = "No sections/classes have been added";
+        }
+
+        if (!Department::count()) {
+            $errors[] = "No departments have been added";
         }
 
         $classesQuery = 'SELECT id FROM classes WHERE id NOT IN (SELECT DISTINCT class_id FROM courses_classes)';
