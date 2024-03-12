@@ -307,7 +307,8 @@ class TimetableRenderer
             }
             
             $professorTitle = $professor->name;
-
+            $professorDepartment = $professor->department;
+            
                 // Get users department ID's
                 foreach ($users as $user) {
                     $userDepID = $user->department;
@@ -318,7 +319,8 @@ class TimetableRenderer
                         // print("\n cd_name:" . $campusdirector."\n");
                     }
 
-                    // compare userDepartmentID with departmentID
+                    if( $userDepID == $professorDepartment){
+                        // compare userDepartmentID with departmentID
                     foreach ($departments as $department) {
                         if($userDepID == $department->id){
 
@@ -348,6 +350,8 @@ class TimetableRenderer
                             $departmentName = $department->name;
                         }
                     }
+                    }
+                    
                     
                 }
 
