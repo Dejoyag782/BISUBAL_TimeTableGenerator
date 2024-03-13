@@ -9,6 +9,7 @@
  */
 namespace PHPUnit\Framework\MockObject\Generator;
 
+use function count;
 use function explode;
 use function implode;
 use function is_object;
@@ -34,7 +35,15 @@ use SebastianBergmann\Type\UnknownType;
 final class MockMethod
 {
     use TemplateLoader;
+
+    /**
+     * @psalm-var class-string
+     */
     private readonly string $className;
+
+    /**
+     * @psalm-var non-empty-string
+     */
     private readonly string $methodName;
     private readonly bool $cloneArguments;
     private readonly string $modifier;
@@ -45,6 +54,16 @@ final class MockMethod
     private readonly bool $callOriginalMethod;
     private readonly bool $static;
     private readonly ?string $deprecation;
+
+    /**
+     * @psalm-var array<int, mixed>
+     */
+    private readonly array $defaultParameterValues;
+
+    /**
+     * @psalm-var non-negative-int
+     */
+    private readonly int $numberOfParameters;
 
     /**
      * @throws ReflectionException
@@ -86,6 +105,8 @@ final class MockMethod
             $modifier,
             self::methodParametersForDeclaration($method),
             self::methodParametersForCall($method),
+            self::methodParametersDefaultValues($method),
+            count($method->getParameters()),
             (new ReflectionMapper)->fromReturnType($method),
             $reference,
             $callOriginalMethod,
@@ -94,15 +115,21 @@ final class MockMethod
         );
     }
 
-    public static function fromName(string $fullClassName, string $methodName, bool $cloneArguments): self
+    /**
+     * @param class-string     $className
+     * @param non-empty-string $methodName
+     */
+    public static function fromName(string $className, string $methodName, bool $cloneArguments): self
     {
         return new self(
-            $fullClassName,
+            $className,
             $methodName,
             $cloneArguments,
             'public',
             '',
             '',
+            [],
+            0,
             new UnknownType,
             '',
             false,
@@ -111,7 +138,13 @@ final class MockMethod
         );
     }
 
-    public function __construct(string $className, string $methodName, bool $cloneArguments, string $modifier, string $argumentsForDeclaration, string $argumentsForCall, Type $returnType, string $reference, bool $callOriginalMethod, bool $static, ?string $deprecation)
+    /**
+     * @psalm-param class-string $className
+     * @psalm-param non-empty-string $methodName
+     * @psalm-param array<int, mixed> $defaultParameterValues
+     * @psalm-param non-negative-int $numberOfParameters
+     */
+    private function __construct(string $className, string $methodName, bool $cloneArguments, string $modifier, string $argumentsForDeclaration, string $argumentsForCall, array $defaultParameterValues, int $numberOfParameters, Type $returnType, string $reference, bool $callOriginalMethod, bool $static, ?string $deprecation)
     {
         $this->className               = $className;
         $this->methodName              = $methodName;
@@ -119,6 +152,8 @@ final class MockMethod
         $this->modifier                = $modifier;
         $this->argumentsForDeclaration = $argumentsForDeclaration;
         $this->argumentsForCall        = $argumentsForCall;
+        $this->defaultParameterValues  = $defaultParameterValues;
+        $this->numberOfParameters      = $numberOfParameters;
         $this->returnType              = $returnType;
         $this->reference               = $reference;
         $this->callOriginalMethod      = $callOriginalMethod;
@@ -126,6 +161,9 @@ final class MockMethod
         $this->deprecation             = $deprecation;
     }
 
+    /**
+     * @psalm-return non-empty-string
+     */
     public function methodName(): string
     {
         return $this->methodName;
@@ -137,20 +175,24 @@ final class MockMethod
     public function generateCode(): string
     {
         if ($this->static) {
-            $templateFile = 'mocked_static_method.tpl';
-        } elseif ($this->returnType->isNever() || $this->returnType->isVoid()) {
-            $templateFile = sprintf(
-                '%s_method_never_or_void.tpl',
-                $this->callOriginalMethod ? 'proxied' : 'mocked',
-            );
+            $templateFile = 'doubled_static_method.tpl';
         } else {
             $templateFile = sprintf(
                 '%s_method.tpl',
-                $this->callOriginalMethod ? 'proxied' : 'mocked',
+                $this->callOriginalMethod ? 'proxied' : 'doubled',
             );
         }
 
-        $deprecation = $this->deprecation;
+        $deprecation  = $this->deprecation;
+        $returnResult = '';
+
+        if (!$this->returnType->isNever() && !$this->returnType->isVoid()) {
+            $returnResult = <<<'EOT'
+
+
+        return $__phpunit_result;
+EOT;
+        }
 
         if (null !== $this->deprecation) {
             $deprecation         = "The {$this->className}::{$this->methodName} method is deprecated ({$this->deprecation}).";
@@ -180,6 +222,7 @@ final class MockMethod
                 'reference'          => $this->reference,
                 'clone_arguments'    => $this->cloneArguments ? 'true' : 'false',
                 'deprecation'        => $deprecation,
+                'return_result'      => $returnResult,
             ],
         );
 
@@ -189,6 +232,22 @@ final class MockMethod
     public function returnType(): Type
     {
         return $this->returnType;
+    }
+
+    /**
+     * @psalm-return array<int, mixed>
+     */
+    public function defaultParameterValues(): array
+    {
+        return $this->defaultParameterValues;
+    }
+
+    /**
+     * @psalm-return non-negative-int
+     */
+    public function numberOfParameters(): int
+    {
+        return $this->numberOfParameters;
     }
 
     /**
@@ -295,6 +354,7 @@ final class MockMethod
                     -2,
                 ),
             )[1];
+            // @codeCoverageIgnoreStart
         } catch (\ReflectionException $e) {
             throw new ReflectionException(
                 $e->getMessage(),
@@ -302,5 +362,24 @@ final class MockMethod
                 $e,
             );
         }
+        // @codeCoverageIgnoreEnd
+    }
+
+    /**
+     * @psalm-return array<int, mixed>
+     */
+    private static function methodParametersDefaultValues(ReflectionMethod $method): array
+    {
+        $result = [];
+
+        foreach ($method->getParameters() as $i => $parameter) {
+            if (!$parameter->isDefaultValueAvailable()) {
+                continue;
+            }
+
+            $result[$i] = $parameter->getDefaultValue();
+        }
+
+        return $result;
     }
 }

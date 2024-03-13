@@ -9,8 +9,8 @@ use RuntimeException;
 
 abstract class Renderer
 {
-    use Truncation;
     use Colors;
+    use Truncation;
 
     /**
      * The output to be rendered.
@@ -80,7 +80,7 @@ abstract class Renderer
      *
      * @return $this
      */
-    protected function when(mixed $value, callable $callback, callable $default = null): self
+    protected function when(mixed $value, callable $callback, ?callable $default = null): self
     {
         if ($value) {
             $callback($this);

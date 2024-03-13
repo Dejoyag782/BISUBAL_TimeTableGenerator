@@ -21,7 +21,6 @@ class JavascriptRenderer extends BaseJavascriptRenderer
 
         $this->cssFiles['laravel'] = __DIR__ . '/Resources/laravel-debugbar.css';
         $this->cssVendors['fontawesome'] = __DIR__ . '/Resources/vendor/font-awesome/style.css';
-        $this->jsFiles['laravel-sql'] = __DIR__ . '/Resources/sqlqueries/widget.js';
         $this->jsFiles['laravel-cache'] = __DIR__ . '/Resources/cache/widget.js';
 
         $theme = config('debugbar.theme', 'auto');
@@ -54,23 +53,26 @@ class JavascriptRenderer extends BaseJavascriptRenderer
         $cssRoute = route('debugbar.assets.css', [
             'v' => $this->getModifiedTime('css'),
             'theme' => config('debugbar.theme', 'auto'),
-        ]);
+        ], false);
 
         $jsRoute = route('debugbar.assets.js', [
             'v' => $this->getModifiedTime('js')
-        ]);
+        ], false);
 
-        $cssRoute = preg_replace('/\Ahttps?:/', '', $cssRoute);
-        $jsRoute  = preg_replace('/\Ahttps?:/', '', $jsRoute);
+        $nonce = $this->getNonceAttribute();
 
         $html  = "<link rel='stylesheet' type='text/css' property='stylesheet' href='{$cssRoute}' data-turbolinks-eval='false' data-turbo-eval='false'>";
-        $html .= "<script src='{$jsRoute}' data-turbolinks-eval='false' data-turbo-eval='false'></script>";
+        $html .= "<script{$nonce} src='{$jsRoute}' data-turbolinks-eval='false' data-turbo-eval='false'></script>";
 
         if ($this->isJqueryNoConflictEnabled()) {
-            $html .= '<script data-turbo-eval="false">jQuery.noConflict(true);</script>' . "\n";
+            $html .= "<script{$nonce} data-turbo-eval='false'>jQuery.noConflict(true);</script>" . "\n";
         }
 
-        $html .= $this->getInlineHtml();
+        $inlineHtml = $this->getInlineHtml();
+        if ($nonce != '') {
+            $inlineHtml = preg_replace("/<(script|style)>/", "<$1{$nonce}>", $inlineHtml);
+        }
+        $html .= $inlineHtml;
 
 
         return $html;

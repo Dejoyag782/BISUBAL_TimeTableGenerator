@@ -268,6 +268,10 @@ class Route
      */
     public function getController()
     {
+        if (! $this->isControllerAction()) {
+            return null;
+        }
+
         if (! $this->controller) {
             $class = $this->getControllerClass();
 
@@ -573,13 +577,13 @@ class Route
      * Get the parent parameter of the given parameter.
      *
      * @param  string  $parameter
-     * @return string
+     * @return string|null
      */
     public function parentOfParameter($parameter)
     {
         $key = array_search($parameter, array_keys($this->parameters));
 
-        if ($key === 0) {
+        if ($key === 0 || $key === false) {
             return;
         }
 
