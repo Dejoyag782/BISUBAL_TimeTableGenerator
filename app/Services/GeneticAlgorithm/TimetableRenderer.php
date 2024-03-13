@@ -170,16 +170,16 @@ class TimetableRenderer
                             switch ($departmentId) {
                                 case $prepper:
                                     if ($user->designation === "dean") {
-                                        $dean = $user->name;
+                                        $dean = $user->name." ".$user->postNominal;
                                         // print("\n dean_name:" . $dean." department:". $department->short_name);
                                     } elseif ($user->designation === "chairperson") {
-                                        $chairperson = $user->name;
+                                        $chairperson = $user->name." ".$user->postNominal;
                                         // print("\n chairperson_name:" . $chairperson." department:". $department->short_name);
                                     }
                                     break;
                                 case null:
                                     if ($user->designation === "campusdirector") {
-                                        $campusdirector = $user->name;
+                                        $campusdirector = $user->name." ".$user->postNominal;
                                         // print("\n cd_name:" . $campusdirector."\n");
                                     }
                                     break;
@@ -314,7 +314,7 @@ class TimetableRenderer
                     $userDepID = $user->department;
 
                     if ($user->designation === "campusdirector") {
-                        $campusdirector = $user->name;
+                        $campusdirector = $user->name." ".$user->postNominal;
                         
                         // print("\n cd_name:" . $campusdirector."\n");
                     }
@@ -327,17 +327,17 @@ class TimetableRenderer
                             // check corresponding user based on department id
                             foreach ($users as $user) {
                                 if ($user->department == $department->id && $user->designation === "dean") {
-                                    $dean = $user->name;                                
+                                    $dean = $user->name." ".$user->postNominal;                                
                                     // print("\n cd_name:" . $campusdirector."\n");
                                 }      
                                 if ($user->department == $department->id && $user->designation === "chairperson") {
-                                    $chairperson = $user->name;         
+                                    $chairperson = $user->name." ".$user->postNominal;         
                                     $chairpersonDep = $department->short_name;                       
                                     // print("\n cd_name:" . $campusdirector."\n");
                                 }    
                                 if ($user->department == null && $user->designation === "chairperson" && $professor->department == null){
 
-                                    $chairperson = $user->name;
+                                    $chairperson = $user->name." ".$user->postNominal;
                                     $chairpersonDep = "General Studies";
                                 }
                             }                    

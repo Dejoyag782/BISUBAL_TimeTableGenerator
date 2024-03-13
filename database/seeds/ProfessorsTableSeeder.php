@@ -13,7 +13,7 @@ class ProfessorsTableSeeder extends Seeder
     {
         DB::table('professors')->insert([
             [
-                'name' => 'Benjamin Omamalin',
+                'name' => 'Jake Paul Leopard',
                 'department' => 1
             ],
             [
