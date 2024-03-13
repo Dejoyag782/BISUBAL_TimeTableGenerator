@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('postNominal')->nullable();
             $table->string('email')->unique();
             $table->enum('role', ['superad', 'admin']) -> default=('admin');
             $table->integer('department')->nullable()->unsigned();

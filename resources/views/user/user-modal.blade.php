@@ -20,6 +20,11 @@
             </div>
 
             <div class="form-group">
+              <label for="name" >Post-Nominal</label>
+              <input type="text" class= "form-control" id="postNominal" name="postNominal" placeholder="Enter Post-nominal" maxlength="20" >
+            </div>
+
+            <div class="form-group">
               <label for="email" >Email</label>
               <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" maxlength="100" >
             </div>

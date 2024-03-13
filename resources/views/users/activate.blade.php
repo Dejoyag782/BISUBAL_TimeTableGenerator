@@ -43,6 +43,11 @@ My Account
                                         </div>
 
                                         <div class="form-group">
+                                            <label>Post-Nominal</label>
+                                            <input type="text" class="form-control" placeholder="Phd, et, ..." name="postNominal" value="{{ $user->postNominal }}">
+                                        </div>
+
+                                        <div class="form-group">
                                             <label>Email</label>
                                             <input type="email" class="form-control" placeholder="Email" name="email" value="{{ $user->email }}">
                                         </div>

@@ -49,6 +49,7 @@ Users
                   <tr>
                     <th>Role</th>
                     <th>Name</th>
+                    <th>Post-nominals</th>
                     <th>Email</th>
                     <th>Department</th>
                     <th>Designation</th>

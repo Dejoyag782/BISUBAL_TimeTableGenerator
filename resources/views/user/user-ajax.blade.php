@@ -15,6 +15,7 @@
           columns: [
               {data: 'role', name: 'role'},
               {data: 'name', name: 'name'},
+              {data: 'postNominal', name: 'postNominal'},
               {data: 'email', name: 'email'},              
               {data: 'department_short_name', name: 'department'},
               {data: 'designation', name: 'designation'},
@@ -54,6 +55,7 @@
             $('#users-modal').modal('show');
             $('#id').val(res.id);
             $('#name').val(res.name);
+            $('#postNominal').val(res.postNominal);
             $('#email').val(res.email);
             if(res.department==null){
                 $('#department').val("").change();

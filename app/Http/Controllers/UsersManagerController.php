@@ -51,6 +51,7 @@ class UsersManagerController extends Controller
   
         $userData = [
             'name' => $request->name, 
+            'postNominal' =>$request->postNominal,
             'email' => $request->email,
             'role' => $request->role,
             'department' => $request->department,
@@ -94,6 +95,7 @@ class UsersManagerController extends Controller
      {
          return User::create([
              'name' => $data['name'],
+             'postNominal' => $data['postNominal'],
              'email' => $data['email'],
              'department' => $data['department'],
              'designation' => $data['designation'],

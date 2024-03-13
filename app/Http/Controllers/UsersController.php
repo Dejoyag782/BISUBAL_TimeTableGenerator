@@ -99,6 +99,7 @@ class UsersController extends Controller
 
         $user->update([
             'name' => $request->name,
+            'postNominal' => $request->postNominal,
             'email' => $request->email,
             'department'=> $request->department,
             'designation'=>$request->designation,
