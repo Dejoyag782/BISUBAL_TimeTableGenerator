@@ -69,21 +69,43 @@ class TimetableRenderer
                                     {BODY}
                                 </tbody>
                             </table>
-                            <h5 class="text-left">Prepared by:</h5>
-                            <h3 class="text-left" style="text-decoration:underline; margin-left:80px;">____{CHAIRPERSON}____</h3>
-                            <h5 class="text-left" style="margin-left:120px;">Chairperson,{DEPARTMENT}</h5>
 
-                            <div style="margin-top:-73px;">
-                            <h5 class="text-right" style="margin-right:250px;">Reviewed by:</h5>
-                            <h3 class="text-right" style="text-decoration:underline; ">____{DEAN}____</h3>
-                            <h5 class="text-right" style="margin-right:70px;">Dean,{DEPARTMENT}</h5>
-                            </div>
-
-                            <div style="margin-top:50px;">
-                            <h5 class="text-right" style="margin-right:265px;">Approved:</h5>
-                            <h3 class="text-right" style="text-decoration:underline; ">____{CAMPUSDIRECTOR}____</h3>
-                            <h5 class="text-right" style="margin-right:70px;">Campus Director</h5>
-                            </div>   
+                            <table style="width: 100%;">
+                                <tr style="width: 100%;">
+                                    <td style="width: 30%;">
+                                        <h5>Prepared by:</h5>
+                                        <h4 style="text-align:center; text-decoration:none; margin-left:80px;">
+                                        <span style=" font-size: 1.3em; text-align:center; border-bottom: 2px solid black; padding-left: 20px; padding-right: 20px;">{CHAIRPERSON}</span>
+                                        <br>Chairperson,{DEPARTMENT}</h4>
+                                        
+                                    </td>
+                                    <td style="width: 10%;">
+                                        
+                                    </td>
+                                    <td style="width: 30%;">
+                                        <h5>Reviewed by:</h5>
+                                        <h4 style="text-align:center; text-decoration:none; margin-left:80px;">
+                                        <span style=" font-size: 1.3em; text-align:center; border-bottom: 2px solid black; padding-left: 20px; padding-right: 20px;">{DEAN}</span>
+                                        <br>Dean,{DEPARTMENT}</h4>
+                                        
+                                    </td>
+                                </tr>
+                                <tr style="width: 100%;">
+                                    <td style="width: 30%;">
+                                        
+                                    </td>
+                                    <td style="width: 10%;">
+                                        
+                                    </td>   
+                                    <td style="width: 30%;  padding-top: 100px;">
+                                        <h5>Approved:</h5>
+                                        <h4 style="text-align:center; text-decoration:none; margin-left:80px;">
+                                        <span style=" font-size: 1.3em; text-align:center; border-bottom: 2px solid black; padding-left: 20px; padding-right: 20px;">{CAMPUSDIRECTOR}</span>
+                                        <br>Campus Director</h4>
+                                        
+                                    </td>
+                                </tr>
+                            </table> 
 
                         </div>
 
@@ -239,25 +261,46 @@ class TimetableRenderer
                                 </tbody>
                             </table>
 
-                            <h5 class="text-left">Prepared by:</h5>
-                            <h3 class="text-left" style="text-decoration:underline; margin-left:80px;">____{CHAIRPERSON}____</h3>
-                            <h5 class="text-left" style="margin-left:120px;">Chairperson,{CHAIRPERSONDEP}</h5>
-
-                            <h5 class="text-left" style="margin-top:50px;">Conforme:</h5>
-                            <h3 class="text-left" style="text-decoration:underline; margin-left:80px;">____{TITLE}____</h3>
-                            <h5 class="text-left" style="margin-left:120px;">Associate Professor</h5>
-
-                            <div style="margin-top:-225px;">
-                            <h5 class="text-right" style="margin-right:250px;">Reviewed by:</h5>
-                            <h3 class="text-right" style="text-decoration:underline; ">____{DEAN}____</h3>
-                            <h5 class="text-right" style="margin-right:70px;">Dean,{DEPARTMENT}</h5>
-                            </div>
-
-                            <div style="margin-top:50px;">
-                            <h5 class="text-right" style="margin-right:265px;">Approved:</h5>
-                            <h3 class="text-right" style="text-decoration:underline; ">____{CAMPUSDIRECTOR}____</h3>
-                            <h5 class="text-right" style="margin-right:70px;">Campus Director</h5>
-                            </div>   
+                            <table style="width: 100%;">
+                                <tr style="width: 100%;">
+                                    <td style="width: 30%;">
+                                        <h5>Prepared by:</h5>
+                                        <h4 style="text-align:center; text-decoration:none; margin-left:80px;">
+                                        <span style=" font-size: 1.3em; text-align:center; border-bottom: 2px solid black; padding-left: 20px; padding-right: 20px;">{CHAIRPERSON}</span>
+                                        <br>Chairperson,{DEPARTMENT}</h4>
+                                        
+                                    </td>
+                                    <td style="width: 10%;">
+                                        
+                                    </td>
+                                    <td style="width: 30%;">
+                                        <h5>Reviewed by:</h5>
+                                        <h4 style="text-align:center; text-decoration:none; margin-left:80px;">
+                                        <span style=" font-size: 1.3em; text-align:center; border-bottom: 2px solid black; padding-left: 20px; padding-right: 20px;">{DEAN}</span>
+                                        <br>Dean,{DEPARTMENT}</h4>
+                                        
+                                    </td>
+                                </tr>
+                                <tr style="width: 100%;">
+                                    <td style="width: 30%;">
+                                    <h5>Conforme:</h5>
+                                    <h4 style="text-align:center; text-decoration:none; margin-left:80px;">
+                                    <span style=" font-size: 1.3em; text-align:center; border-bottom: 2px solid black; padding-left: 20px; padding-right: 20px;">{TITLE}</span>
+                                    <br>Associate Professor</h4>
+                                    
+                                    </td>
+                                    <td style="width: 10%;">
+                                        
+                                    </td>   
+                                    <td style="width: 30%;  padding-top: 100px;">
+                                        <h5>Approved:</h5>
+                                        <h4 style="text-align:center; text-decoration:none; margin-left:80px;">
+                                        <span style=" font-size: 1.3em; text-align:center; border-bottom: 2px solid black; padding-left: 20px; padding-right: 20px;">{CAMPUSDIRECTOR}</span>
+                                        <br>Campus Director</h4>
+                                        
+                                    </td>
+                                </tr>
+                            </table>
 
                         </div>';
         
