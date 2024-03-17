@@ -12,6 +12,7 @@ class Timetable
      * @var array
      */
     private $rooms;
+    private $unavailableSlots;
 
     /**
      * Collection of professors indexed by their IDs
@@ -32,7 +33,7 @@ class Timetable
      *
      * @var array
      */
-    private $groups;
+    private $groups;        
 
     /**
      * Collection of time slots
@@ -183,6 +184,7 @@ class Timetable
         $classes = [];
 
         $chromosome = $individual->getChromosome();
+        // print "Chromosome:".$chromosome;
         $chromosomePos = 0;
         $classIndex = 0;
 
@@ -199,6 +201,7 @@ class Timetable
 
 
                 for ($i = 1; $i <= $module->getSlots($id); $i++) {
+
                     $classes[$classIndex] = new CollegeClass($classIndex, $group->getId(), $moduleId);
 
                     // Add timeslot
@@ -235,6 +238,8 @@ class Timetable
                     $classIndex++;
                         }
 
+                    } else {
+                        
                     }
 
                 }
@@ -265,7 +270,7 @@ class Timetable
                 $moduleCode = $module->getModuleCode();
                 $hours = $this->extractHours($module->getModuleCode());
                 
-// Add diri ug logic mo check if ang modulecode nga corresponding sa moduleID kay naay Lab 
+            // Add diri ug logic mo check if ang modulecode nga corresponding sa moduleID kay naay Lab 
                 for ($i = 1; $i <= $module->getSlots($id); $i++) {
                     $scheme[] = $moduleId;
                     if(strpos($moduleCode, "Lab") !== false){
@@ -538,6 +543,7 @@ class Timetable
             }
         }
 
+        print "\nNo of Clashes: ".$clashes;
         return $clashes;
     }
 
