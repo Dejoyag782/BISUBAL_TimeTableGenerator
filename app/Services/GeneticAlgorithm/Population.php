@@ -31,6 +31,7 @@ class Population
             for ($i = 0; $i < $populationSize; $i++) {
                 $individual = new Individual($timetable);
                 $this->population[$i] = $individual;
+                print "population no: ".$i."\n";
             }
         }
     }
@@ -51,7 +52,7 @@ class Population
         for ($i = 0; $i < $populationSize; $i++) {
             $population->population[$i] = Individual::random($chromosomeLength);
         }
-              
+    
         return $population;
     }
 
