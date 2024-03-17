@@ -193,19 +193,30 @@ class GeneticAlgorithm
     public function crossoverPopulation($population)
     {
         $newPopulation = new Population($population->size());
-
+    
         for ($i = 0; $i < $population->size(); $i++) {
             $parentA = $population->getFittest($i);
-
+    
+            // Debugging output
+            print "\n\nParentA: ".$parentA."\n";
+    
             $random = mt_rand() / mt_getrandmax();
+    
+            // Debugging output
+            print "\n(?".$this->crossoverRate.">".$random."):(interval=".$i.") ";
+    
             if (($this->crossoverRate > $random) && ($i > $this->elitismCount)) {
-                // Initialise offspring
+                // Create offspring
                 $offspring = Individual::random($parentA->getChromosomeLength());
-
+    
+                // Debugging output
+                print "\n\nPopulating with crossover:\n";
+                print "Offspring: ".$offspring."\n";
+    
                 $parentB = $this->selectParent($population);
-
+    
                 $swapPoint = mt_rand(0, $parentB->getChromosomeLength());
-
+    
                 for ($j = 0; $j < $parentA->getChromosomeLength(); $j++) {
                     if ($j < $swapPoint) {
                         $offspring->setGene($j, $parentA->getGene($j));
@@ -213,16 +224,23 @@ class GeneticAlgorithm
                         $offspring->setGene($j, $parentB->getGene($j));
                     }
                 }
-
+    
+                // Debugging output
+                print "New Population with crossover:\n";
+                print $newPopulation."\n";
+    
                 $newPopulation->setIndividual($i, $offspring);
             } else {
                 // Add to population without crossover
+                print "New Population without crossover:\n";
+                print $newPopulation."\n";
                 $newPopulation->setIndividual($i, $parentA);
             }
         }
-
+    
         return $newPopulation;
     }
+    
 
     /**
      * Perform a mutation on the individuals of the given population
@@ -233,6 +251,8 @@ class GeneticAlgorithm
     {
         $newPopulation = new Population();
         $bestFitness = $population->getFittest(0)->getFitness();
+
+        
 
         for ($i = 0; $i < $population->size(); $i++) {
             $individual = $population->getFittest($i);
@@ -257,6 +277,7 @@ class GeneticAlgorithm
                 }
             }
 
+            // print "New Population:\n".$newPopulation."\n";
             $newPopulation->setIndividual($i, $individual);
         }
 
