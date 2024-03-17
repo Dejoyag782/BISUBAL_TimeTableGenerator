@@ -43,8 +43,8 @@ class Individual
     {
 
         // Assuming $timetable is an instance of the Timetable class
-        $timeslots = $timetable->getTimeslots();
-        $timeslotsCount = count($timeslots);
+        // $timeslots = $timetable->getTimeslots();
+        // $timeslotsCount = count($timeslots);
 
         $timeslotLab = false;
 
@@ -320,7 +320,9 @@ class Individual
      */
     public static function random($chromosomeLength)
     {
+        print "\nNew Individuals  (Chromosome Length:".$chromosomeLength.")\n";
         $individual = new Individual();
+        print "\n-------------------------------------------------------------Start New Indiv-------------------------------------------------------------\n";
 
         for ($i = 0; $i < $chromosomeLength; $i++) {
             $individual->setGene($i, mt_rand(0, 1));
