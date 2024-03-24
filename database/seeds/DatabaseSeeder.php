@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\GeneticAlgorithmSettings;
 
 class DatabaseSeeder extends Seeder
 {
@@ -11,6 +12,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        GeneticAlgorithmSettings::create([
+            'max_generations' => 1200,
+            'population_size' => 100,
+            'mutation_rate' => 0.01,
+            'crossover_rate' => 0.9,
+            'elitism' => 2,
+            'tournament_size' => 10,
+        ]);
         $this->call(UsersTableSeeder::class);
         $this->call(DaysTableSeeder::class);
         $this->call(SettingsTableSeeder::class);
