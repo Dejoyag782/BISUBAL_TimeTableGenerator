@@ -203,6 +203,7 @@ class TimetableGA
 
             // Increase population size when schedules needed to be solved are large
             // $algorithm = new GeneticAlgorithm(30000, 0.01, 0.9, 2, 10);
+            // $algorithm = new GeneticAlgorithm(100, 0.01, 0.9, 2, 10);
             $algorithm = new GeneticAlgorithm(100, 0.01, 0.9, 2, 10);
 
             $population = $algorithm->initPopulation($timetable);
@@ -218,7 +219,7 @@ class TimetableGA
             ) {
                 $fittest = $population->getFittest(0);
 
-                print "Generation: " . $generation . "(" . $fittest->getFitness() . ") - ";
+                print "\n\nGeneration: " . $generation . "(" . $fittest->getFitness() . ") - ";
                 print $fittest;
                 print "\n";
 
@@ -229,7 +230,7 @@ class TimetableGA
                 // Apply crossover
                 $population = $algorithm->crossoverPopulation($population);
 
-                print"Applying Mutation:\n";
+                print"\n\nApplying Mutation:";
                 // Apply mutation
                 $population = $algorithm->mutatePopulation($population, $timetable);
 
