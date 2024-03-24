@@ -218,7 +218,7 @@ class Timetable
 
                     $classIndex++;
 
-                    if ($isLab) {
+                    while ($isLab) {
 
                         for ($j = 0; $j < $hours-1; $j++) {
                     $classes[$classIndex] = new CollegeClass($classIndex, $group->getId(), $moduleId);
@@ -238,8 +238,6 @@ class Timetable
                     $classIndex++;
                         }
 
-                    } else {
-                        
                     }
 
                 }
@@ -270,7 +268,7 @@ class Timetable
                 $moduleCode = $module->getModuleCode();
                 $hours = $this->extractHours($module->getModuleCode());
                 
-            // Add diri ug logic mo check if ang modulecode nga corresponding sa moduleID kay naay Lab 
+            // Add diri ug logic mo check if ang modulecode nga corresponding sa moduleID kay naay Lab : Visaya
                 for ($i = 1; $i <= $module->getSlots($id); $i++) {
                     $scheme[] = $moduleId;
                     if(strpos($moduleCode, "Lab") !== false){
@@ -543,7 +541,7 @@ class Timetable
             }
         }
 
-        print "\nNo of Clashes: ".$clashes;
+        print $clashes.",";
         return $clashes;
     }
 
