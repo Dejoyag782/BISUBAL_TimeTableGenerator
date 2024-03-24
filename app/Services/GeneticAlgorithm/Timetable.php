@@ -218,7 +218,7 @@ class Timetable
 
                     $classIndex++;
 
-                    while ($isLab) {
+                    if ($isLab) {
 
                         for ($j = 0; $j < $hours-1; $j++) {
                     $classes[$classIndex] = new CollegeClass($classIndex, $group->getId(), $moduleId);
