@@ -51,12 +51,13 @@ class Individual
         // print "\nLength of Timeslot array: ".$timeslotsCount;
 
         if ($timetable) {
+            $timeslotLab = false;
             $newChromosome = [];
-
             $chromosomeIndex = 0;
 
             // First, handle lab courses
             foreach ($timetable->getGroups() as $group) {
+                $timeslotLab = false;
                 foreach ($group->getModuleIds() as $moduleId) {
                     $module = $timetable->getModule($moduleId);
                     // print "\nOn Module Lab" . $module->getModuleCode() . "\n";
@@ -213,23 +214,23 @@ class Individual
                            
 
                             $module->increaseAllocatedSlots();
-                            $timeslot = $timetable->getTimeslot($timeslotId);
+                            // $timeslot = $timetable->getTimeslot($timeslotId);
 
-                            $timeslotId = $timeslot->getNext();
-                            while (($i + 1) <= $timetable->maxContinuousSlots && ($module->getSlots() != $module->getAllocatedSlots()) && ($timeslotId > -1)) {
-                                $newChromosome[$chromosomeIndex] = $timeslotId;
-                                $chromosomeIndex++;
+                            // $timeslotId = $timeslot->getNext();
+                            // while (($i + 1) <= $timetable->maxContinuousSlots && ($module->getSlots() != $module->getAllocatedSlots()) && ($timeslotId > -1)) {
+                            //     $newChromosome[$chromosomeIndex] = $timeslotId;
+                            //     $chromosomeIndex++;
 
-                                $newChromosome[$chromosomeIndex] = $roomId;
-                                $chromosomeIndex++;
+                            //     $newChromosome[$chromosomeIndex] = $roomId;
+                            //     $chromosomeIndex++;
 
-                                $newChromosome[$chromosomeIndex] = $professor;
-                                $chromosomeIndex++;
+                            //     $newChromosome[$chromosomeIndex] = $professor;
+                            //     $chromosomeIndex++;
 
-                                $timeslotId = $timetable->getTimeslot($timeslotId)->getNext();
-                                $module->increaseAllocatedSlots();
-                                $i += 1;
-                            }
+                            //     $timeslotId = $timetable->getTimeslot($timeslotId)->getNext();
+                            //     $module->increaseAllocatedSlots();
+                            //     $i += 1;
+                            // }
                             $timeslotLab = false;
                         }
                     }else{
@@ -320,9 +321,9 @@ class Individual
      */
     public static function random($chromosomeLength)
     {
-        print "\nNew Individuals  (Chromosome Length:".$chromosomeLength.")\n";
+        // print "\nNew Individuals  (Chromosome Length:".$chromosomeLength.")\n";
         $individual = new Individual();
-        print "\n-------------------------------------------------------------Start New Indiv-------------------------------------------------------------\n";
+        // print "\n-------------------------------------------------------------Start New Indiv-------------------------------------------------------------\n";
 
         for ($i = 0; $i < $chromosomeLength; $i++) {
             $individual->setGene($i, mt_rand(0, 1));
