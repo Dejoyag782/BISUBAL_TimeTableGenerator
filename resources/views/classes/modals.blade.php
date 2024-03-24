@@ -90,7 +90,7 @@
                 <select class="form-control course-select" name="course-{ID}">
                     <option value="" selected>Select a subject</option>
                     @foreach ($courses as $course)
-                    <option value="{{ $course->id }}">{{ $course->name }}</option>
+                    <option value="{{ $course->id }}">{{ $course->course_code }}</option>
                     @endforeach
                 </select>
             </div>
