@@ -12,6 +12,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\UsersManagerController;
 use App\Http\Controllers\ExportDataController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\GeneticAlgorithmSettingsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,6 +38,14 @@ Route::group(['middleware' => ['auth', 'checkRole:superad', 'activated']], funct
     Route::put('user-management/{id}', [UsersManagerController::class, 'update'])->name('user-management.update');
     Route::delete('user-management/{id}', [UsersManagerController::class, 'destroy'])->name('user-management.destroy');
     Route::get('get-user-details/{id}', [UsersManagerController::class, 'getUserDetails'])->name('user.details');
+
+    Route::get('/settings', [GeneticAlgorithmSettingsController::class, 'index'])->name('settings.index');
+    Route::get('/settings/{setting}/edit', [GeneticAlgorithmSettingsController::class, 'edit'])->name('settings.edit');
+    Route::put('/settings/{setting}', [GeneticAlgorithmSettingsController::class, 'update'])->name('settings.update');
+    Route::delete('/settings/reset', [GeneticAlgorithmSettingsController::class, 'reset'])->name('settings.reset');
+
+
+
 
     // Route for registering users
     // Route::get('/register', function () {
