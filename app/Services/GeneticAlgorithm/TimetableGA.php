@@ -12,6 +12,7 @@ use App\Models\Professor as ProfessorModel;
 use App\Models\CollegeClass as CollegeClassModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use App\Models\GeneticAlgorithmSettings;
 
 class TimetableGA
 {
@@ -197,14 +198,22 @@ class TimetableGA
     public function run()
     {
         try {
-            $maxGenerations = 1500;
+            $settings = GeneticAlgorithmSettings::find(1);
+            $population_size = $settings->population_size;
+            $mutation_rate = $settings->mutation_rate;
+            $crossover_rate = $settings->crossover_rate;
+            $elitism = $settings->elitism;
+            $tournament_size = $settings->tournament_size;
+
+            // $maxGenerations = 1500;
+            $maxGenerations = $settings->max_generations;
 
             $timetable = $this->initializeTimetable();
 
             // Increase population size when schedules needed to be solved are large
             // $algorithm = new GeneticAlgorithm(30000, 0.01, 0.9, 2, 10);
             // $algorithm = new GeneticAlgorithm(100, 0.01, 0.9, 2, 10);
-            $algorithm = new GeneticAlgorithm(100, 0.01, 0.9, 2, 10);
+            $algorithm = new GeneticAlgorithm($population_size, $mutation_rate, $crossover_rate, $elitism, $tournament_size);
 
             $population = $algorithm->initPopulation($timetable);
 
