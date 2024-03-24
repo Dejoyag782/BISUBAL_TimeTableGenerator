@@ -28,12 +28,25 @@ class Population
         $this->population = [];
 
         if ($timetable) {
+            print "\nIntializing Population:\n";
             for ($i = 0; $i < $populationSize; $i++) {
                 $individual = new Individual($timetable);
-                $this->population[$i] = $individual;
-                print "population no: ".$i."\n";
+                $this->population[$i] = $individual;       
+                $this->printLoadingBar($i, $populationSize);
             }
         }
+    }
+
+    // Function to print loading bar
+    function printLoadingBar($progress, $total) {
+        $percent = ($progress / $total) * 100;
+        $barLength = 50;
+        $progressBar = "[" . str_repeat("█", intval($percent / 100 * $barLength)) . str_repeat(" ", $barLength - intval($percent / 100 * $barLength)) . "] $percent%";
+
+        // Print the loading bar
+        echo "\r$progressBar";
+        // Flush the output to make it visible immediately
+        flush();
     }
 
     /**
