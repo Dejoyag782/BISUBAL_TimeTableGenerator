@@ -129,6 +129,8 @@ class GeneticAlgorithm
 
         $individuals = $population->getIndividuals();
 
+        print "\n-----------------------------------------------------------------------Counting Clashes-----------------------------------------------------------------------\n";
+        print "\nNo of Clashes:\n";
         foreach ($individuals as $individual) {
             $populationFitness += $this->calculateFitness($individual, $timetable);
         }
@@ -198,20 +200,20 @@ class GeneticAlgorithm
             $parentA = $population->getFittest($i);
     
             // Debugging output
-            print "\n\nParentA: ".$parentA."\n";
+            // print "\n\nParentA: ".$parentA."\n";
     
             $random = mt_rand() / mt_getrandmax();
     
             // Debugging output
-            print "\n(?".$this->crossoverRate.">".$random."):(interval=".$i.") ";
+            // print "\n(?".$this->crossoverRate.">".$random."):(interval=".$i.") ";
     
             if (($this->crossoverRate > $random) && ($i > $this->elitismCount)) {
                 // Create offspring
                 $offspring = Individual::random($parentA->getChromosomeLength());
     
                 // Debugging output
-                print "\n\nPopulating with crossover:\n";
-                print "Offspring: ".$offspring."\n";
+                // print "\n\nPopulating with crossover:\n";
+                // print "Offspring: ".$offspring."\n";
     
                 $parentB = $this->selectParent($population);
     
@@ -226,14 +228,14 @@ class GeneticAlgorithm
                 }
     
                 // Debugging output
-                print "New Population with crossover:\n";
-                print $newPopulation."\n";
+                // print "New Population with crossover:\n";
+                // print $newPopulation."\n";
     
                 $newPopulation->setIndividual($i, $offspring);
             } else {
                 // Add to population without crossover
-                print "New Population without crossover:\n";
-                print $newPopulation."\n";
+                // print "New Population without crossover:\n";
+                // print $newPopulation."\n";
                 $newPopulation->setIndividual($i, $parentA);
             }
         }
@@ -273,6 +275,9 @@ class GeneticAlgorithm
 
                     if (($adaptiveMutationRate * $this->temperature) > $random) {
                         $individual->setGene($j, $randomIndividual->getGene($j));
+                        // $chosen=$randomIndividual->getGene($j);
+                        // print "\nChosen: ".$chosen;
+
                     }
                 }
             }
