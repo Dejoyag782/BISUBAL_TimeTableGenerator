@@ -30,6 +30,9 @@
                 <li class="menu-link" style="margin-bottom: 10px;">
                     <a href="/user-management"><span class="fa fa-user"></span><span class="text">Users</span></a>
                 </li>
+                <li class="menu-link" style="margin-bottom: 10px;">
+                    <a href="/settings"><span class="fa fa-wrench"></span><span class="text">Configurations</span></a>
+                </li>
                 @endif
                 
             </ul>
