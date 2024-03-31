@@ -275,8 +275,44 @@ class GeneticAlgorithm
 
                     if (($adaptiveMutationRate * $this->temperature) > $random) {
                         $individual->setGene($j, $randomIndividual->getGene($j));
-                        // $chosen=$randomIndividual->getGene($j);
-                        // print "\nChosen: ".$chosen;
+                        
+                        // $gene = $randomIndividual->getGene($j);
+                        // $geneprimary = $gene;
+                        //     // Regular expression pattern to match D#T# format
+                        // $pattern = '/^D\d+T\d+$/';
+
+                        // // // Perform the regex match
+                        // if (preg_match($pattern, $geneprimary)) {
+                        //     $day = substr($gene, 1, 1); // Get the character at index 1 (0-based index)
+                        //     $timeslot = substr($gene, 3, 1); // Get the character at index 3 (0-based index)
+
+                        //     // Convert the extracted characters to integers
+                        //     $day = intval($day);
+                        //     $timeslot = intval($timeslot);
+
+                        //     echo "D".$day."T".$timeslot.",";
+                            
+                        //     $roomId = $randomIndividual->getGene($j+1);
+                        //     $profId = $randomIndividual->getGene($j+2);
+
+                        //     echo "$roomId,$profId,";
+
+                        //     $gene2hr = $randomIndividual->getGene($j+3);
+                        //     $day2hr = substr($gene2hr, 1, 1); // Get the character at index 1 (0-based index)
+                        //     $timeslot2hr = substr($gene2hr, 3, 1); // Get the character at index 3 (0-based index)  
+                        //     // Convert the extracted characters to integers                          
+                        //     $day2hr = intval($day2hr);
+                        //     $timeslot2hr = intval($timeslot2hr);
+                        //     // room & prof
+                        //     $roomId2hr = $randomIndividual->getGene($j+4);
+                        //     $profId2hr = $randomIndividual->getGene($j+5);
+
+                        //     if($roomId == $roomId2hr && $profId == $profId2hr){
+                        //         $individual->setGene($j+3, "D$day"."T".$timeslot+1);
+                        //         print "Hoy Ka\n";
+                        //     }                       
+                        // }
+                        
 
                     }
                 }

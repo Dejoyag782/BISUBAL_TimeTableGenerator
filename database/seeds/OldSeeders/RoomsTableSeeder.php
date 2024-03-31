@@ -83,30 +83,6 @@ class RoomsTableSeeder extends Seeder
             [
                 'name' => 'RM 308',
                 'capacity' => 50
-            ],
-            [
-                'name' => 'Gym A',
-                'capacity' => 70
-            ],
-            [
-                'name' => 'Gym B',
-                'capacity' => 70
-            ],
-            [
-                'name' => 'Gym C',
-                'capacity' => 70
-            ],
-            [
-                'name' => 'Gym D',
-                'capacity' => 70
-            ],
-            [
-                'name' => 'Canteen A',
-                'capacity' => 70
-            ],
-            [
-                'name' => 'Canteen B',
-                'capacity' => 70
             ]
         ]);
     }

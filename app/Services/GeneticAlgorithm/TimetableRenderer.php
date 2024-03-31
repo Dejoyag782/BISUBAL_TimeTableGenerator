@@ -74,7 +74,7 @@ class TimetableRenderer
                                 <tr style="width: 100%;">
                                     <td style="width: 30%;">
                                         <h5>Prepared by:</h5>
-                                        <h4 style="text-align:center; text-decoration:none; margin-left:80px;">
+                                        <h4 style="text-align:center;  text-decoration:none; margin-left:80px; line-height: 1.5;">
                                         <span style=" font-size: 1.3em; text-align:center; border-bottom: 2px solid black; padding-left: 20px; padding-right: 20px;">{CHAIRPERSON}</span>
                                         <br>Chairperson,{DEPARTMENT}</h4>
                                         
@@ -84,7 +84,7 @@ class TimetableRenderer
                                     </td>
                                     <td style="width: 30%;">
                                         <h5>Reviewed by:</h5>
-                                        <h4 style="text-align:center; text-decoration:none; margin-left:80px;">
+                                        <h4 style="text-align:center;  text-decoration:none; margin-left:80px; line-height: 1.5;">
                                         <span style=" font-size: 1.3em; text-align:center; border-bottom: 2px solid black; padding-left: 20px; padding-right: 20px;">{DEAN}</span>
                                         <br>Dean,{DEPARTMENT}</h4>
                                         
@@ -99,7 +99,7 @@ class TimetableRenderer
                                     </td>   
                                     <td style="width: 30%;  padding-top: 100px;">
                                         <h5>Approved:</h5>
-                                        <h4 style="text-align:center; text-decoration:none; margin-left:80px;">
+                                        <h4 style="text-align:center;  text-decoration:none; margin-left:80px; line-height: 1.5;">
                                         <span style=" font-size: 1.3em; text-align:center; border-bottom: 2px solid black; padding-left: 20px; padding-right: 20px;">{CAMPUSDIRECTOR}</span>
                                         <br>Campus Director</h4>
                                         
@@ -265,7 +265,7 @@ class TimetableRenderer
                                 <tr style="width: 100%;">
                                     <td style="width: 30%;">
                                         <h5>Prepared by:</h5>
-                                        <h4 style="text-align:center; text-decoration:none; margin-left:80px;">
+                                        <h4 style="text-align:center;  text-decoration:none; margin-left:80px; line-height: 1.5;">
                                         <span style=" font-size: 1.3em; text-align:center; border-bottom: 2px solid black; padding-left: 20px; padding-right: 20px;">{CHAIRPERSON}</span>
                                         <br>Chairperson,{DEPARTMENT}</h4>
                                         
@@ -275,7 +275,7 @@ class TimetableRenderer
                                     </td>
                                     <td style="width: 30%;">
                                         <h5>Reviewed by:</h5>
-                                        <h4 style="text-align:center; text-decoration:none; margin-left:80px;">
+                                        <h4 style="text-align:center;  text-decoration:none; margin-left:80px; line-height: 1.5;">
                                         <span style=" font-size: 1.3em; text-align:center; border-bottom: 2px solid black; padding-left: 20px; padding-right: 20px;">{DEAN}</span>
                                         <br>Dean,{DEPARTMENT}</h4>
                                         
@@ -284,7 +284,7 @@ class TimetableRenderer
                                 <tr style="width: 100%;">
                                     <td style="width: 30%;">
                                     <h5>Conforme:</h5>
-                                    <h4 style="text-align:center; text-decoration:none; margin-left:80px;">
+                                    <h4 style="text-align:center;  text-decoration:none; margin-left:80px; line-height: 1.5;">
                                     <span style=" font-size: 1.3em; text-align:center; border-bottom: 2px solid black; padding-left: 20px; padding-right: 20px;">{TITLE}</span>
                                     <br>Associate Professor</h4>
                                     
@@ -294,7 +294,7 @@ class TimetableRenderer
                                     </td>   
                                     <td style="width: 30%;  padding-top: 100px;">
                                         <h5>Approved:</h5>
-                                        <h4 style="text-align:center; text-decoration:none; margin-left:80px;">
+                                        <h4 style="text-align:center;  text-decoration:none; margin-left:80px; line-height: 1.5;">
                                         <span style=" font-size: 1.3em; text-align:center; border-bottom: 2px solid black; padding-left: 20px; padding-right: 20px;">{CAMPUSDIRECTOR}</span>
                                         <br>Campus Director</h4>
                                         

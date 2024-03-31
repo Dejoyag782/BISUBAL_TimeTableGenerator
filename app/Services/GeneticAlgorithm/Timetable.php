@@ -271,6 +271,7 @@ class Timetable
             // Add diri ug logic mo check if ang modulecode nga corresponding sa moduleID kay naay Lab : Visaya
                 for ($i = 1; $i <= $module->getSlots($id); $i++) {
                     $scheme[] = $moduleId;
+                    // Adds to the scheme the ID of the lab_courses duplicated
                     if(strpos($moduleCode, "Lab") !== false){
                         for ($j = 0; $j < $hours-1; $j++) {
                         $scheme[] = $moduleId;

@@ -13,128 +13,198 @@ class CoursesTableSeeder extends Seeder
     {
         DB::table('courses')->insert([
             [
-                'name' => 'Computer Architecture',
-                'course_code' => 'CSM 301',
+                'name' => 'Introduction to Computing',
+                'course_code' => 'CS 111',
                 'room_preference' => null
             ],
             [
-                'name' => 'Computer Graphics',
-                'course_code' => 'CSM 302',
+                'name' => 'Fundamentals of Proramming (C Language)',
+                'course_code' => 'CS 112',
                 'room_preference' => null
             ],
             [
-                'name' => 'Computer Graphics Lab',
-                'course_code' => 'CSM 302 Lab : 2hr',
+                'name' => 'Fundamentals of Programming (C Language) Lab',
+                'course_code' => 'CS 112 Lab : 2hr',
                 'room_preference' => null
             ],
             [
-                'name' => 'Data Structures and Algorithms I',
-                'course_code' => 'CSM 303',
+                'name' => 'Fundamentals of Electricity and Electronics',
+                'course_code' => 'Elec 1',
                 'room_preference' => null
             ],
             [
-                'name' => 'Survey Of Programming Languages',
-                'course_code' => 'CSM 304',
+                'name' => 'Intermediate Programming 2 (C Language)',
+                'course_code' => 'CS 121',
                 'room_preference' => null
             ],
             [
-                'name' => 'System Analysis',
-                'course_code' => 'CSM 305',
+                'name' => 'Intermediate Programming 2 (C Language) Lab',
+                'course_code' => 'CS 121 Lab : 2hr',
                 'room_preference' => null
             ],
             [
-                'name' => 'Artificial Intelligence',
-                'course_code' => 'CSM 306',
+                'name' => 'Object-Oriented Programming 1 (Java) ',
+                'course_code' => 'CS 122',
                 'room_preference' => null
             ],
             [
-                'name' => 'Operations Research I',
-                'course_code' => 'CSM 307',
+                'name' => 'Networking and Data Communication',
+                'course_code' => 'CS 123',
                 'room_preference' => null
             ],
             [
-                'name' => 'Web Development',
-                'course_code' => 'CSM 308',
+                'name' => 'Networking and Data Communication Lab',
+                'course_code' => 'CS 123 Lab : 2hr',
                 'room_preference' => null
             ],
             [
-                'name' => 'Data Structures And Algorithms II',
-                'course_code' => 'CSM 311',
+                'name' => 'Calculus 1',
+                'course_code' => 'Math Elec 1',
                 'room_preference' => null
             ],
             [
-                'name' => 'Operations Research II',
-                'course_code' => 'CSM 312',
+                'name' => 'Physical Fitness',
+                'course_code' => 'PE 2',
                 'room_preference' => null
             ],
             [
-                'name' => 'Real time and Embedded Systems',
-                'course_code' => 'CSM 313',
+                'name' => 'CWTS2/ROTC2/LTS2',
+                'course_code' => 'NSTP 2',
                 'room_preference' => null
             ],
             [
-                'name' => 'Ecommerce',
-                'course_code' => 'CSM 314',
+                'name' => 'Understanding the Self',
+                'course_code' => 'GE 1',
                 'room_preference' => null
             ],
             [
-                'name' => 'Accounting',
-                'course_code' => 'CSM 315',
+                'name' => 'Purposive Communication',
+                'course_code' => 'GE 2',
                 'room_preference' => null
             ],
             [
-                'name' => 'Computer Networks',
-                'course_code' => 'CSM 401',
+                'name' => 'Mathematic and the Modern World',
+                'course_code' => 'GE 3',
                 'room_preference' => null
             ],
             [
-                'name' => 'Computer Security',
-                'course_code' => 'CSM 402',
+                'name' => 'Physicall Fitness',
+                'course_code' => 'PE 1',
                 'room_preference' => null
             ],
             [
-                'name' => 'Information Systems',
-                'course_code' => 'CSM 403',
+                'name' => 'CWTS1/ROTC1/LTS1',
+                'course_code' => 'NSTP 1',
                 'room_preference' => null
             ],
             [
-                'name' => 'Expert Systems',
-                'course_code' => 'CSM 404',
+                'name' => 'Introduction to Computing',
+                'course_code' => 'IT 111',
                 'room_preference' => null
             ],
             [
-                'name' => 'Computer Vision',
-                'course_code' => 'CSM 405',
+                'name' => 'Fundamentals of Programming (C Language)',
+                'course_code' => 'IT 112',
                 'room_preference' => null
             ],
             [
-                'name' => 'Software Engineering I',
-                'course_code' => 'CSM 406',
+                'name' => 'Fundamentals of Programming (C Language) Lab',
+                'course_code' => 'IT 112 Lab : 2hr',
                 'room_preference' => null
             ],
             [
-                'name' => 'Cyber Security',
-                'course_code' => 'CSM 407',
+                'name' => 'Fundamentals of Electricity and Electronics',
+                'course_code' => 'Free Elec 1',
                 'room_preference' => null
             ],
             [
-                'name' => 'Robotics',
-                'course_code' => 'CSM 411',
+                'name' => 'Fundamentals of Electricity and Electronics Lab',
+                'course_code' => 'Free Elec 1 Lab : 2hr',
                 'room_preference' => null
             ],
             [
-                'name' => 'Graph Theory',
-                'course_code' => 'CSM 412',
+                'name' => 'Electronics Theory and Application',
+                'course_code' => 'Elex Tech 1',
                 'room_preference' => null
             ],
             [
-                'name' => 'Number Theory',
-                'course_code' => 'CSM 413',
+                'name' => 'Electronics Theory and Application',
+                'course_code' => 'Elex Tech 1 Lab : 3hr',
                 'room_preference' => null
             ],
             [
-                'name' => 'French',
-                'course_code' => 'CSM 414',
+                'name' => 'Computer Office Productivity Software Applications',
+                'course_code' => 'TC 1',
+                'room_preference' => null
+            ],
+            [
+                'name' => 'Computer Office Productivity Software Applications Lab',
+                'course_code' => 'TC 1 Lab : 2hr',
+                'room_preference' => null
+            ],
+            [
+                'name' => 'Technical Sketching and Instrumental Drawing Lab',
+                'course_code' => 'TC 2 Lab : 2hr',
+                'room_preference' => null
+            ],
+            [
+                'name' => 'Introduction to Criminology',
+                'course_code' => 'Crim 1',
+                'room_preference' => null
+            ],
+            [
+                'name' => 'The Contemporary World',
+                'course_code' => 'GE 4',
+                'room_preference' => null
+            ],
+            [
+                'name' => 'Computer Application 1 (Elective)',
+                'course_code' => 'Comp 1',
+                'room_preference' => null
+            ],
+            [
+                'name' => 'Electrical Theories and Principles',
+                'course_code' => 'Elect Tech 1',
+                'room_preference' => null
+            ],
+            [
+                'name' => 'Electrical Theories and Principles Lab',
+                'course_code' => 'Elect Tech 1 Lab : 3hr',
+                'room_preference' => null
+            ],
+            [
+                'name' => 'Introduction to Food Preparation',
+                'course_code' => 'FoodTech 1',
+                'room_preference' => null
+            ],
+            [
+                'name' => 'Introduction to Food Preparation Lab',
+                'course_code' => 'FoodTech 1 Lab : 3hr',
+                'room_preference' => null
+            ],
+            [
+                'name' => 'General Chemistry',
+                'course_code' => 'AS 1',
+                'room_preference' => null
+            ],
+            [
+                'name' => 'General Chemistry Lab',
+                'course_code' => 'AS 1 Lab : 2hr',
+                'room_preference' => null
+            ],
+            [
+                'name' => 'Elementary Statistics',
+                'course_code' => 'AS 5',
+                'room_preference' => null
+            ],
+            [
+                'name' => 'Environmental Science with Education fot Sustainable Development',
+                'course_code' => 'GEE 1',
+                'room_preference' => null
+            ],
+            [
+                'name' => 'Science,Technology and Society',
+                'course_code' => 'GE 7',
                 'room_preference' => null
             ]
         ]);
