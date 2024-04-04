@@ -62,12 +62,17 @@ class DepartmentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'short_name' => 'required|string|max:255',
-            'name' => 'required|string|max:255',
+            'short_name' => 'unique:departments|required|string|max:255',
+            'name' => 'unique:departments|required|string|max:255',
+        ], [
+            'short_name.unique' => 'The Department has already been taken.',
+            'short_name.required' => 'The Department field is required.',
+            'name.unique' => 'The name has already been taken.',
+            'name.required' => 'The name field is required.',
         ]);
-
+    
         Department::create($request->all());
-
+    
         return response()->json(['message' => 'Department created'], 200);
     }
 
