@@ -273,46 +273,198 @@ class GeneticAlgorithm
                 for ($j = 0; $j < $individual->getChromosomeLength(); $j++) {
                     $random = mt_rand() / mt_getrandmax();
 
-                    if (($adaptiveMutationRate * $this->temperature) > $random) {
-                        $individual->setGene($j, $randomIndividual->getGene($j));
+                    if (($adaptiveMutationRate * $this->temperature) > $random) {                   
+
+                        // print "/------------ ".$individual." ------------/\n";
+                    //     //---------------------------- Start of Duration Fixer ----------------------------//
                         
-                        // $gene = $randomIndividual->getGene($j);
-                        // $geneprimary = $gene;
-                        //     // Regular expression pattern to match D#T# format
-                        // $pattern = '/^D\d+T\d+$/';
+                    //     $gene = $randomIndividual->getGene($j);
+                    //     $geneprimary = $gene;
+                    //         // Regular expression pattern to match D#T# format
+                    //     $pattern = '/^D\d+T\d+$/';
 
-                        // // // Perform the regex match
-                        // if (preg_match($pattern, $geneprimary)) {
-                        //     $day = substr($gene, 1, 1); // Get the character at index 1 (0-based index)
-                        //     $timeslot = substr($gene, 3, 1); // Get the character at index 3 (0-based index)
+                    //     // // Perform the regex match
+                    //     if (preg_match($pattern, $geneprimary) && $j < ($individual->getChromosomeLength()-6)) {
+                    //         $day = substr($gene, 1, 1); // Get the character at index 1 (0-based index)
+                    //         $timeslot = substr($gene, 3, 1); // Get the character at index 3 (0-based index)
 
-                        //     // Convert the extracted characters to integers
-                        //     $day = intval($day);
-                        //     $timeslot = intval($timeslot);
+                    //         // Convert the extracted characters to integers
+                    //         $day = intval($day);
+                    //         $timeslot = intval($timeslot);
 
-                        //     echo "D".$day."T".$timeslot.",";
+                    //         echo "Gene".$j."[";
+                    //         echo "D".$day."T".$timeslot.",";
                             
-                        //     $roomId = $randomIndividual->getGene($j+1);
-                        //     $profId = $randomIndividual->getGene($j+2);
+                    //         $roomId = $randomIndividual->getGene($j+1);
+                    //         $profId = $randomIndividual->getGene($j+2);
 
-                        //     echo "$roomId,$profId,";
+                    //         echo "$roomId,$profId,";
+                    //         echo "],";
 
-                        //     $gene2hr = $randomIndividual->getGene($j+3);
-                        //     $day2hr = substr($gene2hr, 1, 1); // Get the character at index 1 (0-based index)
-                        //     $timeslot2hr = substr($gene2hr, 3, 1); // Get the character at index 3 (0-based index)  
-                        //     // Convert the extracted characters to integers                          
-                        //     $day2hr = intval($day2hr);
-                        //     $timeslot2hr = intval($timeslot2hr);
-                        //     // room & prof
-                        //     $roomId2hr = $randomIndividual->getGene($j+4);
-                        //     $profId2hr = $randomIndividual->getGene($j+5);
-
-                        //     if($roomId == $roomId2hr && $profId == $profId2hr){
-                        //         $individual->setGene($j+3, "D$day"."T".$timeslot+1);
-                        //         print "Hoy Ka\n";
-                        //     }                       
-                        // }
+                    //         $gene2hr = $randomIndividual->getGene($j+3);
+                    //         $day2hr = substr($gene2hr, 1, 1); // Get the character at index 1 (0-based index)
+                    //         $timeslot2hr = substr($gene2hr, 3, 1); // Get the character at index 3 (0-based index)  
+                    //         // Convert the extracted characters to integers                          
+                    //         $day2hr = intval($day2hr);
+                    //         $timeslot2hr = intval($timeslot2hr);
+                    //         // room & prof
+                    //         $roomId2hr = $randomIndividual->getGene($j+4);
+                    //         $profId2hr = $randomIndividual->getGene($j+5); 
+                            
+                    //         if($j > 0){
+                    //             if(($roomId == $roomId2hr && $profId == $profId2hr && $gene2hr == "D$day"."T".($timeslot+1)) ||
+                    //             ($roomId == $randomIndividual->getGene($j-2) && $profId == $randomIndividual->getGene($j-1) &&
+                    //                 $randomIndividual->getGene($j-3) == "D$day"."T".($timeslot-1))){
+                    //                     print "Next Duration\n";
+                    //                     continue;     
+                    //             } 
+                    //             // else if( (($roomId == $roomId2hr && $profId == $profId2hr) || 
+                    //             //          ($roomId == $randomIndividual->getGene($j-2) && $profId == $randomIndividual->getGene($j-1))) && 
+                    //             //          ($randomIndividual->getGene($j-3) != "D$day"."T".($timeslot-1) && $gene2hr != "D$day"."T".($timeslot+1)) ){
+                    //             //     $individual->setGene($j, $randomIndividual->getGene($j));    
+                    //             // }           
+                    //             else{                                
+                    //                 $individual->setGene($j, $randomIndividual->getGene($j));                             
+                    //             }
+                    //         }
+                    //         else if ($j == 0){
+                    //             if($roomId == $roomId2hr && $profId == $profId2hr && $gene2hr == "D$day"."T".($timeslot+1)){
+                    //                     print "Next Duration\n";
+                    //                     continue;     
+                    //             } 
+                    //             // else if( (($roomId == $roomId2hr && $profId == $profId2hr) || 
+                    //             //          ($roomId == $randomIndividual->getGene($j-2) && $profId == $randomIndividual->getGene($j-1))) && 
+                    //             //          ($randomIndividual->getGene($j-3) != "D$day"."T".($timeslot-1) && $gene2hr != "D$day"."T".($timeslot+1)) ){
+                    //             //     $individual->setGene($j, $randomIndividual->getGene($j));    
+                    //             // }           
+                    //             else{                                
+                    //                 $individual->setGene($j, $randomIndividual->getGene($j));                             
+                    //             }
+                    //         }
+                    //         else{
+                    //             continue;
+                    //         }
+                    //     }
+                    //     else{
+                    //         $individual->setGene($j, $randomIndividual->getGene($j)); 
+                    //     }
                         
+                    // //---------------------------- End of Duration Fixer ----------------------------//
+
+                    //---------------------------- Start of Duration Fixer ----------------------------//
+                        
+                        $gene = $randomIndividual->getGene($j);
+                        $geneprimary = $gene;
+                            // Regular expression pattern to match D#T# format
+                        $pattern = '/^D\d+T\d+$/';
+
+                        // // Perform the regex match
+                        if (preg_match($pattern, $geneprimary) && $j < ($individual->getChromosomeLength()-3)) {
+                            $day = substr($gene, 1, 1); // Get the character at index 1 (0-based index)
+                            $timeslot = substr($gene, 3, 1); // Get the character at index 3 (0-based index)
+
+                            // Convert the extracted characters to integers
+                            $day = intval($day);
+                            $timeslot = intval($timeslot);
+
+                            echo "Gene".$j."[";
+                            echo "D".$day."T".$timeslot.",";
+                            
+                            $roomId = $randomIndividual->getGene($j+1);
+                            $profId = $randomIndividual->getGene($j+2);
+                            $testID = $randomIndividual->getGene(495);
+                            $testID2 = $randomIndividual->getGene($individual->getChromosomeLength()-3);
+
+                            echo "$roomId,$profId,";
+                            echo "],";
+
+                            echo "\nTEST GENE:".$testID." =? ".$testID2." || ";
+
+                            $gene2hr = $randomIndividual->getGene($j+3);
+                            $day2hr = substr($gene2hr, 1, 1); // Get the character at index 1 (0-based index)
+                            $timeslot2hr = substr($gene2hr, 3, 1); // Get the character at index 3 (0-based index)  
+                            // Convert the extracted characters to integers                          
+                            $day2hr = intval($day2hr);
+                            $timeslot2hr = intval($timeslot2hr);
+                            // room & prof
+                            $roomId2hr = $randomIndividual->getGene($j+4);
+                            $profId2hr = $randomIndividual->getGene($j+5); 
+                            
+                            if($j > 0){
+                                if(($roomId == $roomId2hr && $profId == $profId2hr && $gene2hr == "D$day"."T".($timeslot+1)) ||
+                                ($roomId == $randomIndividual->getGene($j-2) && $profId == $randomIndividual->getGene($j-1) &&
+                                    $randomIndividual->getGene($j-3) == "D$day"."T".($timeslot-1))){
+                                        print "Next Duration\n";
+                                        continue;     
+                                } 
+                                // else if( (($roomId == $roomId2hr && $profId == $profId2hr) || 
+                                //          ($roomId == $randomIndividual->getGene($j-2) && $profId == $randomIndividual->getGene($j-1))) && 
+                                //          ($randomIndividual->getGene($j-3) != "D$day"."T".($timeslot-1) && $gene2hr != "D$day"."T".($timeslot+1)) ){
+                                //     $individual->setGene($j, $randomIndividual->getGene($j));    
+                                // }           
+                                else{                                
+                                    $individual->setGene($j, $randomIndividual->getGene($j));                             
+                                }
+                            }
+                            else if ($j == 0){
+                                if($roomId == $roomId2hr && $profId == $profId2hr && $gene2hr == "D$day"."T".($timeslot+1)){
+                                        print "0 Duration\n";
+                                        continue;     
+                                } 
+                                // else if( (($roomId == $roomId2hr && $profId == $profId2hr) || 
+                                //          ($roomId == $randomIndividual->getGene($j-2) && $profId == $randomIndividual->getGene($j-1))) && 
+                                //          ($randomIndividual->getGene($j-3) != "D$day"."T".($timeslot-1) && $gene2hr != "D$day"."T".($timeslot+1)) ){
+                                //     $individual->setGene($j, $randomIndividual->getGene($j));    
+                                // }           
+                                else{                                
+                                    $individual->setGene($j, $randomIndividual->getGene($j));                             
+                                }
+                            }
+                            else{
+                                continue;
+                            }
+                        }
+                        else if(preg_match($pattern, $geneprimary) && $j > ($individual->getChromosomeLength()-4)){
+                            $day = substr($gene, 1, 1); // Get the character at index 1 (0-based index)
+                            $timeslot = substr($gene, 3, 1); // Get the character at index 3 (0-based index)
+
+                            // Convert the extracted characters to integers
+                            $day = intval($day);
+                            $timeslot = intval($timeslot);
+
+                            echo "Gene".$j."[";
+                            echo "D".$day."T".$timeslot.",";
+                            
+                            $roomId = $randomIndividual->getGene($j+1);
+                            $profId = $randomIndividual->getGene($j+2);
+                            $testID = $randomIndividual->getGene(495);
+                            $testID2 = $randomIndividual->getGene($individual->getChromosomeLength()-3);
+
+                            echo "$roomId,$profId,";
+                            echo "],";
+
+                            echo "\nTEST GENE:".$testID." =? ".$testID2." || ";
+
+                            if ($roomId == $randomIndividual->getGene($j-2) && $profId == $randomIndividual->getGene($j-1) &&
+                                    $randomIndividual->getGene($j-3) == "D$day"."T".($timeslot-1)){
+                                        print "After Duration\n";
+                                        continue;     
+                                } 
+                                // else if( (($roomId == $roomId2hr && $profId == $profId2hr) || 
+                                //          ($roomId == $randomIndividual->getGene($j-2) && $profId == $randomIndividual->getGene($j-1))) && 
+                                //          ($randomIndividual->getGene($j-3) != "D$day"."T".($timeslot-1) && $gene2hr != "D$day"."T".($timeslot+1)) ){
+                                //     $individual->setGene($j, $randomIndividual->getGene($j));    
+                                // }           
+                                else{                                
+                                    $individual->setGene($j, $randomIndividual->getGene($j));                             
+                                }
+
+                        }
+                        else{
+                            $individual->setGene($j, $randomIndividual->getGene($j)); 
+                        }
+                        
+                    //---------------------------- End of Duration Fixer ----------------------------//
 
                     }
                 }
