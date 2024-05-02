@@ -64,15 +64,25 @@ class DepartmentController extends Controller
         $request->validate([
             'short_name' => 'unique:departments|required|string|max:255',
             'name' => 'unique:departments|required|string|max:255',
+            // Validate other fields as necessary
         ], [
             'short_name.unique' => 'The Department has already been taken.',
             'short_name.required' => 'The Department field is required.',
             'name.unique' => 'The name has already been taken.',
             'name.required' => 'The name field is required.',
         ]);
-    
-        Department::create($request->all());
-    
+
+        // Prepare the data for insertion
+        $data = $request->only(['short_name', 'name', 'updated_at', 'created_at']); // Specify every field you want to include
+        
+        // Handling `courses_under` if it's expected to be an array
+        if ($request->has('courses_under')) {
+            $data['courses_under'] = json_encode(array_map('strval', $request->courses_under)); // Convert all elements to string and then encode as JSON
+        }
+
+        // Create the department
+        Department::create($data);
+
         return response()->json(['message' => 'Department created'], 200);
     }
 
