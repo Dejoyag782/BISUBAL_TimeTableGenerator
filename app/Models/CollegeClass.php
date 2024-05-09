@@ -11,6 +11,11 @@ class CollegeClass extends Model
      */
     protected $table = 'classes';
 
+    protected $fillable = ['name', 'size', 'available_rooms'];
+    // protected $casts = [
+    //     'available_rooms' => 'array',
+    // ];
+
     protected $guarded = ['id'];
 
     protected $relations = ['courses', 'unavailable_rooms'];

@@ -47,12 +47,29 @@
     };
 
     CollegeClass.prototype.prepareForUpdate = function (resource) {
+
+        var testString = resource.available_rooms;
+        var test = JSON.parse(testString);
+        var testNumbers = [];
+        
+        for (var i = 0; i < test.length; i++) {
+            var numbersOnly = test[i].replace(/\D/g, '');  // Replace all non-digits with an empty string
+            if (numbersOnly !== '') {
+                testNumbers.push(Number(numbersOnly));  // Convert the resulting string to a number and push it into the array
+            }
+        }
+        
+        console.log(testNumbers);  // This should log [2, 3, 4, 5, 10]
+
         var self = this;
 
         $('input[name=name]').val(resource.name);
         $('input[name=size]').val(resource.size);
         $('#rooms-select').val(resource.room_ids).change();
         $('#courses-container .course-form').remove();
+            var availableRooms = testNumbers;
+        $('#availableRoom-select').val(availableRooms).change();
+        $('input[name=available_rooms]').val(resource.available_rooms).change();
 
         $.each(resource.courses, function(index){
             var course = this;
@@ -79,6 +96,7 @@
     };
 
     CollegeClass.prototype.submitResourceForm = function() {
+
         var $form = $('#resource-form');
         var url = $form.attr('action');
         var form;
@@ -88,7 +106,8 @@
             _method: $('[name=_method]').val(),
             name: $form.find('[name=name]').val(),
             size: $form.find('[name=size]').val(),
-            unavailable_rooms: $form.find('#rooms-select').val()
+            unavailable_rooms: $form.find('#rooms-select').val(),
+            available_rooms: $form.find('#availableRooms_temp').val()
         };
 
         var courses = {};
@@ -107,6 +126,8 @@
             }
         });
 
+        
+
         data.courses = courses;
         var formData = new FormData();
         App.appendFormdata(formData, data);
@@ -123,3 +144,44 @@
         var collegeClass = new CollegeClass('/classes', 'class');
         collegeClass.init();
     });
+
+    document.addEventListener("DOMContentLoaded", function() {
+        var inputField = document.getElementById('availableRoom-select');
+        var displayText = document.getElementById('availableRooms_temp');
+    
+        inputField.addEventListener('input', function() {
+            // This function is called every time the user types something into the input field.
+            displayText.textContent = inputField.value; // Display the current value of the input field.
+        });
+    });
+
+
+    function updateText() { // Display the current value of the input field.
+
+        var selectedOptions = $('#availableRoom-select').val();
+        
+        // Check if selectedOptions is null or an empty array, if so, set it to an empty array
+        if (!selectedOptions || selectedOptions.length === 0) {
+            selectedOptions = [];
+        }
+        
+        // Convert the selected options into an array of integers
+        var integerOptions = selectedOptions.map(option => parseInt(option));
+        
+        // Convert the array of integers into a JSON string
+        var jsonData = JSON.stringify(integerOptions);
+        const jsonArray = JSON.parse(jsonData);
+
+        // Step 2: Convert each number in the array to a string
+        const stringArray = jsonArray.map(number => number.toString());
+
+        // Step 3: If needed, stringify the array of strings back into JSON format
+        const jsonStringified = JSON.stringify(stringArray);
+        $('#availableRooms_temp').val(jsonStringified);
+        
+        // Set the value of the select element to the JSON data
+        // $('#courses-saved').val(jsonData);
+        
+        // Now you can do whatever you want with the JSON data, for example, you can send it to the server via AJAX
+        console.log(jsonData);
+    }

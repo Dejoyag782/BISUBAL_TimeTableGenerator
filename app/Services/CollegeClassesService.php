@@ -45,25 +45,31 @@ class CollegeClassesService extends AbstractService
      */
     public function store($data = [])
     {
+        // Create a new class with provided name and size
         $class = CollegeClass::create([
             'name' => $data['name'],
-            'size' => $data['size']
+            'size' => $data['size'],
+            'available_rooms' => isset($data['available_rooms']) ? $data['available_rooms'] : null, // Handling availableRooms_temp
         ]);
-
+    
         if (!$class) {
             return null;
         }
-
+    
         // Set default value to null if 'unavailable_rooms' key is not present
-        $unavailableRooms = isset($data['unavailable_rooms']) ? $data['unavailable_rooms'] : null;
-
+        $unavailableRooms = $data['unavailable_rooms'] ?? null;
+        
         // Set default value to null if 'courses' key is not present
-        $courses = isset($data['courses']) ? $data['courses'] : null;
-
+        $courses = $data['courses'] ?? null;
+    
         // Sync 'unavailable_rooms' and 'courses'
-        $class->unavailable_rooms()->sync($unavailableRooms);
-        $class->courses()->sync($courses);
-
+        if ($unavailableRooms) {
+            $class->unavailable_rooms()->sync($unavailableRooms);
+        }
+        if ($courses) {
+            $class->courses()->sync($courses);
+        }
+    
         return $class;
     }
 
@@ -107,7 +113,8 @@ class CollegeClassesService extends AbstractService
 
         $class->update([
             'name' => $data['name'],
-            'size' => $data['size']
+            'size' => $data['size'],
+            'available_rooms' => isset($data['available_rooms']) ? $data['available_rooms'] : null, // Handling availableRooms_temp
         ]);
 
         if (!isset($data['unavailable_rooms'])) {

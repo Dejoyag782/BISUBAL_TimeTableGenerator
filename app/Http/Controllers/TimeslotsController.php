@@ -104,6 +104,25 @@ class TimeslotsController extends Controller
         }
     }
 
+    /**
+     * Get the timeslot with the given ID
+     *
+     * @param int $id The timeslot id
+     */
+    public function show($id)
+    {
+        $timeslot = Timeslot::find($id);
+
+        if ($timeslot) {
+            $timeParts = explode("-", $timeslot->time);
+            $timeslot->from = trim($timeParts[0]);
+            $timeslot->to = trim($timeParts[1]);
+
+            return response()->json($timeslot, 200);
+        } else {
+            return response()->json(['error' => 'Timeslot not found'], 404);
+        }
+    }
 
     /**
      * Update the timeslot with the given Id

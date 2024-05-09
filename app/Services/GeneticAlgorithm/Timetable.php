@@ -329,6 +329,22 @@ class Timetable
         return $this->rooms[array_rand($this->rooms)];
     }
 
+     /**
+     * Get a random room
+     *
+     * @return Room room
+     */
+    // public function getRandomAvailableRoom()
+    // {
+    //     foreach ($groups->id as $group){
+    //         print $group."=?".$classId;
+    //         if($classId == $group){
+                
+    //         }
+    //     }
+    //     return $this->rooms[array_rand($this->rooms)];
+    // }
+
     /**
      * Get professor with given ID
      *
@@ -484,9 +500,9 @@ class Timetable
             }
 
 
-            if (in_array($classA->getRoomId(), $this->getGroup($classA->getGroupId())->getUnavailableRooms())) {
-                $clashes++;
-            }
+            // if (in_array($classA->getRoomId(), $this->getGroup($classA->getGroupId())->getUnavailableRooms())) {
+            //     $clashes++;
+            // }
 
             // Check if professor is available
             foreach ($this->classes as $id => $classB) {

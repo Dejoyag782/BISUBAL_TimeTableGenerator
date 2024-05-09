@@ -50,7 +50,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label>Unavailable Lecture Rooms</label>
+                                <label>Unavailable Rooms</label>
 
                                 <div class="select2-wrapper">
                                     <select id="rooms-select" name="room_ids[]" class="form-control select2" multiple>
@@ -61,6 +61,21 @@
                                     </select>
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                <label>Available Rooms Only</label>
+
+                                <div class="select2-wrapper">
+                                    <select id="availableRoom-select" name="availableRoom_ids[]" class="form-control select2" onchange="updateText()" multiple>
+                                        <option value="">Select rooms</option>
+                                        @foreach ($rooms as $room)
+                                         <option value="{{ $room->id }}">{{ $room->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <input type="text" name="availableRooms_temp" id="availableRooms_temp" hidden="true"></input>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>

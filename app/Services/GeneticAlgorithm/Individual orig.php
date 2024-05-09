@@ -1,7 +1,6 @@
 <?php
 namespace App\Services\GeneticAlgorithm;
 use DB;
-use App\Models\CollegeClass;
 
 class Individual
 {
@@ -71,40 +70,86 @@ class Individual
 
                         $hours = $this->extractHours($module->getModuleCode());
 
-                        for ($i = 1; $i <= $module->getSlots($group->getId()); $i++) {                            
+                        for ($i = 1; $i <= $module->getSlots($group->getId()); $i++) {
+
 
                             $timeslotId = $timetable->getRandomTimeslot()->getId();
-                            
                             // This is for verifying if timeslot is capable of consecutive slots
                             while($timeslotLab!==true){
                                 $timeslotId = $timetable->getRandomTimeslot()->getId();
-                                // print"Timeslot ID: ".$timeslotId." [";
-                                $timeslotIdCheck = $timeslotId;
-                                $timeslotNo = substr($timeslotIdCheck, 3);
-                                // print $timeslotNo."-";
-                                $maxTimeslot = DB::table('timeslots')->count();
-                                // print "Max TS = ".$maxTimeslot."]\n";
                                 // if hours is equals to 2
                                 if($hours == 2){
-                                    if($timeslotNo <= $maxTimeslot-1){
+                                    if($timeslotId=="D1T1" || $timeslotId=="D1T2" || $timeslotId=="D1T3" || $timeslotId=="D1T4" || 
+                                       $timeslotId=="D1T5" || $timeslotId=="D1T6" || $timeslotId=="D1T7" || $timeslotId=="D1T8" || $timeslotId=="D1T9" || $timeslotId=="D1T10" || 
+                                       $timeslotId=="D2T1" || $timeslotId=="D2T2" || $timeslotId=="D2T3" || $timeslotId=="D2T4" || 
+                                       $timeslotId=="D2T5" || $timeslotId=="D2T6" || $timeslotId=="D2T7" || $timeslotId=="D2T8" || $timeslotId=="D2T9" || $timeslotId=="D1T10" || 
+                                       $timeslotId=="D3T1" || $timeslotId=="D3T2" || $timeslotId=="D3T3" || $timeslotId=="D3T4" || 
+                                       $timeslotId=="D3T5" || $timeslotId=="D3T6" || $timeslotId=="D3T7" || $timeslotId=="D3T8" || $timeslotId=="D3T9" || $timeslotId=="D1T10" || 
+                                       $timeslotId=="D4T1" || $timeslotId=="D4T2" || $timeslotId=="D4T3" || $timeslotId=="D4T4" || 
+                                       $timeslotId=="D4T5" || $timeslotId=="D4T6" || $timeslotId=="D4T7" || $timeslotId=="D4T8" || $timeslotId=="D4T9" || $timeslotId=="D1T10" || 
+                                       $timeslotId=="D5T1" || $timeslotId=="D5T2" || $timeslotId=="D5T3" || $timeslotId=="D5T4" || 
+                                       $timeslotId=="D5T5" || $timeslotId=="D5T6" || $timeslotId=="D5T7" || $timeslotId=="D5T8" || $timeslotId=="D5T9" || $timeslotId=="D1T10" || 
+                                       $timeslotId=="D6T1" || $timeslotId=="D6T2" || $timeslotId=="D6T3" || $timeslotId=="D6T4" || 
+                                       $timeslotId=="D6T5" || $timeslotId=="D6T6" || $timeslotId=="D6T7" || $timeslotId=="D6T8" || $timeslotId=="D6T9" || $timeslotId=="D1T10" || 
+                                       $timeslotId=="D7T1" || $timeslotId=="D7T2" || $timeslotId=="D7T3" || $timeslotId=="D7T4" || 
+                                       $timeslotId=="D7T5" || $timeslotId=="D7T6" || $timeslotId=="D7T7" || $timeslotId=="D7T8" || $timeslotId=="D7T9" || $timeslotId=="D1T10" ){
                                         $timeslotLab = true;
                                     }else{
                                         $timeslotLab = false;
                                     }
                                 }else if($hours == 3){
-                                    if($timeslotNo <= $maxTimeslot-2){
+                                    if($timeslotId=="D1T1" || $timeslotId=="D1T2" || $timeslotId=="D1T3" || $timeslotId=="D1T4" || 
+                                       $timeslotId=="D1T5" || $timeslotId=="D1T6" || $timeslotId=="D1T7" || $timeslotId=="D1T8" || $timeslotId=="D1T9" ||
+                                       $timeslotId=="D2T1" || $timeslotId=="D2T2" || $timeslotId=="D2T3" || $timeslotId=="D2T4" || 
+                                       $timeslotId=="D2T5" || $timeslotId=="D2T6" || $timeslotId=="D2T7" || $timeslotId=="D2T8" || $timeslotId=="D2T9" ||
+                                       $timeslotId=="D3T1" || $timeslotId=="D3T2" || $timeslotId=="D3T3" || $timeslotId=="D3T4" || 
+                                       $timeslotId=="D3T5" || $timeslotId=="D3T6" || $timeslotId=="D3T7" || $timeslotId=="D3T8" || $timeslotId=="D3T9" ||
+                                       $timeslotId=="D4T1" || $timeslotId=="D4T2" || $timeslotId=="D4T3" || $timeslotId=="D4T4" || 
+                                       $timeslotId=="D4T5" || $timeslotId=="D4T6" || $timeslotId=="D4T7" || $timeslotId=="D4T8" || $timeslotId=="D4T9" ||
+                                       $timeslotId=="D5T1" || $timeslotId=="D5T2" || $timeslotId=="D5T3" || $timeslotId=="D5T4" || 
+                                       $timeslotId=="D5T5" || $timeslotId=="D5T6" || $timeslotId=="D5T7" || $timeslotId=="D5T8" || $timeslotId=="D5T9" ||
+                                       $timeslotId=="D6T1" || $timeslotId=="D6T2" || $timeslotId=="D6T3" || $timeslotId=="D6T4" || 
+                                       $timeslotId=="D6T5" || $timeslotId=="D6T6" || $timeslotId=="D6T7" || $timeslotId=="D6T8" || $timeslotId=="D6T9" ||
+                                       $timeslotId=="D7T1" || $timeslotId=="D7T2" || $timeslotId=="D7T3" || $timeslotId=="D7T4" || 
+                                       $timeslotId=="D7T5" || $timeslotId=="D7T6" || $timeslotId=="D7T7" || $timeslotId=="D7T8" || $timeslotId=="D7T9" ){
                                         $timeslotLab = true;
                                     }else{
                                         $timeslotLab = false;
                                     }
                                 }else if($hours == 4){
-                                    if($timeslotNo <= $maxTimeslot-3){
+                                    if($timeslotId=="D1T1" || $timeslotId=="D1T2" || $timeslotId=="D1T3" || $timeslotId=="D1T4" || 
+                                       $timeslotId=="D1T5" || $timeslotId=="D1T6" || $timeslotId=="D1T7" || $timeslotId=="D1T8" ||
+                                       $timeslotId=="D2T1" || $timeslotId=="D2T2" || $timeslotId=="D2T3" || $timeslotId=="D2T4" || 
+                                       $timeslotId=="D2T5" || $timeslotId=="D2T6" || $timeslotId=="D2T7" || $timeslotId=="D2T8" ||
+                                       $timeslotId=="D3T1" || $timeslotId=="D3T2" || $timeslotId=="D3T3" || $timeslotId=="D3T4" || 
+                                       $timeslotId=="D3T5" || $timeslotId=="D3T6" || $timeslotId=="D3T7" || $timeslotId=="D3T8" ||
+                                       $timeslotId=="D4T1" || $timeslotId=="D4T2" || $timeslotId=="D4T3" || $timeslotId=="D4T4" || 
+                                       $timeslotId=="D4T5" || $timeslotId=="D4T6" || $timeslotId=="D4T7" || $timeslotId=="D4T8" ||
+                                       $timeslotId=="D5T1" || $timeslotId=="D5T2" || $timeslotId=="D5T3" || $timeslotId=="D5T4" || 
+                                       $timeslotId=="D5T5" || $timeslotId=="D5T6" || $timeslotId=="D5T7" || $timeslotId=="D5T8" ||
+                                       $timeslotId=="D6T1" || $timeslotId=="D6T2" || $timeslotId=="D6T3" || $timeslotId=="D6T4" || 
+                                       $timeslotId=="D6T5" || $timeslotId=="D6T6" || $timeslotId=="D6T7" || $timeslotId=="D6T8" ||
+                                       $timeslotId=="D7T1" || $timeslotId=="D7T2" || $timeslotId=="D7T3" || $timeslotId=="D7T4" || 
+                                       $timeslotId=="D7T5" || $timeslotId=="D7T6" || $timeslotId=="D7T7" || $timeslotId=="D7T8"){
                                         $timeslotLab = true;
                                     }else{
                                         $timeslotLab = false;
                                     }
                                 }else if($hours == 5){
-                                    if($timeslotNo <= $maxTimeslot-4){
+                                    if($timeslotId=="D1T1" || $timeslotId=="D1T2" || $timeslotId=="D1T3" || $timeslotId=="D1T4" || 
+                                       $timeslotId=="D1T5" || $timeslotId=="D1T6" || $timeslotId=="D1T7" ||
+                                       $timeslotId=="D2T1" || $timeslotId=="D2T2" || $timeslotId=="D2T3" || $timeslotId=="D2T4" || 
+                                       $timeslotId=="D2T5" || $timeslotId=="D2T6" || $timeslotId=="D2T7" ||
+                                       $timeslotId=="D3T1" || $timeslotId=="D3T2" || $timeslotId=="D3T3" || $timeslotId=="D3T4" || 
+                                       $timeslotId=="D3T5" || $timeslotId=="D3T6" || $timeslotId=="D3T7" ||
+                                       $timeslotId=="D4T1" || $timeslotId=="D4T2" || $timeslotId=="D4T3" || $timeslotId=="D4T4" || 
+                                       $timeslotId=="D4T5" || $timeslotId=="D4T6" || $timeslotId=="D4T7" ||
+                                       $timeslotId=="D5T1" || $timeslotId=="D5T2" || $timeslotId=="D5T3" || $timeslotId=="D5T4" || 
+                                       $timeslotId=="D5T5" || $timeslotId=="D5T6" || $timeslotId=="D5T7" ||
+                                       $timeslotId=="D6T1" || $timeslotId=="D6T2" || $timeslotId=="D6T3" || $timeslotId=="D6T4" || 
+                                       $timeslotId=="D6T5" || $timeslotId=="D6T6" || $timeslotId=="D6T7" ||
+                                       $timeslotId=="D7T1" || $timeslotId=="D7T2" || $timeslotId=="D7T3" || $timeslotId=="D7T4" || 
+                                       $timeslotId=="D7T5" || $timeslotId=="D7T6" || $timeslotId=="D7T7"){
                                         $timeslotLab = true;
                                     }else{
                                         $timeslotLab = false;
@@ -128,23 +173,7 @@ class Individual
                                 if ($this->getRoomIdFromPreference($courseCode)!==null){
                                     $roomId = $this->getRoomIdFromPreference($courseCode);
                                 }else{
-                                    // $roomId = $timetable->getRandomRoom()->getId();
-
-// -------------------------------------------------------------------- Add random room -------------------------------------------------------------------------------------------
-                                    // Retrieve the class information based on group ID
-                                    $classRoom = CollegeClass::where('id', $group->getId())->first();  // Assuming 'group_id' is the relevant column in your database
-
-                                    if ($classRoom) {
-                                        // Access the available_rooms column
-                                        $jsonString  = $classRoom->available_rooms;
-                                        $arrayOfIntegers = array_map('intval', json_decode($jsonString, true));
-                                        // Get a random key from the array
-                                        $randomKey = array_rand($arrayOfIntegers);
-                                        // Use the random key to get the corresponding value
-                                        $randomRoomSelected = $arrayOfIntegers[$randomKey];
-                                        print_r($arrayOfIntegers);
-                                    }
-                                    $roomId = $randomRoomSelected;
+                                    $roomId = $timetable->getRandomRoom()->getId();
                                 }
                             $newChromosome[$chromosomeIndex] = $roomId;
                             $chromosomeIndex++;
@@ -220,22 +249,8 @@ class Individual
                                 $chromosomeIndex++;
                                 // print $timeslotId.",";
     
-// -------------------------------------------------------------------- Add random room --------------------------------------------------------------------------------------------
-                                // Retrieve the class information based on group ID
-                                $classRoom = CollegeClass::where('id', $group->getId())->first();  // Assuming 'group_id' is the relevant column in your database
-
-                                if ($classRoom) {
-                                    // Access the available_rooms column
-                                    $jsonString  = $classRoom->available_rooms;
-                                    $arrayOfIntegers = array_map('intval', json_decode($jsonString, true));
-                                    // Get a random key from the array
-                                    $randomKey = array_rand($arrayOfIntegers);
-                                    // Use the random key to get the corresponding value
-                                    $randomRoomSelected = $arrayOfIntegers[$randomKey];
-                                    print_r($arrayOfIntegers);
-                                }
-                                $roomId = $randomRoomSelected;
-                                // print"CheckRoomID:".$roomId."\n";
+                                // Add random room
+                                $roomId = $timetable->getRandomRoom()->getId();
                                 $newChromosome[$chromosomeIndex] = $roomId;
                                 $chromosomeIndex++;
                                 // print $roomId.",";

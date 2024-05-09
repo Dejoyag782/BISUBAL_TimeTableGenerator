@@ -49,7 +49,7 @@ class CollegeClassesController extends Controller
 
 
         if ($request->ajax()) {
-            return view('classes.table', compact('classes', 'academicPeriods'));
+            return view('classes.table', compact('classes', 'rooms', 'academicPeriods'));
         }
 
         return view('classes.index', compact('classes', 'rooms', 'courses', 'academicPeriods'));
@@ -65,7 +65,8 @@ class CollegeClassesController extends Controller
     {
         $rules = [
             'name' => 'required|unique:classes',
-            'size' => 'required'
+            'size' => 'required',
+            'available_rooms' => 'required'
         ];
 
         $this->validate($request, $rules);
@@ -107,7 +108,8 @@ class CollegeClassesController extends Controller
     {
         $rules = [
             'name' => 'required|unique:classes,name,' . $id,
-            'size' => 'required'
+            'size' => 'required',
+            'available_rooms' => 'required'
         ];
 
         $this->validate($request, $rules);

@@ -13,30 +13,37 @@ class ClassesTableSeeder extends Seeder
     {
         DB::table('classes')->insert([
             [
+                'available_rooms' => json_encode([]),
                 'name' => 'CS 1-A',
                 'size' => 28
             ],
             [
+                'available_rooms' => json_encode([]),
                 'name' => 'CS 1-B',
                 'size' => 25
             ],
             [
+                'available_rooms' => json_encode([]),
                 'name' => 'Elex 1',
                 'size' => 25
             ],
             [
+                'available_rooms' => json_encode([]),
                 'name' => 'FoodTech 1',
                 'size' => 25
             ],
             [
+                'available_rooms' => json_encode([]),
                 'name' => 'Crim 1',
                 'size' => 25
             ],
             [
+                'available_rooms' => json_encode([]),
                 'name' => 'IT 1',
                 'size' => 25
             ],
             [
+                'available_rooms' => json_encode([]),
                 'name' => 'Elec 1',
                 'size' => 25
             ]

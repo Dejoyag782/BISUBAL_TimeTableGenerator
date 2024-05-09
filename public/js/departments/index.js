@@ -9,7 +9,8 @@ App.extend(Resource, Department);
 
 Department.prototype.prepareForUpdate = function (resource) {
 
-    var test = resource.courses_under;
+    var testString = resource.courses_under;
+    var test = JSON.parse(testString);
     var testNumbers = [];
 
     for (var i = 0; i < test.length; i++) {

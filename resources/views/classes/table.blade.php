@@ -7,7 +7,7 @@
                     <th style="width: 30%">Name</th>
                     <th style="width: 10%">Size</th>
                     <th style="width: 30%">Subjects</th>
-                    <th style="width: 20%">Unavailable Rooms</th>
+                    <th style="width: 20%">Available Rooms</th>
                     <th style="width: 10%">Actions</th>
                 </tr>
             </thead>
@@ -33,10 +33,14 @@
                         @endforeach
                     </td>
                     <td>
-                        @if (count($class->unavailable_rooms))
+                        @if (count(json_decode($class->available_rooms)))
                         <ul>
-                            @foreach ($class->unavailable_rooms as $room)
-                                <li>{{ $room->name }}</li>
+                            @foreach (json_decode($class->available_rooms) as $availableRoom)
+                                @foreach ($rooms as $room)
+                                    @if($room->id == $availableRoom)
+                                        <li>{{ $room->name }}</li>
+                                    @endif
+                                @endforeach
                             @endforeach
                         </ul>
                         @else
