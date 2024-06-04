@@ -17,7 +17,7 @@
                     <a href="/courses"><span class="fa fa-book"></span><span class="text">Subjects</span></a>
                 </li>
                 <li class="menu-link {{ ($page == 'professors') ? 'active' : '' }}">
-                    <a href="/professors"><span class="fa fa-graduation-cap"></span><span class="text">Professors</span></a>
+                    <a href="/professors"><span class="fa fa-graduation-cap"></span><span class="text">Instructors</span></a>
                 </li>
                 <li class="menu-link {{ ($page == 'classes') ? 'active' : '' }}">
                     <a href="/classes"><span class="fa fa-users"></span><span class="text">Sections</span></a>
