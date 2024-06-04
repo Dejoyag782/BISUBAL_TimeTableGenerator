@@ -49,7 +49,7 @@
                                 <input type="text" name="size" class="form-control">
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group" hidden="true">
                                 <label>Unavailable Rooms</label>
 
                                 <div class="select2-wrapper">

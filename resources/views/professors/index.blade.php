@@ -13,7 +13,7 @@ Instructors
     </div>
 
     <div class="menubar">
-        @include('partials.menu_bar', ['buttonTitle' => 'Add Professor'])
+        @include('partials.menu_bar', ['buttonTitle' => 'Add Instructor'])
     </div>
 
     <div class="page-body" id="resource-container">
