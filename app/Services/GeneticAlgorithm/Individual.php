@@ -142,7 +142,7 @@ class Individual
                                         $randomKey = array_rand($arrayOfIntegers);
                                         // Use the random key to get the corresponding value
                                         $randomRoomSelected = $arrayOfIntegers[$randomKey];
-                                        print_r($arrayOfIntegers);
+                                        // print_r($arrayOfIntegers);
                                     }
                                     $roomId = $randomRoomSelected;
                                 }
@@ -232,7 +232,7 @@ class Individual
                                     $randomKey = array_rand($arrayOfIntegers);
                                     // Use the random key to get the corresponding value
                                     $randomRoomSelected = $arrayOfIntegers[$randomKey];
-                                    print_r($arrayOfIntegers);
+                                    // print_r($arrayOfIntegers);
                                 }
                                 $roomId = $randomRoomSelected;
                                 // print"CheckRoomID:".$roomId."\n";
