@@ -36,7 +36,7 @@ class DashboardService
                     'value' => $coursesCount
                 ],
                 [
-                    'title' => 'Professors',
+                    'title' => 'Instructors',
                     'icon' => 'graduation-cap',
                     'value' => $professorsCount
                 ],
