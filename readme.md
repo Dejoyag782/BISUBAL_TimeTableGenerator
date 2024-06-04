@@ -13,13 +13,13 @@ To get started with the application, follow these installation steps:
 2. Clone the repository using the following command:
 
    ```
-   git clone https://github.com/Dejoyag782/BISUBAL_TTG_WORKING.git
+   git clone https://github.com/Dejoyag782/BISUBAL_TimeTableGenerator.git
    ```
 
 3. Move into the project directory:
 
    ```
-   cd BISUBAL_TTG_WORKING
+   cd BISUBAL_TimeTableGenerator
    ```
 
 4. Install the required dependencies by running:
