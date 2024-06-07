@@ -40,7 +40,7 @@ class Population
     // Function to print loading bar
     function printLoadingBar($progress, $total) {
         $percent = ($progress / $total) * 100;
-        $barLength = 50;
+        $barLength = 100;
         $progressBar = "[" . str_repeat("█", intval($percent / 100 * $barLength)) . str_repeat(" ", $barLength - intval($percent / 100 * $barLength)) . "] $percent%";
 
         // Print the loading bar
