@@ -205,7 +205,9 @@ class Individual
                             $timeslotLab = false;
                         }
                     }else{
+                        $timeslotLab = false;
                         if (strpos($module->getModuleCode(), "Lab") !== true) {
+                            $timeslotLab = false;
 
                             $hours = $this->extractHours($module->getModuleCode());
     
