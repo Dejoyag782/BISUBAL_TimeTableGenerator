@@ -28,7 +28,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::group(['middleware' => ['auth', 'checkRole:superad', 'activated']], function () {
    // user management
@@ -93,5 +93,3 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/my_account', [UsersController::class, 'updateAccount']);
 });
 
-
-Auth::routes();
