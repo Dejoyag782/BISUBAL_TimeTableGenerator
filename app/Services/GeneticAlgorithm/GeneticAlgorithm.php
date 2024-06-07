@@ -195,250 +195,109 @@ class GeneticAlgorithm
     public function crossoverPopulation($population)
     {
         $newPopulation = new Population($population->size());
-    
+
         for ($i = 0; $i < $population->size(); $i++) {
             $parentA = $population->getFittest($i);
-    
-            // Debugging output
-            // print "\n\nParentA: ".$parentA."\n";
-    
             $random = mt_rand() / mt_getrandmax();
-    
-            // Debugging output
-            // print "\n(?".$this->crossoverRate.">".$random."):(interval=".$i.") ";
-    
+
             if (($this->crossoverRate > $random) && ($i > $this->elitismCount)) {
-                // Create offspring
                 $offspring = Individual::random($parentA->getChromosomeLength());
-    
-                // Debugging output
-                // print "\n\nPopulating with crossover:\n";
-                // print "Offspring: ".$offspring."\n";
-    
                 $parentB = $this->selectParent($population);
-    
-                $primarySwapPoint = mt_rand(0, $parentB->getChromosomeLength()-3);
-                // $primarySwapPoint = 496;
+
+                $primarySwapPoint = mt_rand(0, $parentB->getChromosomeLength() - 3);
                 $swapPoint = $primarySwapPoint;
                 $endSwapPoint = $swapPoint;
                 $duration = 1;
-                // $swapPoint = 487;
-                // $swapPoint = 0;
-                // print "\033[31m"."\n\n--------------------------------------------OrigSP:".$swapPoint."---------------------------------------\n"."\033[0m";
-                // print "Initial End Swap Point = ".$endSwapPoint;
+
                 $gene = $parentB->getGene($swapPoint);
-                $geneCheck = $gene;                
-                    // Regular expression pattern to match D#T# format
                 $pattern = '/^D\d+T\d+$/';
 
-                if (preg_match($pattern, $geneCheck) && ($swapPoint > 0 && $swapPoint < $parentB->getChromosomeLength()-1)){
-                    // print"D#T# SwapPoint: ".$swapPoint."=".$parentB->getGene($swapPoint).",".$parentB->getGene($swapPoint+1).",".$parentB->getGene($swapPoint+2)."\n";
-
-                    $gene = $parentB->getGene($swapPoint);
-                    $geneCheck = $gene;
-
-                    if (preg_match($pattern, $geneCheck) && ($swapPoint > 0 && $swapPoint < $parentB->getChromosomeLength()-1)){
-
-                        // print "D#T# Timeslot:".$gene."\n";
-                        $day = substr($gene, 1, 1); // Get the character at index 1 (0-based index)
-                        $timeslot = substr($gene, 3); // Get the character at index 3 (0-based index)
-
-                        // Convert the extracted characters to integers
-                        $day = intval($day);
-                        $timeslot = intval($timeslot);
-
-                        // echo "Gene".$swapPoint."[";
-                        // echo "D".$day."T".$timeslot.",";
-                        
-                        $roomId = $parentB->getGene($swapPoint+1);
-                        $profId = $parentB->getGene($swapPoint+2);
-
-                        // print "swapPoint = ".$parentB->getGene($endSwapPoint).",";
-                        // print"TimeslotIncrementCheck:1 ".$parentB->getGene($swapPoint)."->".$parentB->getGene($swapPoint-3)."\n";
-
-                        $duration = 1;
-                        if($roomId == $parentB->getGene($swapPoint-2) && $profId == $parentB->getGene($swapPoint-1) &&
-                            $parentB->getGene($swapPoint-3) == "D$day"."T".($timeslot-1) && ($swapPoint != 0)){
-                            $endSwapPoint = $swapPoint-3;
-                            // print "swapPoint = ".$parentB->getGene($endSwapPoint).",";
-                            // print"TimeslotIncrementCheck:2 ".$parentB->getGene($swapPoint-3)."->".$parentB->getGene($swapPoint-6)."\n";
-                            $duration = $duration + 1;
-                            if($roomId == $parentB->getGene($swapPoint-5) && $profId == $parentB->getGene($swapPoint-4) &&
-                            $parentB->getGene($swapPoint-6) == "D$day"."T".($timeslot-2) && ($swapPoint != 0)){
-                                $endSwapPoint = $endSwapPoint-3;
-                                // print "swapPoint = ".$parentB->getGene($endSwapPoint).",";
-                                // print"TimeslotIncrementCheck:3 ".$parentB->getGene($swapPoint-6)."->".$parentB->getGene($swapPoint-9)."\n";
-                                $duration = $duration + 1;
-                                if($roomId == $parentB->getGene($swapPoint-8) && $profId == $parentB->getGene($swapPoint-7) &&
-                                $parentB->getGene($swapPoint-9) == "D$day"."T".($timeslot-3) && ($swapPoint != 0)){
-                                    $endSwapPoint = $endSwapPoint-3;
-                                    // print "swapPoint = ".$parentB->getGene($endSwapPoint).",";
-                                    // print"TimeslotIncrementCheck:4 ".$parentB->getGene($swapPoint-9)."->".$parentB->getGene($swapPoint-12)."\n";
-                                    $duration = $duration + 1;
-                                    if($roomId == $parentB->getGene($swapPoint-11) && $profId == $parentB->getGene($swapPoint-10) &&
-                                    $parentB->getGene($swapPoint-12) == "D$day"."T".($timeslot-4) && ($swapPoint != 0)){     
-                                        $endSwapPoint = $endSwapPoint-3;
-                                        // print "swapPoint = ".$parentB->getGene($endSwapPoint).",";
-                                        // print"TimeslotIncrementCheck:5 ".$parentB->getGene($swapPoint-12)."->".$parentB->getGene($swapPoint-15)."\n";
-                                        $duration = $duration + 1;
-                                        if($roomId == $parentB->getGene($swapPoint-14) && $profId == $parentB->getGene($swapPoint-13) &&
-                                        $parentB->getGene($swapPoint-15) == "D$day"."T".($timeslot-5) && ($swapPoint != 0)){
-                                            $endSwapPoint = $endSwapPoint-3;
-                                            // print "swapPoint = ".$parentB->getGene($endSwapPoint).",";              
-                                            // print"TimeslotIncrementCheck:Final ".$parentB->getGene($swapPoint-15)."\n";
-                                
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                    }
-
-                }else if(!preg_match($pattern, $geneCheck) && ($swapPoint > 0 && $swapPoint < $parentB->getChromosomeLength()-1)){                    
-                    $swapPointChecker = $swapPoint;
-                    $noneDTgene = $parentB->getGene($swapPointChecker);
-                    $geneDTCheck = $noneDTgene;                
-                    $pattern = '/^D\d+T\d+$/';
-                    
-                    while (!preg_match($pattern, $geneDTCheck)) {
-                        $swapPointChecker--;
-                        $noneDTgene = $parentB->getGene($swapPointChecker);
-                        $geneDTCheck = $noneDTgene;
-                    }
-                    
-                    $swapPoint = $swapPointChecker;
-                    // print"ID SwapPoint: ".$swapPoint."=".$parentB->getGene($swapPoint).",".$parentB->getGene($swapPoint+1).",".$parentB->getGene($swapPoint+2)."\n";
-                    $gene = $parentB->getGene($swapPoint);
-                    $geneCheck = $gene;
-
-                    if (preg_match($pattern, $geneCheck) && ($swapPoint > 0 && $swapPoint < $parentB->getChromosomeLength()-1)){
-
-                        // print "ID:".$gene."\n";
-                        $day = substr($gene, 1, 1); // Get the character at index 1 (0-based index)
-                        $timeslot = substr($gene, 3); // Get the character at index 3 (0-based index)
-
-                        // Convert the extracted characters to integers
-                        $day = intval($day);
-                        $timeslot = intval($timeslot);
-
-                        // echo "Gene".$swapPoint."[";
-                        // echo "D".$day."T".$timeslot.",";
-                        
-                        $roomId = $parentB->getGene($swapPoint+1);
-                        $profId = $parentB->getGene($swapPoint+2);
-
-                        $endSwapPoint = $swapPoint;
-                        // print "swapPoint = ".$parentB->getGene($endSwapPoint).",";
-                        // print"TimeslotIncrementCheck:1 ".$parentB->getGene($swapPoint)."->".$parentB->getGene($swapPoint-3)."\n";
-                        
-                        $duration = 1;
-                        if($roomId == $parentB->getGene($swapPoint-2) && $profId == $parentB->getGene($swapPoint-1) &&
-                            $parentB->getGene($swapPoint-3) == "D$day"."T".($timeslot-1) && ($swapPoint != 0)){                            
-                            $endSwapPoint = $swapPoint-3;
-                            // print "swapPoint = ".$parentB->getGene($endSwapPoint).",";
-                            // print"TimeslotIncrementCheck:2 ".$parentB->getGene($swapPoint-3)."->".$parentB->getGene($swapPoint-6)."\n";
-                            $duration = $duration + 1;
-                            if($roomId == $parentB->getGene($swapPoint-5) && $profId == $parentB->getGene($swapPoint-4) &&
-                            $parentB->getGene($swapPoint-6) == "D$day"."T".($timeslot-2) && ($swapPoint != 0)){
-                                $endSwapPoint = $endSwapPoint-3;
-                                // print "swapPoint = ".$parentB->getGene($endSwapPoint).",";
-                                // print"TimeslotIncrementCheck:3 ".$parentB->getGene($swapPoint-6)."->".$parentB->getGene($swapPoint-9)."\n";
-                                $duration = $duration + 1;
-                                if($roomId == $parentB->getGene($swapPoint-8) && $profId == $parentB->getGene($swapPoint-7) &&
-                                $parentB->getGene($swapPoint-9) == "D$day"."T".($timeslot-3) && ($swapPoint != 0)){
-                                    $endSwapPoint = $endSwapPoint-3;
-                                    // print "swapPoint = ".$parentB->getGene($endSwapPoint).",";
-                                    // print"TimeslotIncrementCheck:4 ".$parentB->getGene($swapPoint-9)."->".$parentB->getGene($swapPoint-12)."\n";
-                                    $duration = $duration + 1;
-                                    if($roomId == $parentB->getGene($swapPoint-11) && $profId == $parentB->getGene($swapPoint-10) &&
-                                    $parentB->getGene($swapPoint-12) == "D$day"."T".($timeslot-4) && ($swapPoint != 0)){     
-                                        $endSwapPoint = $endSwapPoint-3;
-                                        // print "swapPoint = ".$parentB->getGene($endSwapPoint).",";
-                                        // print"TimeslotIncrementCheck:5 ".$parentB->getGene($swapPoint-12)."->".$parentB->getGene($swapPoint-15)."\n";
-                                        $duration = $duration + 1;
-                                        if($roomId == $parentB->getGene($swapPoint-14) && $profId == $parentB->getGene($swapPoint-13) &&
-                                        $parentB->getGene($swapPoint-15) == "D$day"."T".($timeslot-5) && ($swapPoint != 0)){ 
-                                            $endSwapPoint = $endSwapPoint-3;
-                                            // print "swapPoint = ".$parentB->getGene($endSwapPoint).",";             
-                                            // print"TimeslotIncrementCheck:Final ".$parentB->getGene($swapPoint-15)."\n";
-                                
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                    }
-                }else if($swapPoint == 0){
+                if (preg_match($pattern, $gene) && ($swapPoint > 0 && $swapPoint < $parentB->getChromosomeLength() - 1)) {
+                    list($swapPoint, $endSwapPoint, $duration) = $this->adjustSwapPointForGene($parentB, $swapPoint, $gene);
+                } else if (!preg_match($pattern, $gene) && ($swapPoint > 0 && $swapPoint < $parentB->getChromosomeLength() - 1)) {
+                    list($swapPoint, $endSwapPoint, $duration) = $this->adjustSwapPointForNonGene($parentB, $swapPoint);
+                } else if ($swapPoint == 0) {
                     $swapPoint = $endSwapPoint;
                 }
 
-                // print "\nCheck Duration = ".$duration;
-                if($duration < 2 && $swapPoint != 0){                    
-
-                        $gene = $parentB->getGene($swapPoint);
-                        // print "ID:".$gene."\n";
-                        $day = substr($gene, 1, 1); // Get the character at index 1 (0-based index)
-                        $timeslot = substr($gene, 3); // Get the character at index 3 (0-based index)
-
-                        // Convert the extracted characters to integers
-                        $day = intval($day);
-                        $timeslot = intval($timeslot);
-
-                        // echo "Gene".$swapPoint."[";
-                        // echo "D".$day."T".$timeslot.",";
-                        
-                        $roomId = $parentB->getGene($swapPoint+1);
-                        $profId = $parentB->getGene($swapPoint+2);
-                        if($swapPoint < ($parentA->getChromosomeLength()-7)){
-                            if($roomId == $parentB->getGene($swapPoint+4) && $profId == $parentB->getGene($swapPoint+5) &&
-                            $parentB->getGene($swapPoint+3) == "D$day"."T".($timeslot+1) && ($swapPoint != 0)){                         
-                            $swapPoint = $endSwapPoint-1;
-                            } else{
-                                $swapPoint = mt_rand($endSwapPoint, $endSwapPoint+2);
-                            }
-                        }else{
-                            if($swapPoint > ($parentA->getChromosomeLength()-2)){
-                                $swapPoint = $endSwapPoint-1;
-                            }else{
-                                $swapPoint = $endSwapPoint+1;
-                            }
-                        }
-                        
+                if ($duration < 2 && $swapPoint != 0) {
+                    $swapPoint = $this->handleShortDuration($parentA, $parentB, $swapPoint, $endSwapPoint);
+                } else if ($duration >= 2 && $swapPoint != 0) {
+                    $swapPoint = $endSwapPoint - 1;
+                } else if ($duration == 1 && $swapPoint == 0) {
+                    $swapPoint = mt_rand($endSwapPoint, $endSwapPoint + 2);
                 }
-                if($duration >= 2 && $swapPoint != 0){
-                    $swapPoint = $endSwapPoint-1;
-                }
-                if($duration == 1 && $swapPoint == 0){
-                    $swapPoint = mt_rand($endSwapPoint, $endSwapPoint+2);
-                }       
-                       
-                
-                // print "\033[32m"."\n--------------------------------------------EndSP:".$swapPoint."---------------------------------------\n"."\033[0m";
+
                 for ($j = 0; $j < $parentA->getChromosomeLength(); $j++) {
                     if ($j < $swapPoint) {
                         $offspring->setGene($j, $parentA->getGene($j));
                     } else {
                         $offspring->setGene($j, $parentB->getGene($j));
                     }
-                }                
-    
-                // Debugging output
-                // print "New Population with crossover:\n";
-                // print $newPopulation."\n";
-    
+                }
+
                 $newPopulation->setIndividual($i, $offspring);
             } else {
-                // Add to population without crossover
-                // print "New Population without crossover:\n";
-                // print $newPopulation."\n";
                 $newPopulation->setIndividual($i, $parentA);
             }
         }
-    
+
         return $newPopulation;
     }
+
+    private function adjustSwapPointForGene($parentB, $swapPoint, $gene)
+    {
+        $pattern = '/^D\d+T\d+$/';
+        $day = intval(substr($gene, 1, 1));
+        $timeslot = intval(substr($gene, 3));
+        $roomId = $parentB->getGene($swapPoint + 1);
+        $profId = $parentB->getGene($swapPoint + 2);
+        $endSwapPoint = $swapPoint;
+        $duration = 1;
+
+        while ($swapPoint > 0 && $roomId == $parentB->getGene($swapPoint - 2) && $profId == $parentB->getGene($swapPoint - 1) && $parentB->getGene($swapPoint - 3) == "D$day" . "T" . ($timeslot - $duration)) {
+            $swapPoint -= 3;
+            $endSwapPoint = $swapPoint;
+            $duration++;
+        }
+         $endSwapPoint = $endSwapPoint - 1;
+        return [$swapPoint, $endSwapPoint, $duration];
+    }
+
+    private function adjustSwapPointForNonGene($parentB, $swapPoint)
+    {
+        $pattern = '/^D\d+T\d+$/';
+        while ($swapPoint > 0 && !preg_match($pattern, $parentB->getGene($swapPoint))) {
+            $swapPoint--;
+        }
+
+        return $this->adjustSwapPointForGene($parentB, $swapPoint, $parentB->getGene($swapPoint));
+    }
+
+    private function handleShortDuration($parentA, $parentB, $swapPoint, $endSwapPoint)
+    {
+        $gene = $parentB->getGene($swapPoint);
+        $day = intval(substr($gene, 1, 1));
+        $timeslot = intval(substr($gene, 3));
+        $roomId = $parentB->getGene($swapPoint + 1);
+        $profId = $parentB->getGene($swapPoint + 2);
+
+        if ($swapPoint < ($parentA->getChromosomeLength() - 7)) {
+            if ($roomId == $parentB->getGene($swapPoint + 4) && $profId == $parentB->getGene($swapPoint + 5) && $parentB->getGene($swapPoint + 3) == "D$day" . "T" . ($timeslot + 1)) {
+                return $endSwapPoint - 1;
+            } else {
+                return mt_rand($endSwapPoint, $endSwapPoint + 2);
+            }
+        } else {
+            if ($swapPoint > ($parentA->getChromosomeLength() - 2)) {
+                return $endSwapPoint - 1;
+            } else {
+                return $endSwapPoint + 1;
+            }
+        }
+        
+    }
+
     
 
     /**
