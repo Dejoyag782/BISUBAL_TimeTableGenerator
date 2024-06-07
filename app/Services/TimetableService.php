@@ -73,6 +73,14 @@ class TimetableService
             $errors[] = "Some classes don't have any course set up.<a href=\"/classes?filter=no_course\" target=\"_blank\">Click here to review them</a>";
         }
 
+        // Check if any class has no available rooms
+        $classesWithNoRoomsQuery = 'SELECT id FROM classes WHERE available_rooms = "[]"';
+        $classesWithNoRooms = DB::select($classesWithNoRoomsQuery);
+
+        if (count($classesWithNoRooms)) {
+            $errors[] = "A class doesn't have rooms available.<a href=\"/classes?filter=available_rooms_empty\" target=\"_blank\">Click here to review them</a>";
+        }
+
         return $errors;
     }
 }

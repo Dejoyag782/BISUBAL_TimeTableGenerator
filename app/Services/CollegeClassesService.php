@@ -22,7 +22,8 @@ class CollegeClassesService extends AbstractService
     protected $showWithRelations = true;
 
     protected $customFilters = [
-        'no_course' => 'getClassesWithNoCourse'
+        'no_course' => 'getClassesWithNoCourse',
+        'available_rooms_empty' => 'getClassesWithNoAvailableRooms' 
     ];
 
     /**
@@ -137,5 +138,14 @@ class CollegeClassesService extends AbstractService
     public function getClassesWithNoCourse($query)
     {
         return $query->havingNoCourses();
+    }
+
+    /**
+     * Return query with filter applied to select classes with no available rooms
+     */
+    public function getClassesWithNoAvailableRooms($query)
+    {
+        return $query->whereRaw('JSON_LENGTH(available_rooms) = 0'); // For MySQL
+        // For PostgreSQL use: return $query->whereRaw('jsonb_array_length(available_rooms::jsonb) = 0');
     }
 }
