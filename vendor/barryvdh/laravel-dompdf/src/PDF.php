@@ -158,11 +158,13 @@ class PDF
      *
      * @param array<string, mixed> $options
      */
-    public function setOptions(array $options): self
+    public function setOptions(array $options, bool $mergeWithDefaults = false): self
     {
-        $dompdfOptions = new Options(app()->make('dompdf.options'));
-        $dompdfOptions->set($options);
-        $this->dompdf->setOptions($dompdfOptions);
+        if ($mergeWithDefaults) {
+            $options = array_merge(app()->make('dompdf.options'), $options);
+        }
+
+        $this->dompdf->setOptions(new Options($options));
         return $this;
     }
 

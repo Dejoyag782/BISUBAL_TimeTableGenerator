@@ -20,7 +20,6 @@ class JavascriptRenderer extends BaseJavascriptRenderer
         parent::__construct($debugBar, $baseUrl, $basePath);
 
         $this->cssFiles['laravel'] = __DIR__ . '/Resources/laravel-debugbar.css';
-        $this->cssVendors['fontawesome'] = __DIR__ . '/Resources/vendor/font-awesome/style.css';
         $this->jsFiles['laravel-cache'] = __DIR__ . '/Resources/cache/widget.js';
 
         $theme = config('debugbar.theme', 'auto');
@@ -50,14 +49,14 @@ class JavascriptRenderer extends BaseJavascriptRenderer
      */
     public function renderHead()
     {
-        $cssRoute = route('debugbar.assets.css', [
+        $cssRoute = preg_replace('/\Ahttps?:\/\/[^\/]+/', '', route('debugbar.assets.css', [
             'v' => $this->getModifiedTime('css'),
             'theme' => config('debugbar.theme', 'auto'),
-        ], false);
+        ]));
 
-        $jsRoute = route('debugbar.assets.js', [
+        $jsRoute = preg_replace('/\Ahttps?:\/\/[^\/]+/', '', route('debugbar.assets.js', [
             'v' => $this->getModifiedTime('js')
-        ], false);
+        ]));
 
         $nonce = $this->getNonceAttribute();
 

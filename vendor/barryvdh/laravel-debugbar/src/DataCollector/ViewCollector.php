@@ -3,10 +3,12 @@
 namespace Barryvdh\Debugbar\DataCollector;
 
 use Barryvdh\Debugbar\DataFormatter\SimpleFormatter;
-use DebugBar\Bridge\Twig\TwigCollector;
+use DebugBar\DataCollector\AssetProvider;
+use DebugBar\DataCollector\DataCollector;
+use DebugBar\DataCollector\Renderable;
 use Illuminate\View\View;
 
-class ViewCollector extends TwigCollector
+class ViewCollector extends DataCollector implements Renderable, AssetProvider
 {
     protected $name;
     protected $templates = [];
@@ -52,6 +54,17 @@ class ViewCollector extends TwigCollector
     }
 
     /**
+     * @return array
+     */
+    public function getAssets()
+    {
+        return [
+            'css' => 'widgets/templates/widget.css',
+            'js' => 'widgets/templates/widget.js',
+        ];
+    }
+
+    /**
      * Add a View instance to the Collector
      *
      * @param \Illuminate\View\View $view
@@ -81,8 +94,9 @@ class ViewCollector extends TwigCollector
                 }
             }
 
+            $shortPath = $this->normalizeFilePath($path);
             foreach ($this->exclude_paths as $excludePath) {
-                if (str_starts_with($path, $excludePath)) {
+                if (str_starts_with($shortPath, $excludePath)) {
                     return;
                 }
             }

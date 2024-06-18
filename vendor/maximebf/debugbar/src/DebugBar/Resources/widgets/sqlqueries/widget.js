@@ -14,15 +14,7 @@
 
         onFilterClick: function(el) {
             $(el).toggleClass(csscls('excluded'));
-
-            var excludedLabels = [];
-            this.$toolbar.find(csscls('.filter') + csscls('.excluded')).each(function() {
-                excludedLabels.push(this.rel);
-            });
-
             this.$list.$el.find("li[connection=" + $(el).attr("rel") + "]").toggle();
-
-            this.set('exclude', excludedLabels);
         },
         onCopyToClipboard: function (el) {
             var code = $(el).parent('li').find('code').get(0);
@@ -138,7 +130,7 @@
                     var header = $('<span title="Filename" />').addClass(csscls('filename')).text(stmt.xdebug_link.filename + ( stmt.xdebug_link.line ? "#" + stmt.xdebug_link.line : ''));
                     if (stmt.xdebug_link.ajax) {
                         $('<a title="' + stmt.xdebug_link.url + '"></a>').on('click', function () {
-                            $.ajax(stmt.xdebug_link.url);
+                            fetch(stmt.xdebug_link.url);
                         }).addClass(csscls('editor-link')).appendTo(header);
                     } else {
                         $('<a href="' + stmt.xdebug_link.url + '"></a>').addClass(csscls('editor-link')).appendTo(header);
@@ -179,6 +171,8 @@
                 if (data.length <= 0 || !data.statements) {
                     return false;
                 }
+                filters = [];
+                this.$toolbar.hide().find(csscls('.filter')).remove();
                 this.$list.set('data', data.statements);
                 this.$status.empty();
 

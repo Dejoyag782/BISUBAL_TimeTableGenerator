@@ -492,6 +492,9 @@ class LaravelDebugbar extends DebugBar
                 $this['auth']->setShowName(
                     $config->get('debugbar.options.auth.show_name')
                 );
+                $this['auth']->setShowGuardsData(
+                    $config->get('debugbar.options.auth.show_guards', true)
+                );
             } catch (Exception $e) {
                 $this->addCollectorException('Cannot add AuthCollector', $e);
             }
@@ -840,7 +843,7 @@ class LaravelDebugbar extends DebugBar
      */
     protected function isDebugbarRequest()
     {
-        return $this->app['request']->segment(1) == $this->app['config']->get('debugbar.route_prefix');
+        return $this->app['request']->is($this->app['config']->get('debugbar.route_prefix') . '*');
     }
 
     /**
@@ -916,6 +919,10 @@ class LaravelDebugbar extends DebugBar
         $renderer = $this->getJavascriptRenderer();
         $autoShow = $config->get('debugbar.ajax_handler_auto_show', true);
         $renderer->setAjaxHandlerAutoShow($autoShow);
+
+        $enableTab = $config->get('debugbar.ajax_handler_enable_tab', true);
+        $renderer->setAjaxHandlerEnableTab($enableTab);
+
         if ($this->getStorage()) {
             $openHandlerUrl = route('debugbar.openhandler');
             $renderer->setOpenHandlerUrl($openHandlerUrl);
