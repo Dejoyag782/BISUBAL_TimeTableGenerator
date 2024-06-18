@@ -205,6 +205,7 @@ class GeneticAlgorithm
                 $parentB = $this->selectParent($population);
 
                 $primarySwapPoint = mt_rand(0, $parentB->getChromosomeLength() - 3);
+                // $primarySwapPoint = 20;
                 $swapPoint = $primarySwapPoint;
                 $endSwapPoint = $swapPoint;
                 $duration = 1;
@@ -261,7 +262,21 @@ class GeneticAlgorithm
             $duration++;
         }
          $endSwapPoint = $endSwapPoint - 1;
-        return [$swapPoint, $endSwapPoint, $duration];
+         $endSwapPoint = mt_rand($endSwapPoint, $endSwapPoint + 2);
+        
+         if($endSwapPoint > 0){
+            if(!preg_match($pattern, $parentB->getGene($endSwapPoint-1))){            
+                // echo "Swapping";
+                return $this->adjustSwapPointForNonGene($parentB, $endSwapPoint);
+            }
+            else if(preg_match($pattern, $parentB->getGene($endSwapPoint-1))){   
+                // echo "Not Swapping";    
+                return [$swapPoint, $endSwapPoint, $duration];
+            }
+        }else{            
+            return [$swapPoint, $endSwapPoint, $duration];
+        }
+        // return [$swapPoint, $endSwapPoint, $duration];
     }
 
     private function adjustSwapPointForNonGene($parentB, $swapPoint)
